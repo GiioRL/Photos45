@@ -34,6 +34,7 @@ public class App extends Application {
         
             primaryStage.setTitle("Photos Application");
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (Exception e) {
             System.out.println("err there was an exception");
