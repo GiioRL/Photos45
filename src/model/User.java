@@ -1,0 +1,37 @@
+package model;
+
+public class User {
+    
+    private String username = "";
+    private String password = "";
+
+    public User() {}
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String setUsername(String username) {
+        this.username = username;
+    }
+
+    public String setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean equals(Object other) {
+        if (!(other instanceof User)) {
+            return false;
+        }
+        return (username.equals(((User)other).getUsername()) && password.equals(((User)other).getPassword()));
+    }
+}
