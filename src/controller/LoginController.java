@@ -15,9 +15,9 @@ public class LoginController {
     @FXML
     private TextField tfUsername;
 
-    private LoginModel loginModel;
+    private LoginModel loginModel = LoginModel.getInstance();
 
-    public LoginController() {}
+    // public LoginController() {}
 
     @FXML
     void login() {

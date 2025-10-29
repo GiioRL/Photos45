@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class LoginModel {
 
     private ArrayList<User> users;
-    private LoginModel instance;
+    private static LoginModel instance;
 
     private LoginModel() {
         users = new ArrayList<User>();
@@ -13,7 +13,7 @@ public class LoginModel {
         users.add(new User("admin", "admin"));
     }
 
-    public LoginModel getInstance() {
+    public static LoginModel getInstance() {
         if (instance == null) {
             return new LoginModel();
         }
