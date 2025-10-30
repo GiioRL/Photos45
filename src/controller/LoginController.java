@@ -12,7 +12,7 @@ public class LoginController {
     private Button butonLogin;
 
     @FXML
-    private TextField tfPassword;
+    private TextField tfPassword; //consider making this a password field
 
     @FXML
     private TextField tfUsername;
