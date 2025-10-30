@@ -1,15 +1,14 @@
-package album;
+package main.java.album;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import fakemain.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import library.LibraryController;
-import main.App;
+import main.java.library.LibraryController;
 import util.*;
 
 public class AlbumModel {

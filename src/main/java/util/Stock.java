@@ -2,7 +2,7 @@ package util;
 // 
 // import java.util.ArrayList;
 
-import album.AlbumModel;
+import main.java.album.AlbumModel;
 
 public class Stock extends User {
 

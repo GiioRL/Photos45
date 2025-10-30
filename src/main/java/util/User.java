@@ -6,9 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import library.LibraryController;
-import album.AlbumModel;
-import main.App;
+import main.java.album.AlbumModel;
+import main.java.library.LibraryController;
+import fakemain.App;
 
 public class User { //maybe this gets split into controller and model?
     

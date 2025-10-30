@@ -1,10 +1,9 @@
-package album;
+package main.java.album;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
-import library.LibraryController;
+import main.java.library.LibraryController;
 import util.*;
 
 public class AlbumController {

@@ -1,4 +1,4 @@
-package library;
+package main.java.library;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
-
-import album.AlbumController;
-import album.AlbumModel;
+import main.java.album.AlbumController;
+import main.java.album.AlbumModel;
 import util.*;
 
 public class LibraryController {

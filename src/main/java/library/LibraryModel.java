@@ -1,8 +1,8 @@
-package library;
+package main.java.library;
 
 import java.util.ArrayList;
 
-import album.AlbumModel;
+import main.java.album.AlbumModel;
 import util.*;
 
 public class LibraryModel {
