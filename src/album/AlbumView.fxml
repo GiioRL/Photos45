@@ -1,53 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="album.AlbumController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AlbumController">
    <children>
-      <GridPane prefHeight="400.0" prefWidth="600.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <ScrollPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
-               <content>
-                  <HBox fx:id="photoHBox" alignment="CENTER" prefHeight="198.0" prefWidth="598.0" spacing="50.0">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-               </content>
-            </ScrollPane>
-            <AnchorPane prefHeight="223.0" prefWidth="598.0" GridPane.rowIndex="1">
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="104.0" layoutX="150.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
-                  <Text layoutX="250.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Search">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Text>
-                  <ComboBox fx:id="tagDropdown" layoutX="175.0" layoutY="71.0" prefWidth="150.0" promptText="Tag" />
-                  <ComboBox fx:id="valueDropdown" layoutX="175.0" layoutY="103.0" prefWidth="150.0" promptText="Value" />
-                  <Button fx:id="searchButton" layoutX="363.0" layoutY="91.0" mnemonicParsing="false" text="Search" />
-               </children>
-            </AnchorPane>
-         </children>
-      </GridPane>
+      <ImageView fx:id="imageView" fitHeight="313.0" fitWidth="393.0" layoutX="104.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="nextButon" layoutX="516.0" layoutY="188.0" mnemonicParsing="false" onAction="#next" text="Next" />
+      <Button fx:id="prevButon" layoutX="37.0" layoutY="188.0" mnemonicParsing="false" onAction="#prev" text="Prev" />
+      <Button fx:id="exitButon" layoutX="551.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" text="exit" />
    </children>
 </AnchorPane>

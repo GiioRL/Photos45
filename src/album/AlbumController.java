@@ -1,34 +1,43 @@
 package album;
 
-import java.util.ArrayList;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.ImageView;
 
 import util.*;
 
 public class AlbumController {
 
     @FXML
-    private HBox photoHBox;
+    private Button exitButon;
 
     @FXML
-    private Button searchButton;
+    private ImageView imageView;
 
     @FXML
-    private ComboBox<?> tagDropdown;
+    private Button nextButon;
 
     @FXML
-    private ComboBox<?> valueDropdown;
+    private Button prevButon;
 
     private User user;
 
     private AlbumModel albumModel = new AlbumModel();
 
     @FXML
-    void createAlbum() {
-        albumModel.createAlbum(null);
+    void exit(ActionEvent event) {
+        user.start();
     }
+
+    @FXML
+    void next(ActionEvent event) {
+
+    }
+
+    @FXML
+    void prev(ActionEvent event) {
+
+    }
+
 }

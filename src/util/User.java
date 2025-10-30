@@ -1,18 +1,17 @@
 package util;
 
-import album.AlbumController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import library.LibraryController;
 import main.App;
 
 public class User {
     
     private String username = "";
     private String password = "";
-    private AlbumController albumController = new AlbumController();
+    private LibraryController libraryController = new LibraryController();
     private Stage primaryStage;
 
     public User() {}
@@ -49,7 +48,7 @@ public class User {
         primaryStage = App.getStage();
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/album/AlbumView.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/library/LibraryView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
         } catch (Exception e) {
