@@ -22,7 +22,7 @@ public class LoginModel {
         return instance;
     }
 
-    public User login(String username, String password) { //returns 1 if admin, 0 if other, -1 if unsuccessful
+    public User login(String username, String password) {
         int index = users.indexOf(new User(username, password));
         System.out.println("index: " + index);
         if (index == -1) {
@@ -30,15 +30,6 @@ public class LoginModel {
             return null;
         }
         return users.get(index);
-        // if (username.equals("admin") && password.equals("admin")) {
-        //     return 1;
-        // } else if  (users.contains(new User(username, password))) {
-        //     System.out.println("Login successful!");
-        //     return 0;
-        // } else {
-        //     System.out.println("Login unsuccessful");
-        //     return -1;
-        // }
     }
     
 }

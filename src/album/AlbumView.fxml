@@ -1,15 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AlbumController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="album.AlbumController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="443.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="157.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <ImageView fx:id="imageView" fitHeight="313.0" fitWidth="393.0" layoutX="104.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="nextButon" layoutX="516.0" layoutY="188.0" mnemonicParsing="false" onAction="#next" text="Next" />
-      <Button fx:id="prevButon" layoutX="37.0" layoutY="188.0" mnemonicParsing="false" onAction="#prev" text="Prev" />
-      <Button fx:id="exitButon" layoutX="551.0" layoutY="14.0" mnemonicParsing="false" onAction="#exit" text="exit" />
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" GridPane.columnIndex="1">
+         <children>
+            <Button fx:id="slideshowButon" mnemonicParsing="false" onAction="#slideshow" text="Slideshow" />
+            <Button fx:id="addPhotoButon" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
+            <Button fx:id="removePhotoButon" disable="true" mnemonicParsing="false" onAction="#removePhoto" text="Remove Photo" />
+            <Button fx:id="captionPhotoButon" disable="true" mnemonicParsing="false" onAction="#captionPhoto" text="Caption Photo" />
+            <Button fx:id="displayPhotoButon" disable="true" mnemonicParsing="false" onAction="#displayPhoto" text="Display Photo" />
+            <Button fx:id="addTagButon" disable="true" mnemonicParsing="false" onAction="#addTag" text="Add Tag" />
+            <Button fx:id="removeTagButon" disable="true" mnemonicParsing="false" onAction="#removeTag" text="Remove Tag" />
+            <Button fx:id="copyButon" disable="true" mnemonicParsing="false" onAction="#copy" text="Copy To Album" />
+            <Button fx:id="moveButon" disable="true" mnemonicParsing="false" onAction="#move" text="Move To Album" />
+            <Button fx:id="backButon" mnemonicParsing="false" onAction="#back" text="Back" />
+         </children>
+      </VBox>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0">
+         <content>
+            <GridPane prefHeight="397.0" prefWidth="441.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
    </children>
-</AnchorPane>
+</GridPane>

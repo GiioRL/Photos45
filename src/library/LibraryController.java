@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 
+import album.AlbumController;
+import album.AlbumModel;
 import util.*;
 
 public class LibraryController {
@@ -25,10 +27,22 @@ public class LibraryController {
 
     private User user;
 
-    private LibraryModel albumModel = new LibraryModel();
+    private LibraryModel libraryModel = new LibraryModel();
+    private ArrayList<AlbumModel> albums = new ArrayList<AlbumModel>();
+    // private ArrayList<AlbumController> albumControllers = new ArrayList<AlbumController>();
 
     @FXML
     void createAlbum() {
-        albumModel.createAlbum(null);
+        albums.add(new AlbumModel());
+        AlbumModel album = albums.get(albums.size()-1);
+        album.start();
+    }
+
+    void createAlbum(ArrayList<Photo> photos) {
+        libraryModel.createAlbum(photos);
+    }
+
+    public void start() {
+        user.start();
     }
 }

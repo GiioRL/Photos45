@@ -3,40 +3,97 @@ package album;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 
+import library.LibraryController;
 import util.*;
 
 public class AlbumController {
 
     @FXML
-    private Button exitButon;
+    private Button addPhotoButon;
 
     @FXML
-    private ImageView imageView;
+    private Button addTagButon;
 
     @FXML
-    private Button nextButon;
+    private Button backButon;
 
     @FXML
-    private Button prevButon;
-
-    private User user;
-
-    private AlbumModel albumModel = new AlbumModel();
+    private Button captionPhotoButon;
 
     @FXML
-    void exit(ActionEvent event) {
-        user.start();
+    private Button copyButon;
+
+    @FXML
+    private Button displayPhotoButon;
+
+    @FXML
+    private Button moveButon;
+
+    @FXML
+    private Button removePhotoButon;
+
+    @FXML
+    private Button removeTagButon;
+
+    @FXML
+    private Button slideshowButon;
+
+    private LibraryController lc;
+
+    public AlbumController() {}
+
+    public AlbumController(LibraryController lc) {
+        this.lc = lc;
     }
 
     @FXML
-    void next(ActionEvent event) {
+    void addPhoto(ActionEvent event) {
 
     }
 
     @FXML
-    void prev(ActionEvent event) {
+    void addTag(ActionEvent event) {
+
+    }
+
+    @FXML
+    void back(ActionEvent event) {
+        lc.start();
+    }
+
+    @FXML
+    void captionPhoto(ActionEvent event) {
+
+    }
+
+    @FXML
+    void copy(ActionEvent event) {
+
+    }
+
+    @FXML
+    void displayPhoto(ActionEvent event) {
+
+    }
+
+    @FXML
+    void move(ActionEvent event) {
+
+    }
+
+    @FXML
+    void removePhoto(ActionEvent event) {
+
+    }
+
+    @FXML
+    void removeTag(ActionEvent event) {
+
+    }
+
+    @FXML
+    void slideshow(ActionEvent event) {
 
     }
 

@@ -1,17 +1,22 @@
 package util;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import library.LibraryController;
+import album.AlbumModel;
 import main.App;
 
-public class User {
+public class User { //maybe this gets split into controller and model?
     
-    private String username = "";
-    private String password = "";
-    private LibraryController libraryController = new LibraryController();
+    protected String username = "";
+    protected String password = "";
+    protected LibraryController libraryController = new LibraryController();
+    protected ArrayList<Photo> photos = new ArrayList<Photo>();
+    protected ArrayList<AlbumModel> albums = new ArrayList<AlbumModel>();
     private Stage primaryStage;
 
     public User() {}
@@ -43,6 +48,10 @@ public class User {
         }
         return (username.equals(((User)other).getUsername()) && password.equals(((User)other).getPassword()));
     }
+
+    // protected void addPhoto(String location) {
+    //     libraryController.method();
+    // }
 
     public void start() {
         primaryStage = App.getStage();
