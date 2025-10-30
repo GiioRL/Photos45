@@ -1,8 +1,11 @@
 package login;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+
+import util.User;
 
 public class LoginController {
 
@@ -24,13 +27,20 @@ public class LoginController {
 
     @FXML
     void login() {
-        if (loginModel.login(tfUsername.getText(), tfPassword.getText()) == 1) {
-            textInvalid.setVisible(false);
-            // System.out.println("Logged in!!");
-        } else {
+        User user = loginModel.login(tfUsername.getText(), tfPassword.getText());
+        if (user == null) { //invalid
             textInvalid.setVisible(true);
-            // System.out.println("Invalid credentials :(");
+        } else {
+            textInvalid.setVisible(false);
+            user.start();
         }
+        // if (num == 1) { // admin
+        //     textInvalid.setVisible(false);
+        // } else if (num == 0) { // user
+        //     textInvalid.setVisible(false);
+        // } else { // invalid
+            
+        // }
     }
 
 }
