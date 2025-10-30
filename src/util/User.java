@@ -1,9 +1,18 @@
-package model;
+package util;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import library.LibraryController;
+import main.App;
 
 public class User {
     
     private String username = "";
     private String password = "";
+    private LibraryController libraryController = new LibraryController();
+    private Stage primaryStage;
 
     public User() {}
 
@@ -33,5 +42,18 @@ public class User {
             return false;
         }
         return (username.equals(((User)other).getUsername()) && password.equals(((User)other).getPassword()));
+    }
+
+    public void start() {
+        primaryStage = App.getStage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/library/LibraryView.fxml"));
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } catch (Exception e) {
+            System.out.println("err there was an exception");
+            e.printStackTrace();
+        }
     }
 }
