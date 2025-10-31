@@ -3,11 +3,12 @@ package main.java.album;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import main.java.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import main.java.App;
 import main.java.library.LibraryController;
 import main.java.util.*;
 

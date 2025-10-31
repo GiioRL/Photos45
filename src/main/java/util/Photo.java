@@ -31,7 +31,7 @@ public class Photo {
     }
 
     private ImageView createImageView() throws IOException {
-        return new ImageView(new Image(new FileInputStream(location)));
+        return new ImageView(new Image(Photo.class.getResourceAsStream(location)));
     }
 
     public Calendar getDate() {

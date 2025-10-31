@@ -34,13 +34,6 @@ public class LoginController {
             textInvalid.setVisible(false);
             user.start();
         }
-        // if (num == 1) { // admin
-        //     textInvalid.setVisible(false);
-        // } else if (num == 0) { // user
-        //     textInvalid.setVisible(false);
-        // } else { // invalid
-            
-        // }
     }
 
 }

@@ -28,7 +28,13 @@ public class LibraryController {
 
     private LibraryModel libraryModel = new LibraryModel();
     private ArrayList<AlbumModel> albums = new ArrayList<AlbumModel>();
+    private AlbumController ac;
     // private ArrayList<AlbumController> albumControllers = new ArrayList<AlbumController>();
+
+    public void injectAlbumController(AlbumController ac) {
+        this.ac = ac;
+        System.out.println("injected album controller!");
+    }
 
     @FXML
     void createAlbum() {

@@ -37,13 +37,18 @@ public class AlbumController {
 
     @FXML
     private Button slideshowButon;
-
-    private LibraryController lc;
+    
+    @FXML private LibraryController lc;
+    
 
     public AlbumController() {}
 
     public AlbumController(LibraryController lc) {
         this.lc = lc;
+    }
+
+    @FXML private void initialize() {
+        lc.injectAlbumController(this);
     }
 
     @FXML

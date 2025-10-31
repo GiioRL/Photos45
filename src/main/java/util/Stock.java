@@ -11,7 +11,7 @@ public class Stock extends User {
     public Stock() {
         username = "stock";
         password = "stock";
-        photos.add(albumModel.createPhoto("/resources/Monk_with_Munk.jpg"));
+        photos.add(albumModel.createPhoto("/main/resources/StockPhotos/Monk_with_Munk.jpg"));
     }
     
 }
