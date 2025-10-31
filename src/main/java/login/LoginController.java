@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-import util.User;
+import main.java.util.User;
 
 public class LoginController {
 

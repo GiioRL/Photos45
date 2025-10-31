@@ -1,4 +1,4 @@
-package main.java.main;
+package main.java;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +14,7 @@ public class App extends Application {
         stage = primaryStage;
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/login/LoginView.fxml"));
+            root = FXMLLoader.load(getClass().getResource("login/LoginView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Photos Application");
             primaryStage.setScene(scene);

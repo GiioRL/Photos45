@@ -3,7 +3,7 @@ package main.java.library;
 import java.util.ArrayList;
 
 import main.java.album.AlbumModel;
-import util.*;
+import main.java.util.*;
 
 public class LibraryModel {
 

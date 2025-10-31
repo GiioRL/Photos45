@@ -3,13 +3,13 @@ package main.java.album;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import fakemain.App;
+import main.java.App;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.library.LibraryController;
-import util.*;
+import main.java.util.*;
 
 public class AlbumModel {
 
@@ -38,7 +38,7 @@ public class AlbumModel {
         primaryStage = App.getStage();
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/album/AlbumView.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/main/java/album/AlbumView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
         } catch (Exception e) {

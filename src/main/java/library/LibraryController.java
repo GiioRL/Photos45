@@ -8,7 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import main.java.album.AlbumController;
 import main.java.album.AlbumModel;
-import util.*;
+import main.java.util.*;
 
 public class LibraryController {
 

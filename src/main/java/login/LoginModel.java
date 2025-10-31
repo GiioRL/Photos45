@@ -2,7 +2,7 @@ package main.java.login;
 
 import java.util.ArrayList;
 
-import util.*;
+import main.java.util.*;
 
 public class LoginModel {
 
