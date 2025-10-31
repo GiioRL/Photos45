@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import main.java.App;
+import main.java.MainController;
 import main.java.library.LibraryController;
 import main.java.util.*;
 
@@ -36,7 +36,7 @@ public class AlbumModel {
     }
 
     public void start() {
-        primaryStage = App.getStage();
+        primaryStage = MainController.getStage();
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/main/java/album/AlbumView.fxml"));

@@ -47,10 +47,6 @@ public class AlbumController {
         this.lc = lc;
     }
 
-    @FXML private void initialize() {
-        lc.injectAlbumController(this);
-    }
-
     @FXML
     void addPhoto(ActionEvent event) {
 

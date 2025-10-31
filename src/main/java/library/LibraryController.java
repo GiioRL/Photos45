@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+
+import main.java.MainController;
 import main.java.album.AlbumController;
 import main.java.album.AlbumModel;
 import main.java.util.*;
@@ -24,6 +26,8 @@ public class LibraryController {
     @FXML
     private ComboBox<?> valueDropdown;
 
+    private MainController mc;
+
     private User user;
 
     private LibraryModel libraryModel = new LibraryModel();
@@ -31,9 +35,8 @@ public class LibraryController {
     private AlbumController ac;
     // private ArrayList<AlbumController> albumControllers = new ArrayList<AlbumController>();
 
-    public void injectAlbumController(AlbumController ac) {
-        this.ac = ac;
-        System.out.println("injected album controller!");
+    public void injectMainController(MainController mc) {
+        this.mc = mc;
     }
 
     @FXML

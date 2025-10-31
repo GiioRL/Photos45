@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.album.AlbumModel;
 import main.java.library.LibraryController;
-import main.java.App;
+import main.java.MainController;
 
 public class User { //maybe this gets split into controller and model?
     
@@ -54,7 +54,7 @@ public class User { //maybe this gets split into controller and model?
     // }
 
     public void start() {
-        primaryStage = App.getStage();
+        primaryStage = MainController.getStage();
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/main/java/library/LibraryView.fxml"));

@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+import main.java.MainController;
 import main.java.util.User;
 
 public class LoginController {
@@ -21,6 +22,8 @@ public class LoginController {
     @FXML
     private Text textInvalid;
 
+    private MainController mc;
+
     private LoginModel loginModel = LoginModel.getInstance();
 
     // public LoginController() {}
@@ -34,6 +37,10 @@ public class LoginController {
             textInvalid.setVisible(false);
             user.start();
         }
+    }
+
+    public void injectMainController(MainController mc) {
+        this.mc = mc;
     }
 
 }
