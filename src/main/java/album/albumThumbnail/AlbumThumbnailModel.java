@@ -3,7 +3,7 @@ package main.java.album.albumThumbnail;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 import main.java.album.AlbumModel;
 import main.java.util.Album;
@@ -23,8 +23,8 @@ public class AlbumThumbnailModel {
         return instance;
     }
 
-    public ImageView getImage(Album album) {
-        return album.getPhotos().get(0).getImageView();
+    public Image getImage(Album album) {
+        return album.getPhotos().get(0).getImage();
     }
 
     public String getName(Album album) {
@@ -42,6 +42,6 @@ public class AlbumThumbnailModel {
     }
 
     public String getNumPhotos(Album album) {
-        return "" + album.getPhotos().size();
+        return "" + album.getPhotos().size() + "photos";
     }
 }

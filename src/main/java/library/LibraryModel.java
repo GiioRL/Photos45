@@ -40,7 +40,9 @@ public class LibraryModel {
         ArrayList<Node> thumbnails = new ArrayList<Node>();
         System.out.println("Albums: " + user.getAlbums().size());
         for (Album album: user.getAlbums()) {
-            thumbnails.add(album.getThumbnail());
+            Node thumbnail = album.getThumbnail();
+            
+            thumbnails.add(thumbnail);
         }
         if (thumbnails.get(0) == null) {
             System.out.println("oh this guy is null");

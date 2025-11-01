@@ -16,7 +16,7 @@ public class Photo {
     private ArrayList<Tag> tags;
     private String location;
     private String caption;
-    private ImageView imageView;
+    private Image image;
     
     public Photo(Calendar date, ArrayList<Tag> tags, String location, String caption) {
         this.date = date;
@@ -24,14 +24,14 @@ public class Photo {
         this.location = location;
         this.caption = caption;
         try {
-            imageView = createImageView();
+            image = createImage();
         } catch (IOException e) {
             System.out.println("oops hehe");
         }
     }
 
-    private ImageView createImageView() throws IOException {
-        return new ImageView(new Image(Photo.class.getResourceAsStream(location)));
+    private Image createImage() throws IOException {
+        return new Image(Photo.class.getResourceAsStream(location));
     }
 
     public Calendar getDate() {
@@ -50,8 +50,8 @@ public class Photo {
         return caption;
     }
 
-    public ImageView getImageView() {
-        return imageView;
+    public Image getImage() {
+        return image;
     }
 
     // private ImageView createImageView() throws IOException {

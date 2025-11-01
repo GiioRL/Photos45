@@ -2,12 +2,11 @@ package main.java.album.albumThumbnail;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.Node;
 import javafx.scene.text.Text;
 
 import main.java.util.Album;
 
-public class AlbumThumbnailController extends Node {
+public class AlbumThumbnailController {
 
     @FXML
     private ImageView imageView;
@@ -30,9 +29,9 @@ public class AlbumThumbnailController extends Node {
     }
 
     private void initScene() {
-        imageView = thumbnailModel.getImage(album);
-        titleText = new Text(thumbnailModel.getName(album));
-        dateRangeText = new Text(thumbnailModel.getDateRange(album));
-        photoNumText = new Text(thumbnailModel.getNumPhotos(album));
+        imageView.setImage(thumbnailModel.getImage(album));
+        titleText.setText(thumbnailModel.getName(album));
+        dateRangeText.setText(thumbnailModel.getDateRange(album));
+        photoNumText.setText(thumbnailModel.getNumPhotos(album));
     }
 }
