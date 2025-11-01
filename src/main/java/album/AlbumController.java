@@ -4,11 +4,16 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
-import main.java.library.LibraryController;
+import javafx.scene.image.ImageView;
+
 import main.java.util.*;
 
 public class AlbumController {
+
+    @FXML
+    private GridPane photoGrid;
 
     @FXML
     private Button addPhotoButon;
@@ -40,17 +45,22 @@ public class AlbumController {
     @FXML
     private Button slideshowButon;
     
-    private ArrayList<AlbumModel> albums;
     private static User user;
-
-    // public void createAlbum() {
-    //     albums.add(new AlbumModel());
-    //     AlbumModel album = albums.get(albums.size()-1);
-    //     album.start();
-    // }
+    private static Album album;
+    private AlbumModel albumModel = AlbumModel.getInstance();
 
     public void injectUser(User user) {
         this.user = user;
+    }
+
+    public void injectAlbum(Album album) {
+        this.album = album;
+        initScene();
+    }
+
+    private void initScene() {
+        ArrayList<ImageView> imageViews = albumModel.getImageViews(album);
+        photoGrid.getChildren().addAll(imageViews);
     }
 
     @FXML

@@ -3,26 +3,21 @@ package main.java.album;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
-import main.java.MainController;
-import main.java.library.LibraryController;
 import main.java.util.*;
 
 public class AlbumModel {
 
-    private ArrayList<Photo> photos;
-    private Stage primaryStage;
-    private LibraryController lc;
-    private AlbumController ac;
+    static AlbumModel instance;
 
-    public AlbumModel() {}
+    private AlbumModel() {}
 
-    public AlbumModel(ArrayList<Photo> photos) {
-        this.photos = photos;
+    public static AlbumModel getInstance() {
+        if (instance == null) {
+            instance = new AlbumModel();
+        }
+        return instance;
     }
 
     public Photo createPhoto(Calendar calendar, ArrayList<Tag> tags, String location, String caption) {
@@ -35,16 +30,11 @@ public class AlbumModel {
         return new Photo(calendar, null, location, "");
     }
 
-    public void start() {
-        primaryStage = MainController.getStage();
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/main/java/album/AlbumView.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-        } catch (Exception e) {
-            System.out.println("err there was an exception");
-            e.printStackTrace();
+    public ArrayList<ImageView> getImageViews(Album album) {
+        ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
+        for (Photo photo : album.getPhotos()) {
+            imageViews.add(photo.getImageView());
         }
+        return imageViews;
     }
 }

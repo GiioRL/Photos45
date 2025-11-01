@@ -6,7 +6,7 @@ import main.java.album.AlbumModel;
 
 public class Stock extends User {
 
-    private AlbumModel albumModel = new AlbumModel();
+    private AlbumModel albumModel = AlbumModel.getInstance();
     
     public Stock() {
         username = "stock";

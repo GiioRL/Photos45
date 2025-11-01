@@ -35,7 +35,8 @@ public class Album {
             System.out.println("scene is empty!!" + count);
             initScene();
         }
-        ac.injectUser(user);
+        ac.injectUser(user); //this may not be necessary
+        ac.injectAlbum(this);
         primaryStage.setScene(scene);
     }
 
