@@ -12,8 +12,10 @@ public class Stock extends User {
         username = "stock";
         password = "stock";
         photos.add(albumModel.createPhoto("/main/resources/StockPhotos/Monk_with_Munk.jpg"));
-        // ArrayList<Photo> stockPhotos = new ArrayList<Photo>();
-        albums.add(new Album(photos, "stock"));
+        photos.add(albumModel.createPhoto("/main/resources/StockPhotos/Monkey_Fall.jpg"));
+        photos.add(albumModel.createPhoto("/main/resources/StockPhotos/Pumpkin.jpg"));
+        photos.add(albumModel.createPhoto("/main/resources/StockPhotos/Skill_Issue.jpg"));
+        albums.add(new Album(photos, "stock", this));
     }
     
 }

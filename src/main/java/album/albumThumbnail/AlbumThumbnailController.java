@@ -1,6 +1,7 @@
 package main.java.album.albumThumbnail;
 
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -33,5 +34,9 @@ public class AlbumThumbnailController {
         titleText.setText(thumbnailModel.getName(album));
         dateRangeText.setText(thumbnailModel.getDateRange(album));
         photoNumText.setText(thumbnailModel.getNumPhotos(album));
+    }
+
+    @FXML void open(MouseEvent e) {
+        album.start();
     }
 }

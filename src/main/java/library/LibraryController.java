@@ -17,7 +17,10 @@ public class LibraryController {
     private HBox albumHBox;
 
     @FXML
-    private Button searchButton;
+    private Button searchButon;
+
+    @FXML
+    private Button createAlbumButon;
 
     @FXML
     private ComboBox<?> tagDropdown;
@@ -41,8 +44,9 @@ public class LibraryController {
     }
 
     private void initScene() {
+        albumHBox.getChildren().clear(); // maybe do something else
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
-        System.out.println("thumbnails: " + thumbnails.size());
+        albumHBox.getChildren().add(createAlbumButon);
         albumHBox.getChildren().addAll(thumbnails);
     }
 

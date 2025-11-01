@@ -46,7 +46,7 @@
                   </Text>
                   <ComboBox fx:id="tagDropdown" layoutX="175.0" layoutY="71.0" prefWidth="150.0" promptText="Tag" />
                   <ComboBox fx:id="valueDropdown" layoutX="175.0" layoutY="103.0" prefWidth="150.0" promptText="Value" />
-                  <Button fx:id="searchButton" layoutX="363.0" layoutY="91.0" mnemonicParsing="false" text="Search" />
+                  <Button fx:id="searchButon" layoutX="363.0" layoutY="91.0" mnemonicParsing="false" text="Search" />
                </children>
             </AnchorPane>
          </children>

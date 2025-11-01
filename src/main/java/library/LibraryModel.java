@@ -27,7 +27,7 @@ public class LibraryModel {
     }
 
     public void createAlbum(User user) {
-        createAlbum(user, "defualt");
+        createAlbum(user, "default");
     }
 
     public void createAlbum(User user, String name) {
@@ -38,7 +38,6 @@ public class LibraryModel {
 
     public ArrayList<Node> getThumbnails(User user) {
         ArrayList<Node> thumbnails = new ArrayList<Node>();
-        System.out.println("Albums: " + user.getAlbums().size());
         for (Album album: user.getAlbums()) {
             Node thumbnail = album.getThumbnail();
             

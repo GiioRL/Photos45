@@ -41,4 +41,11 @@ public class AlbumModel {
         }
         return images;
     }
+
+    public void back(Album album) {
+        if (album.getPhotos() == null) {
+            album.delete();
+        }
+        album.back();
+    }
 }

@@ -45,13 +45,8 @@ public class AlbumController {
     @FXML
     private Button slideshowButon;
     
-    private static User user;
     private static Album album;
     private static AlbumModel albumModel = AlbumModel.getInstance();
-
-    public void injectUser(User user) {
-        this.user = user;
-    }
 
     public void injectAlbum(Album album) {
         this.album = album;
@@ -72,7 +67,7 @@ public class AlbumController {
 
     @FXML
     void back(ActionEvent event) {
-        user.start();
+        albumModel.back(album);
     }
 
     @FXML

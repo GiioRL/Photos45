@@ -27,9 +27,10 @@ public class Album {
         this.name = name;
     }
 
-    public Album(ArrayList<Photo> photos, String name) {
+    public Album(ArrayList<Photo> photos, String name, User user) {
         this.photos = photos;
         this.name = name;
+        this.user = user;
         createThumbnail();
     }
 
@@ -71,6 +72,14 @@ public class Album {
         // ac.injectUser(user); //this may not be necessary
         ac.injectAlbum(this);
         primaryStage.setScene(scene);
+    }
+
+    public void back() {
+        user.start();
+    }
+
+    public void delete() {
+        user.getAlbums().remove(this);
     }
 
     private void initScene() {

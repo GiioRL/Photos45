@@ -2,14 +2,11 @@ package main.java.util;
 
 import java.util.ArrayList;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import main.java.library.LibraryController;
 import main.java.MainController;
-import main.java.util.Album;
 
 public class User { // this might become library model
     
@@ -58,19 +55,6 @@ public class User { // this might become library model
     public ArrayList<Album> getAlbums() {
         return albums;
     }
-
-    // public void start() {
-    //     primaryStage = MainController.getStage();
-    //     Parent root;
-    //     try {
-    //         root = FXMLLoader.load(getClass().getResource("/main/java/library/LibraryView.fxml"));
-    //         Scene scene = new Scene(root);
-    //         primaryStage.setScene(scene);
-    //     } catch (Exception e) {
-    //         System.out.println("err there was an exception");
-    //         e.printStackTrace();
-    //     }
-    // }
 
     public void start() {
         if (scene == null) {
