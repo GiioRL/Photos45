@@ -55,6 +55,10 @@ public class User { // this might become library model
         albums.add(album);
     }
 
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+
     // public void start() {
     //     primaryStage = MainController.getStage();
     //     Parent root;

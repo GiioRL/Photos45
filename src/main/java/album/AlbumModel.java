@@ -30,6 +30,10 @@ public class AlbumModel {
         return new Photo(calendar, null, location, "");
     }
 
+    public String convertDatetoString(Calendar date) {
+        return ("" + date.MONTH + date.DAY_OF_MONTH + date.YEAR);
+    }
+
     public ArrayList<ImageView> getImageViews(Album album) {
         ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
         for (Photo photo : album.getPhotos()) {

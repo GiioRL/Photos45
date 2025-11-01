@@ -6,16 +6,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.Node;
 
 import main.java.MainController;
-import main.java.album.AlbumController;
-import main.java.album.AlbumModel;
 import main.java.util.*;
 
 public class LibraryController {
 
     @FXML
-    private HBox photoHBox;
+    private HBox albumHBox;
 
     @FXML
     private Button searchButton;
@@ -30,7 +29,7 @@ public class LibraryController {
 
     private static User user;
 
-    private LibraryModel libraryModel = new LibraryModel();
+    private static LibraryModel libraryModel = LibraryModel.getInstance();
 
     public void injectMainController(MainController mc) {
         this.mc = mc;
@@ -38,6 +37,13 @@ public class LibraryController {
 
     public void injectUser(User user) {
         this.user = user;
+        initScene();
+    }
+
+    private void initScene() {
+        ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
+        System.out.println("thumbnails: " + thumbnails.size());
+        albumHBox.getChildren().addAll(thumbnails);
     }
 
     @FXML
@@ -48,8 +54,4 @@ public class LibraryController {
     void createAlbum(ArrayList<Photo> photos) {
         libraryModel.createAlbum(photos);
     }
-
-    // public void start() {
-    //     user.start();
-    // }
 }

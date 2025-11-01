@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.album.albumThumbnail.AlbumThumbnailController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="titleText" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album Title" textAlignment="CENTER" wrappingWidth="400.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text fx:id="photoNumText" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="# Photos" textAlignment="CENTER" wrappingWidth="400.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="dateRangeText" layoutY="487.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date - End Date" textAlignment="CENTER" wrappingWidth="400.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

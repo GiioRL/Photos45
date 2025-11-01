@@ -24,7 +24,7 @@ public class LoginController {
 
     private MainController mc;
 
-    private LoginModel loginModel = LoginModel.getInstance();
+    private static LoginModel loginModel = LoginModel.getInstance();
 
     @FXML
     void login() {

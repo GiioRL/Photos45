@@ -2,10 +2,13 @@ package main.java.util;
 
 import java.util.ArrayList;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import main.java.album.AlbumController;
+import main.java.album.albumThumbnail.AlbumThumbnailController;
 import main.java.MainController;
 
 public class Album {
@@ -15,27 +18,57 @@ public class Album {
     private static Scene scene;
     private static Stage primaryStage;
     private User user;
-    private int count = 0;
+    private Node thumbnail;
+    private AlbumThumbnailController tc;
+    private String name;
 
-    public Album(User user) {
+    public Album(User user, String name) {
         this.user = user;
+        this.name = name;
     }
 
-    public Album(ArrayList<Photo> photos) {
+    public Album(ArrayList<Photo> photos, String name) {
         this.photos = photos;
+        this.name = name;
+        createThumbnail();
+    }
+
+    public void createThumbnail() {
+        if (photos.size() == 0) {
+            System.out.println("ALBUM HAS NO PHTOOS");
+            return; // dont let this happen, delete album or something
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/albumThumbnail/albumThumbnailView.fxml"));
+            thumbnail = loader.load();
+            if (thumbnail == null) {
+                System.out.println("why null???");
+            }
+            tc = loader.getController();
+            tc.injectAlbum(this);
+        } catch (Exception e) {
+            System.out.println("o no bad thumbnail");
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Photo> getPhotos() {
         return photos;
     }
+
+    public Node getThumbnail() {
+        return thumbnail;
+    }
+
+    public String getName() {
+        return name;
+    }
     
     public void start() {
-        count++;
         if (scene == null) {
-            System.out.println("scene is empty!!" + count);
             initScene();
         }
-        ac.injectUser(user); //this may not be necessary
+        // ac.injectUser(user); //this may not be necessary
         ac.injectAlbum(this);
         primaryStage.setScene(scene);
     }

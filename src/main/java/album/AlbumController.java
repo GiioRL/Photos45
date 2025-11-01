@@ -47,7 +47,7 @@ public class AlbumController {
     
     private static User user;
     private static Album album;
-    private AlbumModel albumModel = AlbumModel.getInstance();
+    private static AlbumModel albumModel = AlbumModel.getInstance();
 
     public void injectUser(User user) {
         this.user = user;
@@ -58,10 +58,7 @@ public class AlbumController {
         initScene();
     }
 
-    private void initScene() {
-        ArrayList<ImageView> imageViews = albumModel.getImageViews(album);
-        photoGrid.getChildren().addAll(imageViews);
-    }
+    private void initScene() {}
 
     @FXML
     void addPhoto(ActionEvent event) {
