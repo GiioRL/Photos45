@@ -24,7 +24,6 @@ public class LoginModel {
 
     public User login(String username, String password) {
         int index = users.indexOf(new User(username, password));
-        System.out.println("index: " + index);
         if (index == -1) {
             System.out.println("login unsuccessful");
             return null;

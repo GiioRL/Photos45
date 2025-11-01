@@ -6,18 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.album.AlbumModel;
+
 import main.java.library.LibraryController;
 import main.java.MainController;
+import main.java.util.Album;
 
-public class User { //maybe this gets split into controller and model?
+public class User { // this might become library model
     
     protected String username = "";
     protected String password = "";
-    protected LibraryController libraryController = new LibraryController();
+    protected static LibraryController lc; //maybe private
     protected ArrayList<Photo> photos = new ArrayList<Photo>();
-    protected ArrayList<AlbumModel> albums = new ArrayList<AlbumModel>();
-    private Stage primaryStage;
+    protected ArrayList<Album> albums = new ArrayList<Album>();
+    private static Stage primaryStage;
+    private static Scene scene;
 
     public User() {}
 
@@ -49,20 +51,34 @@ public class User { //maybe this gets split into controller and model?
         return (username.equals(((User)other).getUsername()) && password.equals(((User)other).getPassword()));
     }
 
-    // protected void addPhoto(String location) {
-    //     libraryController.method();
+    public void addAlbum(Album album) {
+        albums.add(album);
+    }
+
+    // public void start() {
+    //     primaryStage = MainController.getStage();
+    //     Parent root;
+    //     try {
+    //         root = FXMLLoader.load(getClass().getResource("/main/java/library/LibraryView.fxml"));
+    //         Scene scene = new Scene(root);
+    //         primaryStage.setScene(scene);
+    //     } catch (Exception e) {
+    //         System.out.println("err there was an exception");
+    //         e.printStackTrace();
+    //     }
     // }
 
     public void start() {
-        primaryStage = MainController.getStage();
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/main/java/library/LibraryView.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-        } catch (Exception e) {
-            System.out.println("err there was an exception");
-            e.printStackTrace();
+        if (scene == null) {
+            initScene();
         }
+        lc.injectUser(this);
+        primaryStage.setScene(scene);
+    }
+
+    private void initScene() {
+        primaryStage = MainController.getStage();
+        lc = MainController.getLibraryController();
+        scene = MainController.getLibraryScene();
     }
 }

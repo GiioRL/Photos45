@@ -16,12 +16,19 @@ public class MainController {
 
     private static FXMLLoader loginLoader;
     private static FXMLLoader libraryLoader;
+    private static FXMLLoader albumLoader;
 
     private static Parent loginRoot;
     private static Parent libraryRoot;
+    private static Parent albumRoot;
+
+    private static Scene loginScene;
+    private static Scene libraryScene;
+    private static Scene albumScene;
 
     private static LoginController loginController;
     private static LibraryController libraryController;
+    private static AlbumController albumController;
 
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -29,9 +36,15 @@ public class MainController {
             loginLoader = new FXMLLoader(getClass().getResource("login/LoginView.fxml"));
             loginRoot = loginLoader.load();
             loginController = loginLoader.getController();
+            loginScene = new Scene(loginRoot);
             libraryLoader = new FXMLLoader(getClass().getResource("library/LibraryView.fxml"));
             libraryRoot = libraryLoader.load();
             libraryController = libraryLoader.getController();
+            libraryScene = new Scene(libraryRoot);
+            albumLoader = new FXMLLoader(getClass().getResource("album/AlbumView.fxml"));
+            albumRoot = albumLoader.load();
+            albumController = albumLoader.getController();
+            albumScene = new Scene(albumRoot);
         } catch (Exception e) {
             System.out.println("oopsie daisy");
             e.printStackTrace();
@@ -39,9 +52,8 @@ public class MainController {
         loginController.injectMainController(this);
         libraryController.injectMainController(this);
 
-        Scene scene = new Scene(loginRoot);
         primaryStage.setTitle("Photos Application");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(loginScene);
         primaryStage.setResizable(false);
         primaryStage.show();
     }
@@ -50,11 +62,31 @@ public class MainController {
         return primaryStage;
     }
 
-    public static LoginController getLoginController() {
-        return loginController;
+    public static AlbumController getAlbumController() {
+        return albumController;
     }
 
     public static LibraryController getLibraryController() {
         return libraryController;
+    }
+
+    public static LoginController getLoginController() {
+        return loginController;
+    }
+
+    public static Parent getAlbumRoot() {
+        return albumRoot;
+    }
+
+    public static Parent getLibraryRoot() {
+        return libraryRoot;
+    }
+
+    public static Scene getAlbumScene() {
+        return albumScene;
+    }
+
+    public static Scene getLibraryScene() {
+        return libraryScene;
     }
 }

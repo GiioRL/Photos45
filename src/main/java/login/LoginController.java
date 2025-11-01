@@ -26,8 +26,6 @@ public class LoginController {
 
     private LoginModel loginModel = LoginModel.getInstance();
 
-    // public LoginController() {}
-
     @FXML
     void login() {
         User user = loginModel.login(tfUsername.getText(), tfPassword.getText());
@@ -41,6 +39,10 @@ public class LoginController {
 
     public void injectMainController(MainController mc) {
         this.mc = mc;
+    }
+
+    public void start() {
+
     }
 
 }

@@ -1,47 +1,47 @@
-// package util;
+package main.java.util;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
-// import javafx.fxml.FXMLLoader;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
-// import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-// import album.AlbumController;
-// import library.LibraryController;
-// import main.App;
+import main.java.album.AlbumController;
+import main.java.MainController;
 
-// public class Album {
+public class Album {
 
-//     private ArrayList<Photo> photos;
-//     private Stage primaryStage;
-//     private LibraryController lc;
-//     private AlbumController ac;
+    private ArrayList<Photo> photos;
+    private static AlbumController ac;
+    private static Scene scene;
+    private static Stage primaryStage;
+    private User user;
+    private int count = 0;
 
-//     public Album(LibraryController lc) {
-//         this.lc = lc;
-//         ac = new AlbumController(lc);
-//     }
+    public Album(User user) {
+        this.user = user;
+    }
 
-//     public Album(ArrayList<Photo> photos) {
-//         this.photos = photos;
-//         ac = new AlbumController(lc);
-//     }
+    public Album(ArrayList<Photo> photos) {
+        this.photos = photos;
+    }
 
-//     public ArrayList<Photo> getPhotos() {
-//         return photos;
-//     }
+    public ArrayList<Photo> getPhotos() {
+        return photos;
+    }
     
-//     public void start() {
-//         primaryStage = App.getStage();
-//         Parent root;
-//         try {
-//             root = FXMLLoader.load(getClass().getResource("/album/AlbumView.fxml"));
-//             Scene scene = new Scene(root);
-//             primaryStage.setScene(scene);
-//         } catch (Exception e) {
-//             System.out.println("err there was an exception");
-//             e.printStackTrace();
-//         }
-//     }
-// }
+    public void start() {
+        count++;
+        if (scene == null) {
+            System.out.println("scene is empty!!" + count);
+            initScene();
+        }
+        ac.injectUser(user);
+        primaryStage.setScene(scene);
+    }
+
+    private void initScene() {
+        primaryStage = MainController.getStage();
+        ac = MainController.getAlbumController();
+        scene = MainController.getAlbumScene();
+    }
+}

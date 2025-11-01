@@ -1,5 +1,7 @@
 package main.java.album;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,13 +40,17 @@ public class AlbumController {
     @FXML
     private Button slideshowButon;
     
-    @FXML private LibraryController lc;
-    
+    private ArrayList<AlbumModel> albums;
+    private static User user;
 
-    public AlbumController() {}
+    // public void createAlbum() {
+    //     albums.add(new AlbumModel());
+    //     AlbumModel album = albums.get(albums.size()-1);
+    //     album.start();
+    // }
 
-    public AlbumController(LibraryController lc) {
-        this.lc = lc;
+    public void injectUser(User user) {
+        this.user = user;
     }
 
     @FXML
@@ -59,7 +65,7 @@ public class AlbumController {
 
     @FXML
     void back(ActionEvent event) {
-        lc.start();
+        user.start();
     }
 
     @FXML

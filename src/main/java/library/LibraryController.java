@@ -28,29 +28,28 @@ public class LibraryController {
 
     private MainController mc;
 
-    private User user;
+    private static User user;
 
     private LibraryModel libraryModel = new LibraryModel();
-    private ArrayList<AlbumModel> albums = new ArrayList<AlbumModel>();
-    private AlbumController ac;
-    // private ArrayList<AlbumController> albumControllers = new ArrayList<AlbumController>();
 
     public void injectMainController(MainController mc) {
         this.mc = mc;
     }
 
+    public void injectUser(User user) {
+        this.user = user;
+    }
+
     @FXML
     void createAlbum() {
-        albums.add(new AlbumModel());
-        AlbumModel album = albums.get(albums.size()-1);
-        album.start();
+        libraryModel.createAlbum(user);
     }
 
     void createAlbum(ArrayList<Photo> photos) {
         libraryModel.createAlbum(photos);
     }
 
-    public void start() {
-        user.start();
-    }
+    // public void start() {
+    //     user.start();
+    // }
 }

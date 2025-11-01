@@ -13,5 +13,9 @@ public class LibraryModel {
         return null;
     }
 
-    public void createAlbum() {}
+    public void createAlbum(User user) {
+        Album album = new Album(user);
+        user.addAlbum(album);
+        album.start();
+    }
 }
