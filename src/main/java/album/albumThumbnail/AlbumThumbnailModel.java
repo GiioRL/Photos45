@@ -42,6 +42,10 @@ public class AlbumThumbnailModel {
     }
 
     public String getNumPhotos(Album album) {
-        return "" + album.getPhotos().size() + "photos";
+        int num = album.getPhotos().size();
+        if (num == 1) {
+            return "1 photo";
+        }
+        return "" + num + " photos";
     }
 }

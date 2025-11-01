@@ -31,7 +31,7 @@ public class AlbumModel {
     }
 
     public String convertDatetoString(Calendar date) {
-        return ("" + date.MONTH + date.DAY_OF_MONTH + date.YEAR);
+        return ("" + date.MONTH + "/" + date.DAY_OF_MONTH + "/" + date.YEAR);
     }
 
     public ArrayList<Image> getImages(Album album) {
