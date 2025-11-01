@@ -7,8 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import main.java.album.photoThumbnail.PhotoThumbnailController;
 
 public class Photo {
 
@@ -17,6 +21,8 @@ public class Photo {
     private String location;
     private String caption;
     private Image image;
+    private Node thumbnail;
+    private PhotoThumbnailController tc;
     
     public Photo(Calendar date, ArrayList<Tag> tags, String location, String caption) {
         this.date = date;
@@ -28,10 +34,26 @@ public class Photo {
         } catch (IOException e) {
             System.out.println("oops hehe");
         }
+        createThumbnail();
     }
 
     private Image createImage() throws IOException {
         return new Image(Photo.class.getResourceAsStream(location));
+    }
+
+    public void createThumbnail() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/photoThumbnail/PhotoThumbnailView.fxml"));
+            thumbnail = loader.load();
+            if (thumbnail == null) {
+                System.out.println("why null???");
+            }
+            tc = loader.getController();
+            tc.injectPhoto(this);
+        } catch (Exception e) {
+            System.out.println("o no bad thumbnail");
+            e.printStackTrace();
+        }
     }
 
     public Calendar getDate() {
@@ -54,11 +76,7 @@ public class Photo {
         return image;
     }
 
-    // private ImageView createImageView() throws IOException {
-    //     InputStream stream = new FileInputStream(location);
-    //     Image image = new Image(stream);
-    //     ImageView imageView = new ImageView();
-    //     imageView.setImage(image);
-    //     return null;
-    // }
+    public Node getThumbnail() {
+        return thumbnail;
+    }
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javafx.scene.Node;
 
 import main.java.album.AlbumModel;
-import main.java.album.albumThumbnail.AlbumThumbnailController;
 import main.java.util.*;
 
 public class LibraryModel {

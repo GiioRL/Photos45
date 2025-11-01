@@ -69,7 +69,6 @@ public class Album {
         if (scene == null) {
             initScene();
         }
-        // ac.injectUser(user); //this may not be necessary
         ac.injectAlbum(this);
         primaryStage.setScene(scene);
     }

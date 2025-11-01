@@ -3,7 +3,9 @@ package main.java.album;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import main.java.util.*;
 
@@ -34,12 +36,25 @@ public class AlbumModel {
         return ("" + date.MONTH + "/" + date.DAY_OF_MONTH + "/" + date.YEAR);
     }
 
-    public ArrayList<Image> getImages(Album album) {
-        ArrayList<Image> images = new ArrayList<Image>();
-        for (Photo photo : album.getPhotos()) {
-            images.add(photo.getImage());
+    // public ArrayList<ImageView> getImageViews(Album album) {
+    //     ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
+    //     for (Photo photo : album.getPhotos()) {
+    //         imageViews.add(new ImageView(photo.getImage()));
+    //     }
+    //     return imageViews;
+    // }
+
+    public ArrayList<Node> getThumbnails(Album album) {
+        ArrayList<Node> thumbnails = new ArrayList<Node>();
+        for (Photo photo: album.getPhotos()) {
+            Node thumbnail = photo.getThumbnail();
+            
+            thumbnails.add(thumbnail);
         }
-        return images;
+        if (thumbnails.get(0) == null) {
+            System.out.println("oh this guy is null");
+        }
+        return thumbnails;
     }
 
     public void back(Album album) {

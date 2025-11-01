@@ -2,11 +2,13 @@ package main.java.album;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.Node;
 
 import main.java.util.*;
 
@@ -53,7 +55,16 @@ public class AlbumController {
         initScene();
     }
 
-    private void initScene() {}
+    private void initScene() {
+        // photoGrid.addRow(0, albumModel.getThumbnails(album));
+        ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
+        // ObservableList<Node> children = photoGrid.getChildren();
+        for (int i = 0; i < thumbnails.size(); i++) {
+            photoGrid.add(thumbnails.get(i), i%3, i/3);
+        }
+        // photoGrid.add(thumbnails.get(0), 0, 0);
+        // photoGrid.add(thumbnails.get(1), 0, 1);
+    }
 
     @FXML
     void addPhoto(ActionEvent event) {
