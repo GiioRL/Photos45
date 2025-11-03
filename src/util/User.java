@@ -25,9 +25,8 @@ public class User {
     public User() {}
 
     public User(String username, String password) throws Exception {
-        for (User user: users)
-            if (user.username.equals(username))
-                throw new Exception("User already exists with that username");
+        if (User.exists(username))
+            throw new Exception("User already exists with that username.");
         this.username = username;
         this.password = password;
         users.add(this);
@@ -58,6 +57,28 @@ public class User {
 
     public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public static boolean exists(String username) {
+        return getUser(username) != null;
+    }
+
+    public static boolean exists(String username, String password) {
+        return getUser(username, password) != null;
+    }
+
+    public static User getUser(String username) {
+        for (User user: users)
+            if (user.username.equals(username))
+                return user;
+        return null;
+    }
+
+    public static User getUser(String username, String password) {
+        for (User user: users)
+            if (user.username.equals(username) && user.password.equals(password))
+                return user;
+        return null;
     }
 
     public void start() {

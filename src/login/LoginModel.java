@@ -23,16 +23,10 @@ public class LoginModel {
     }
 
     public User login(String username, String password) { //returns 1 if admin, 0 if other, -1 if unsuccessful
-        ArrayList<User> users = User.getUsers();
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            if (user.getUsername().equals(username)) {
-                System.out.println("index: " + i);
-                return user;
-            }
-        }
-        System.out.println("login unsuccessful");
-        return null;
+        User user = User.getUser(username, password);
+        if (user == null)
+            System.out.println("Login unsuccessful");
+        return user;
         // if (username.equals("admin") && password.equals("admin")) {
         //     return 1;
         // } else if  (users.contains(new User(username, password))) {

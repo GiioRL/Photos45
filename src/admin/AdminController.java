@@ -1,9 +1,12 @@
 package admin;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import util.*;
 
 public class AdminController {
 
@@ -25,4 +28,45 @@ public class AdminController {
     @FXML
     private TextField tfUsername;
 
+    @FXML
+    void listUsers() {
+        String list = "";
+        for (User user: User.getUsers())
+            list += user.getUsername() + '\n';
+        display.setText(list);
+    }
+
+    @FXML
+    void addUser() {
+        String username = tfUsername.getText(), password = tfPassword.getText();
+        if (username.length() == 0)
+            display.setText("Enter a username to proceed.");
+        else if (password.length() == 0)
+            display.setText("Enter a password to proceed.");
+        try {
+            new User(username, password);
+            display.setText("User added successsfully!");
+        }
+        catch (Exception e) {
+            display.setText(e.getMessage());
+        }
+    }
+
+    @FXML
+    void deleteUser() {
+        String username = tfUsername.getText();
+        if (username.length() == 0)
+            display.setText("Enter a username to proceed.");
+        else if (username.equals("admin"))
+            display.setText("Cannot remove admin user.");
+        else if (username.equals("stock"))
+            display.setText("Cannot remove stock user.");
+        User oldUser = User.getUser(username);
+        if (oldUser == null)
+            display.setText("User with that username does not exist.");
+        else {
+            User.getUsers().remove(oldUser);
+            display.setText("User deleted successfully!");
+        }
+    }
 }
