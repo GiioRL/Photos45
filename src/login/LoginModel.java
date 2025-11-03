@@ -11,8 +11,8 @@ public class LoginModel {
 
     private LoginModel() {
         users = new ArrayList<User>();
-        users.add(new Admin()); //admin has index 0
-        users.add(new Stock());
+        // users.add(new Admin()); //admin has index 0
+        // users.add(new Stock());
     }
 
     public static LoginModel getInstance() {
@@ -23,13 +23,16 @@ public class LoginModel {
     }
 
     public User login(String username, String password) { //returns 1 if admin, 0 if other, -1 if unsuccessful
-        int index = users.indexOf(new User(username, password));
-        System.out.println("index: " + index);
-        if (index == -1) {
-            System.out.println("login unsuccessful");
-            return null;
+        ArrayList<User> users = User.getUsers();
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getUsername().equals(username)) {
+                System.out.println("index: " + i);
+                return user;
+            }
         }
-        return users.get(index);
+        System.out.println("login unsuccessful");
+        return null;
         // if (username.equals("admin") && password.equals("admin")) {
         //     return 1;
         // } else if  (users.contains(new User(username, password))) {

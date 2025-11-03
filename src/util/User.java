@@ -1,5 +1,7 @@
 package util;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,12 +15,22 @@ public class User {
     private String password = "";
     private LibraryController libraryController = new LibraryController();
     private Stage primaryStage;
+    private static ArrayList<User> users = new ArrayList<>();
+
+    static {
+        users.add(new Admin());
+        users.add(new Stock());
+    }
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password) throws Exception {
+        for (User user: users)
+            if (user.username.equals(username))
+                throw new Exception("User already exists with that username");
         this.username = username;
         this.password = password;
+        users.add(this);
     }
 
     public String getUsername() {
@@ -42,6 +54,10 @@ public class User {
             return false;
         }
         return (username.equals(((User)other).getUsername()) && password.equals(((User)other).getPassword()));
+    }
+
+    public static ArrayList<User> getUsers() {
+        return users;
     }
 
     public void start() {
