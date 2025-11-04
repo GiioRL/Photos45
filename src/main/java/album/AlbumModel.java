@@ -3,9 +3,8 @@ package main.java.album;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import main.java.util.*;
 
@@ -36,14 +35,6 @@ public class AlbumModel {
         return ("" + date.MONTH + "/" + date.DAY_OF_MONTH + "/" + date.YEAR);
     }
 
-    // public ArrayList<ImageView> getImageViews(Album album) {
-    //     ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
-    //     for (Photo photo : album.getPhotos()) {
-    //         imageViews.add(new ImageView(photo.getImage()));
-    //     }
-    //     return imageViews;
-    // }
-
     public ArrayList<Node> getThumbnails(Album album) {
         ArrayList<Node> thumbnails = new ArrayList<Node>();
         for (Photo photo: album.getPhotos()) {
@@ -62,5 +53,21 @@ public class AlbumModel {
             album.delete();
         }
         album.back();
+    }
+
+    public ArrayList<Node> getPhotoBoxes() {
+        ArrayList<Node> photoBoxes = new ArrayList<Node>();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/PhotoBox.fxml"));
+            thumbnail = loader.load();
+            if (thumbnail == null) {
+                System.out.println("why null???");
+            }
+            tc = loader.getController();
+            tc.injectAlbum(this);
+        } catch (Exception e) {
+            System.out.println("o no bad thumbnail");
+            e.printStackTrace();
+        }
     }
 }

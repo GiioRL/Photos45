@@ -10,7 +10,7 @@ import javafx.scene.Node;
 
 import main.java.util.*;
 
-public class AlbumController {
+public class AlbumController2 {
 
     @FXML
     private GridPane photoGrid;
