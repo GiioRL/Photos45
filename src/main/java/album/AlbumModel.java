@@ -55,19 +55,19 @@ public class AlbumModel {
         album.back();
     }
 
-    public ArrayList<Node> getPhotoBoxes() {
-        ArrayList<Node> photoBoxes = new ArrayList<Node>();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/PhotoBox.fxml"));
-            thumbnail = loader.load();
-            if (thumbnail == null) {
-                System.out.println("why null???");
-            }
-            tc = loader.getController();
-            tc.injectAlbum(this);
-        } catch (Exception e) {
-            System.out.println("o no bad thumbnail");
-            e.printStackTrace();
-        }
-    }
+    // public ArrayList<Node> getPhotoBoxes() {
+    //     ArrayList<Node> photoBoxes = new ArrayList<Node>();
+    //     try {
+    //         FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/PhotoBox.fxml"));
+    //         thumbnail = loader.load();
+    //         if (thumbnail == null) {
+    //             System.out.println("why null???");
+    //         }
+    //         tc = loader.getController();
+    //         tc.injectAlbum(this);
+    //     } catch (Exception e) {
+    //         System.out.println("o no bad thumbnail");
+    //         e.printStackTrace();
+    //     }
+    // }
 }

@@ -11,6 +11,7 @@ import main.java.util.*;
 public class AlbumModel2 {
 
     static AlbumModel2 instance;
+    private AlbumController2 ac;
 
     private AlbumModel() {}
 
@@ -55,6 +56,10 @@ public class AlbumModel2 {
         album.back();
     }
 
+    public void injectAlbumController(AlbumController2 ac) {
+        this.ac = ac;
+    }
+
     public Node getPhotoBox() {
         Node photoBox;
         try {
@@ -63,7 +68,7 @@ public class AlbumModel2 {
             if (thumbnail == null) {
                 System.out.println("why null???");
             }
-            
+            ac.injectPB(loader.getController());
         } catch (Exception e) {
             System.out.println("o no bad thumbnail");
             e.printStackTrace();

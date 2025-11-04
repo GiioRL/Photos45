@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.Node;
+import main.java.album.photoBox.PhotoBoxController;
 
 import main.java.util.*;
 
@@ -48,6 +49,7 @@ public class AlbumController2 {
     private static Album album;
     private static AlbumModel2 albumModel = AlbumModel2.getInstance();
     private ArrayList<Node> photoBoxes = new ArrayList<Node>();
+    private ArrayList<PhotoBoxController> pbControllers = new ArrayList<PhotoBoxController>();
 
     public void injectAlbum(Album album) {
         this.album = album;
@@ -56,12 +58,24 @@ public class AlbumController2 {
 
     private void initScene() {
         ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
-        for (int i = 0; i < thumbnails.size(); i++) {
-            if (i % 3 == 0) {
-                photoBoxes.add(albumModel.getPhotoBox());
+        int num = thumbnails.size();
+
+        for (int i = 0; i < num/3; i++) {
+            photoBoxes.add(albumModel.getPhotoBox());
+            Node[] photos = new Node[3];
+            for (int j = 0; j < 3; j++) {
+                if (3*i+j >= num) {
+                    photo[j] = null;
+                } else {
+                    photo[j] = thumbnails.get(3*i + j);
+                }
             }
-            photoGrid.add(thumbnails.get(i), i%3, i/3);
+            pbControllers.init(photos);
         }
+    }
+
+    public void injectPB(PhotoBoxController pb) {
+        pbControllers.add(pb);
     }
 
     @FXML
