@@ -46,7 +46,8 @@ public class AlbumController2 {
     private Button slideshowButon;
     
     private static Album album;
-    private static AlbumModel albumModel = AlbumModel.getInstance();
+    private static AlbumModel2 albumModel = AlbumModel2.getInstance();
+    private ArrayList<Node> photoBoxes = new ArrayList<Node>();
 
     public void injectAlbum(Album album) {
         this.album = album;
@@ -54,14 +55,13 @@ public class AlbumController2 {
     }
 
     private void initScene() {
-        // photoGrid.addRow(0, albumModel.getThumbnails(album));
         ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
-        // ObservableList<Node> children = photoGrid.getChildren();
         for (int i = 0; i < thumbnails.size(); i++) {
+            if (i % 3 == 0) {
+                photoBoxes.add(albumModel.getPhotoBox());
+            }
             photoGrid.add(thumbnails.get(i), i%3, i/3);
         }
-        // photoGrid.add(thumbnails.get(0), 0, 0);
-        // photoGrid.add(thumbnails.get(1), 0, 1);
     }
 
     @FXML
