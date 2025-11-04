@@ -70,7 +70,7 @@ public class AlbumController2 {
                     photos[j] = thumbnails.get(3*i + j);
                 }
             }
-            pbControllers.init(photos);
+            pbControllers.get(i).init(photos);
         }
     }
 

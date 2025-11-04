@@ -13,7 +13,7 @@ public class AlbumModel2 {
     static AlbumModel2 instance;
     private AlbumController2 ac;
 
-    private AlbumModel() {}
+    private AlbumModel2() {}
 
     public static AlbumModel2 getInstance() {
         if (instance == null) {
@@ -61,11 +61,11 @@ public class AlbumModel2 {
     }
 
     public Node getPhotoBox() {
-        Node photoBox;
+        Node photoBox = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/photoBox/PhotoBox.fxml"));
             photoBox = loader.load();
-            if (thumbnail == null) {
+            if (photoBox == null) {
                 System.out.println("why null???");
             }
             ac.injectPB(loader.getController());
