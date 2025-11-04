@@ -7,14 +7,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import main.java.album.AlbumController;
+import main.java.album.AlbumController2;
 import main.java.album.albumThumbnail.AlbumThumbnailController;
 import main.java.MainController;
 
 public class Album {
 
     private ArrayList<Photo> photos;
-    private static AlbumController ac;
+    private static AlbumController2 ac;
     private static Scene scene;
     private static Stage primaryStage;
     private User user;

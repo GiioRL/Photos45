@@ -65,9 +65,9 @@ public class AlbumController2 {
             Node[] photos = new Node[3];
             for (int j = 0; j < 3; j++) {
                 if (3*i+j >= num) {
-                    photo[j] = null;
+                    photos[j] = null;
                 } else {
-                    photo[j] = thumbnails.get(3*i + j);
+                    photos[j] = thumbnails.get(3*i + j);
                 }
             }
             pbControllers.init(photos);

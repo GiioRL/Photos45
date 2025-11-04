@@ -40,7 +40,7 @@ public class MainController {
             libraryRoot = libraryLoader.load();
             libraryController = libraryLoader.getController();
             libraryScene = new Scene(libraryRoot);
-            albumLoader = new FXMLLoader(getClass().getResource("album/AlbumView.fxml"));
+            albumLoader = new FXMLLoader(getClass().getResource("album/AlbumView2.fxml"));
             albumRoot = albumLoader.load();
             albumController = albumLoader.getController();
             albumScene = new Scene(albumRoot);

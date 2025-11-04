@@ -17,7 +17,7 @@ public class AlbumModel2 {
 
     public static AlbumModel2 getInstance() {
         if (instance == null) {
-            instance = new AlbumModel();
+            instance = new AlbumModel2();
         }
         return instance;
     }
