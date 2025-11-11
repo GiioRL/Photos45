@@ -43,12 +43,14 @@ public class AdminController {
             display.setText("Enter a username to proceed.");
         else if (password.length() == 0)
             display.setText("Enter a password to proceed.");
-        try {
-            new User(username, password);
-            display.setText("User added successsfully!");
-        }
-        catch (Exception e) {
-            display.setText(e.getMessage());
+        else {
+            try {
+                new User(username, password);
+                display.setText("User added successsfully!");
+            }
+            catch (Exception e) {
+                display.setText(e.getMessage());
+            }
         }
     }
 
@@ -61,12 +63,14 @@ public class AdminController {
             display.setText("Cannot remove admin user.");
         else if (username.equals("stock"))
             display.setText("Cannot remove stock user.");
-        User oldUser = User.getUser(username);
-        if (oldUser == null)
-            display.setText("User with that username does not exist.");
         else {
-            User.getUsers().remove(oldUser);
-            display.setText("User deleted successfully!");
+            User oldUser = User.getUser(username);
+            if (oldUser == null)
+                display.setText("User with that username does not exist.");
+            else {
+                User.getUsers().remove(oldUser);
+                display.setText("User deleted successfully!");
+            }
         }
     }
 }
