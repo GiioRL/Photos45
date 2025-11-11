@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.scene.Node;
 
 import main.java.MainController;
@@ -27,6 +28,12 @@ public class LibraryController {
 
     @FXML
     private ComboBox<?> valueDropdown;
+
+    @FXML
+    private Button logoutButton;
+
+    @FXML
+    private Button quitButton;
 
     private MainController mc;
 
@@ -57,5 +64,16 @@ public class LibraryController {
 
     void createAlbum(ArrayList<Photo> photos) {
         libraryModel.createAlbum(photos);
+    }
+
+    @FXML
+    void logout() {
+        Stage primaryStage = MainController.getStage();
+        primaryStage.setScene(MainController.getLoginScene());
+    }
+
+    @FXML
+    void quit() {
+        System.exit(0);
     }
 }

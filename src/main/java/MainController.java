@@ -88,4 +88,8 @@ public class MainController {
     public static Scene getLibraryScene() {
         return libraryScene;
     }
+
+    public static Scene getLoginScene() {
+        return loginScene;
+    }
 }

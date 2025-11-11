@@ -22,6 +22,9 @@ public class LoginController {
     @FXML
     private Text textInvalid;
 
+    @FXML
+    private Button quitButton;
+
     private MainController mc;
 
     private static LoginModel loginModel = LoginModel.getInstance();
@@ -37,6 +40,11 @@ public class LoginController {
         }
     }
 
+    @FXML
+    void quit() {
+        System.exit(0);
+    }
+
     public void injectMainController(MainController mc) {
         this.mc = mc;
     }
@@ -44,5 +52,4 @@ public class LoginController {
     public void start() {
 
     }
-
 }
