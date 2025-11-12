@@ -38,12 +38,15 @@ public class AlbumModel {
 
     public ArrayList<Node> getThumbnails(Album album) {
         ArrayList<Node> thumbnails = new ArrayList<Node>();
-        for (Photo photo: album.getPhotos()) {
-            Node thumbnail = photo.getThumbnail();
-            thumbnails.add(thumbnail);
-        }
-        if (thumbnails.get(0) == null) {
-            System.out.println("oh this guy is null");
+        ArrayList<Photo> photos = album.getPhotos();
+        if (photos != null) {
+            for (Photo photo: album.getPhotos()) {
+                Node thumbnail = photo.getThumbnail();
+                thumbnails.add(thumbnail);
+            }
+            if (thumbnails.get(0) == null) {
+                System.out.println("oh this guy is null");
+            }
         }
         return thumbnails;
     }
