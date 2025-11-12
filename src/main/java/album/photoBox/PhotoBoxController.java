@@ -11,7 +11,7 @@ public class PhotoBoxController {
 
     public void init(Node[] photos) {
         for (int i = 0; i < photos.length; i++) {
-            if (photos[i] != null) {
+            if (photos[i] != null && !box.getChildren().contains(photos[i])) {
                 box.getChildren().add(photos[i]);
             }
         }

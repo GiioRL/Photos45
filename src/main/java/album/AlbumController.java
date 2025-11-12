@@ -73,7 +73,10 @@ public class AlbumController {
             }
             pbControllers.get(i).init(photos);
         }
-        photoVBox.getChildren().addAll(photoBoxes);
+        // photoVBox.getChildren().addAll(photoBoxes);
+        for (Node pb: photoBoxes)
+            if (!photoVBox.getChildren().contains(pb))
+                photoVBox.getChildren().add(pb);
     }
 
     public void injectPB(PhotoBoxController pb) {
