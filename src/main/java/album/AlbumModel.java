@@ -11,6 +11,7 @@ import main.java.util.*;
 public class AlbumModel {
 
     static AlbumModel instance;
+    private AlbumController ac;
 
     private AlbumModel() {}
 
@@ -39,7 +40,6 @@ public class AlbumModel {
         ArrayList<Node> thumbnails = new ArrayList<Node>();
         for (Photo photo: album.getPhotos()) {
             Node thumbnail = photo.getThumbnail();
-            
             thumbnails.add(thumbnail);
         }
         if (thumbnails.get(0) == null) {
@@ -55,19 +55,23 @@ public class AlbumModel {
         album.back();
     }
 
-    // public ArrayList<Node> getPhotoBoxes() {
-    //     ArrayList<Node> photoBoxes = new ArrayList<Node>();
-    //     try {
-    //         FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/PhotoBox.fxml"));
-    //         thumbnail = loader.load();
-    //         if (thumbnail == null) {
-    //             System.out.println("why null???");
-    //         }
-    //         tc = loader.getController();
-    //         tc.injectAlbum(this);
-    //     } catch (Exception e) {
-    //         System.out.println("o no bad thumbnail");
-    //         e.printStackTrace();
-    //     }
-    // }
+    public void injectAlbumController(AlbumController ac) {
+        this.ac = ac;
+    }
+
+    public Node getPhotoBox() {
+        Node photoBox = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("photoBox/PhotoBox.fxml"));
+            photoBox = loader.load();
+            if (photoBox == null) {
+                System.out.println("why null???");
+            }
+            ac.injectPB(loader.getController());
+        } catch (Exception e) {
+            System.out.println("o no bad thumbnail in AM");
+            e.printStackTrace();
+        }
+        return photoBox;
+    }
 }

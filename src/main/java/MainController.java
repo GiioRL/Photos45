@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import main.java.album.AlbumController2;
+import main.java.album.AlbumController;
 import main.java.library.LibraryController;
 import main.java.login.LoginController;
 
@@ -27,7 +27,7 @@ public class MainController {
 
     private static LoginController loginController;
     private static LibraryController libraryController;
-    private static AlbumController2 albumController;
+    private static AlbumController albumController;
 
     public void start(Stage primaryStage) { //if you make more fxmlloaders you can have multiple instances of the same scene
         this.primaryStage = primaryStage;
@@ -40,7 +40,7 @@ public class MainController {
             libraryRoot = libraryLoader.load();
             libraryController = libraryLoader.getController();
             libraryScene = new Scene(libraryRoot);
-            albumLoader = new FXMLLoader(getClass().getResource("album/AlbumView2.fxml"));
+            albumLoader = new FXMLLoader(getClass().getResource("album/AlbumView.fxml"));
             albumRoot = albumLoader.load();
             albumController = albumLoader.getController();
             albumScene = new Scene(albumRoot);
@@ -61,7 +61,7 @@ public class MainController {
         return primaryStage;
     }
 
-    public static AlbumController2 getAlbumController() {
+    public static AlbumController getAlbumController() {
         return albumController;
     }
 

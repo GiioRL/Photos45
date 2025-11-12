@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
+import main.java.album.photoBox.PhotoBoxController;
 import main.java.util.*;
 
 public class AlbumController {
-
-    @FXML
-    private GridPane photoGrid;
 
     @FXML
     private Button addPhotoButon;
@@ -44,9 +42,14 @@ public class AlbumController {
 
     @FXML
     private Button slideshowButon;
+
+    @FXML
+    private VBox photoVBox;
     
     private static Album album;
     private static AlbumModel albumModel = AlbumModel.getInstance();
+    private ArrayList<Node> photoBoxes = new ArrayList<Node>();
+    private ArrayList<PhotoBoxController> pbControllers = new ArrayList<PhotoBoxController>();
 
     public void injectAlbum(Album album) {
         this.album = album;
@@ -54,14 +57,27 @@ public class AlbumController {
     }
 
     private void initScene() {
-        // photoGrid.addRow(0, albumModel.getThumbnails(album));
         ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
-        // ObservableList<Node> children = photoGrid.getChildren();
-        for (int i = 0; i < thumbnails.size(); i++) {
-            photoGrid.add(thumbnails.get(i), i%3, i/3);
+        int num = thumbnails.size();
+        albumModel.injectAlbumController(this);
+
+        for (int i = 0; i <= num/3; i++) {
+            photoBoxes.add(albumModel.getPhotoBox());
+            Node[] photos = new Node[3];
+            for (int j = 0; j < 3; j++) {
+                if (3*i+j >= num) {
+                    photos[j] = null;
+                } else {
+                    photos[j] = thumbnails.get(3*i + j);
+                }
+            }
+            pbControllers.get(i).init(photos);
         }
-        // photoGrid.add(thumbnails.get(0), 0, 0);
-        // photoGrid.add(thumbnails.get(1), 0, 1);
+        photoVBox.getChildren().addAll(photoBoxes);
+    }
+
+    public void injectPB(PhotoBoxController pb) {
+        pbControllers.add(pb);
     }
 
     @FXML
