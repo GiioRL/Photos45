@@ -40,7 +40,6 @@ public class AlbumModel2 {
         ArrayList<Node> thumbnails = new ArrayList<Node>();
         for (Photo photo: album.getPhotos()) {
             Node thumbnail = photo.getThumbnail();
-            
             thumbnails.add(thumbnail);
         }
         if (thumbnails.get(0) == null) {
@@ -63,14 +62,14 @@ public class AlbumModel2 {
     public Node getPhotoBox() {
         Node photoBox = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photoBox/PhotoBox.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("photoBox/PhotoBox.fxml"));
             photoBox = loader.load();
             if (photoBox == null) {
                 System.out.println("why null???");
             }
             ac.injectPB(loader.getController());
         } catch (Exception e) {
-            System.out.println("o no bad thumbnail");
+            System.out.println("o no bad thumbnail in AM2");
             e.printStackTrace();
         }
         return photoBox;

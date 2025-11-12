@@ -51,7 +51,7 @@ public class Photo {
             tc = loader.getController();
             tc.injectPhoto(this);
         } catch (Exception e) {
-            System.out.println("o no bad thumbnail");
+            System.out.println("o no bad thumbnail in photo");
             e.printStackTrace();
         }
     }

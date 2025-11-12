@@ -4,17 +4,14 @@ import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
 import javafx.scene.Node;
-import main.java.album.photoBox.PhotoBoxController;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
+import main.java.album.photoBox.PhotoBoxController;
 import main.java.util.*;
 
 public class AlbumController2 {
-
-    @FXML
-    private GridPane photoGrid;
 
     @FXML
     private Button addPhotoButon;
@@ -45,6 +42,9 @@ public class AlbumController2 {
 
     @FXML
     private Button slideshowButon;
+
+    @FXML
+    private VBox photoVBox;
     
     private static Album album;
     private static AlbumModel2 albumModel = AlbumModel2.getInstance();
@@ -59,8 +59,9 @@ public class AlbumController2 {
     private void initScene() {
         ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
         int num = thumbnails.size();
+        albumModel.injectAlbumController(this);
 
-        for (int i = 0; i < num/3; i++) {
+        for (int i = 0; i <= num/3; i++) {
             photoBoxes.add(albumModel.getPhotoBox());
             Node[] photos = new Node[3];
             for (int j = 0; j < 3; j++) {
@@ -72,6 +73,7 @@ public class AlbumController2 {
             }
             pbControllers.get(i).init(photos);
         }
+        photoVBox.getChildren().addAll(photoBoxes);
     }
 
     public void injectPB(PhotoBoxController pb) {
