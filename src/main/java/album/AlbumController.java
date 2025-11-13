@@ -181,5 +181,5 @@ public class AlbumController {
     void slideshow(ActionEvent event) {
 
     }
-
+    
 }

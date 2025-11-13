@@ -6,7 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-
+import javafx.stage.Stage;
+import main.java.MainController;
 import main.java.util.User;
 
 public class AdminController {
@@ -73,5 +74,16 @@ public class AdminController {
                 display.setText("User deleted successfully!");
             }
         }
+    }
+
+    @FXML
+    void logout() {
+        Stage primaryStage = MainController.getStage();
+        primaryStage.setScene(MainController.getLoginScene());
+    }
+
+    @FXML
+    void quit() {
+        System.exit(0);
     }
 }
