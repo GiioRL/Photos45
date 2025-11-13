@@ -1,5 +1,6 @@
 package main.java.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
@@ -30,21 +31,23 @@ public class Photo {
         this.tags = tags;
         this.location = location;
         this.caption = caption;
-        try {
-            image = createImage();
-        } catch (IOException e) {
-            System.out.println("oops hehe");
-        }
+        // try {
+        //     image = createImage();
+        // } catch (IOException e) {
+        //     System.out.println("oops hehe");
+        // }
+        image = createImage();
         createThumbnail();
     }
 
-    private Image createImage() throws IOException {
-        InputStream stream = Photo.class.getResourceAsStream(location);
-        if (stream == null) {
+    private Image createImage() {
+        InputStream stream = null;
+        try {
+            stream = new FileInputStream(new File(location));
+        } catch (IOException e) {
             Alert error = new Alert(Alert.AlertType.ERROR, "Photo not found. Please enter a valid photo file path.");
             error.setHeaderText("Photo Not Found");
             error.showAndWait();
-            throw new IOException();
         }
         return new Image(stream);
     }
