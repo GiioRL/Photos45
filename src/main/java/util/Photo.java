@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -38,7 +39,14 @@ public class Photo {
     }
 
     private Image createImage() throws IOException {
-        return new Image(Photo.class.getResourceAsStream(location));
+        InputStream stream = Photo.class.getResourceAsStream(location);
+        if (stream == null) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "Photo not found. Please enter a valid photo file path.");
+            error.setHeaderText("Photo Not Found");
+            error.showAndWait();
+            throw new IOException();
+        }
+        return new Image(stream);
     }
 
     public void createThumbnail() {
@@ -78,5 +86,12 @@ public class Photo {
 
     public Node getThumbnail() {
         return thumbnail;
+    }
+
+    // Returns true if photos have same location - perhaps change in future, but this way is useful for preventing duplicate photo insert into album
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof Photo))
+            return false;
+        return location.equals(((Photo) o).location);
     }
 }

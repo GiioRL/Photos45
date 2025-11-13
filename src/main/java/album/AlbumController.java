@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ButtonType;
 
 import main.java.album.photoBox.PhotoBoxController;
 import main.java.util.*;
@@ -85,7 +88,21 @@ public class AlbumController {
 
     @FXML
     void addPhoto(ActionEvent event) {
-
+        TextInputDialog locationDialog = new TextInputDialog();
+        locationDialog.setContentText("Enter photo location");
+        locationDialog.setHeaderText("Add Photo");
+        locationDialog.showAndWait().ifPresent(location -> {
+            Photo newPhoto = albumModel.createPhoto(location);
+            if (!album.getPhotos().contains(newPhoto)) {
+                album.getPhotos().add(newPhoto);
+                initScene();
+            }
+            else {
+                Alert error = new Alert(Alert.AlertType.ERROR, "Photo already exists in album.");
+                error.setHeaderText("Photo Already Exists");
+                error.showAndWait();
+            }
+        });
     }
 
     @FXML
