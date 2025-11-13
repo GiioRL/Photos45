@@ -70,8 +70,9 @@ public class AlbumController {
         ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
         int num = thumbnails.size();
         albumModel.injectAlbumController(this);
-        photoVBox.getChildren().clear();
-        // photoBoxes.clear(); // this doesn't work correctly...
+        photoVBox.getChildren().clear(); // there could be better ways..
+        photoBoxes.clear();
+        pbControllers.clear();
         int count = 0;
 
         for (int i = 0; i < (num+2)/3; i++) {
