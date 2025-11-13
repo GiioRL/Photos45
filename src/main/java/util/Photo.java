@@ -1,5 +1,6 @@
 package main.java.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.Calendar;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -29,16 +31,25 @@ public class Photo {
         this.tags = tags;
         this.location = location;
         this.caption = caption;
-        try {
-            image = createImage();
-        } catch (IOException e) {
-            System.out.println("oops hehe");
-        }
+        // try {
+        //     image = createImage();
+        // } catch (IOException e) {
+        //     System.out.println("oops hehe");
+        // }
+        image = createImage();
         createThumbnail();
     }
 
-    private Image createImage() throws IOException {
-        return new Image(Photo.class.getResourceAsStream(location));
+    private Image createImage() {
+        InputStream stream = null;
+        try {
+            stream = new FileInputStream(new File(location));
+        } catch (IOException e) {
+            Alert error = new Alert(Alert.AlertType.ERROR, "Photo not found. Please enter a valid photo file path.");
+            error.setHeaderText("Photo Not Found");
+            error.showAndWait();
+        }
+        return new Image(stream);
     }
 
     public void createThumbnail() {
@@ -78,5 +89,12 @@ public class Photo {
 
     public Node getThumbnail() {
         return thumbnail;
+    }
+
+    // Returns true if photos have same location - perhaps change in future, but this way is useful for preventing duplicate photo insert into album
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof Photo))
+            return false;
+        return location.equals(((Photo) o).location);
     }
 }
