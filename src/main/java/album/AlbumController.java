@@ -99,15 +99,8 @@ public class AlbumController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Photo");
         fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("PNG", "*.png"),
-            new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-            new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
-            new FileChooser.ExtensionFilter("GIF", "*.gif"),
-            new FileChooser.ExtensionFilter("WEBP", "*.webp"),
-            new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-            new FileChooser.ExtensionFilter("HEIC", "*.heic"),
-            new FileChooser.ExtensionFilter("SVG", "*.svg"),
-            new FileChooser.ExtensionFilter("AVIF", "*.avif")
+            new FileChooser.ExtensionFilter("Image Files (*.png, *.jpg, *.jpeg, *.gif, *.webp, *.bmp, *.heic, *.svg, *.avif)", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.bmp", "*.heic", "*.svg", "*.avif"),
+            new FileChooser.ExtensionFilter("All Files", "*.*")
         );
         List<File> photoFiles = fileChooser.showOpenMultipleDialog(primaryStage);
         if (photoFiles == null)
