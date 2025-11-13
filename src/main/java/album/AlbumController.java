@@ -70,9 +70,13 @@ public class AlbumController {
         ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
         int num = thumbnails.size();
         albumModel.injectAlbumController(this);
+        photoVBox.getChildren().clear();
+        // photoBoxes.clear(); // this doesn't work correctly...
+        int count = 0;
 
-        for (int i = 0; i <= num/3; i++) {
+        for (int i = 0; i < (num+2)/3; i++) {
             photoBoxes.add(albumModel.getPhotoBox());
+            System.out.println("made new photobox " + count++);
             Node[] photos = new Node[3];
             for (int j = 0; j < 3; j++) {
                 if (3*i+j >= num) {
@@ -83,10 +87,10 @@ public class AlbumController {
             }
             pbControllers.get(i).init(photos);
         }
-        // photoVBox.getChildren().addAll(photoBoxes);
-        for (Node pb: photoBoxes)
-            if (!photoVBox.getChildren().contains(pb))
-                photoVBox.getChildren().add(pb);
+        photoVBox.getChildren().addAll(photoBoxes);
+        // for (Node pb: photoBoxes)
+        //     if (!photoVBox.getChildren().contains(pb))
+        //         photoVBox.getChildren().add(pb);
     }
 
     public void injectPB(PhotoBoxController pb) {
