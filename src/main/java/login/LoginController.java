@@ -3,6 +3,8 @@ package main.java.login;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 import main.java.MainController;
@@ -26,6 +28,8 @@ public class LoginController {
     private Button quitButton;
 
     private MainController mc;
+    private Scene scene;
+    private Stage stage;
 
     private static LoginModel loginModel = LoginModel.getInstance();
 
@@ -45,11 +49,19 @@ public class LoginController {
         System.exit(0);
     }
 
-    public void injectMainController(MainController mc) {
+    public void injectMainController(MainController mc) { // we may not even need a main controller but we'll see
         this.mc = mc;
     }
 
     public void start() {
+        if (scene == null) {
+            initScene();
+        }
+        stage.setScene(scene);
+    }
 
+    private void initScene() {
+        stage = MainController.getStage();
+        scene = MainController.getLoginScene();
     }
 }

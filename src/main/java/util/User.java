@@ -2,6 +2,8 @@ package main.java.util;
 
 import java.util.ArrayList;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -100,13 +102,21 @@ public class User { // this might become library model
         if (scene == null) {
             initScene();
         }
-        lc.injectUser(this);
+        // lc.injectUser(this);
         primaryStage.setScene(scene);
     }
 
     private void initScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/library/LibraryView.fxml"));
+            Parent root = loader.load();
+            lc = loader.getController();
+            lc.injectUser(this);
+            scene = new Scene(root);
+        } catch (Exception e) {
+            System.out.println("user oops");
+            e.printStackTrace();
+        }
         primaryStage = MainController.getStage();
-        lc = MainController.getLibraryController();
-        scene = MainController.getLibraryScene();
     }
 }

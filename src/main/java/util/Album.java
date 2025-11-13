@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -69,7 +70,7 @@ public class Album {
         if (scene == null) {
             initScene();
         }
-        ac.injectAlbum(this);
+        // ac.injectAlbum(this);
         primaryStage.setScene(scene);
     }
 
@@ -82,8 +83,16 @@ public class Album {
     }
 
     private void initScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/album/AlbumView.fxml"));
+            Parent root = loader.load();
+            ac = loader.getController();
+            ac.injectAlbum(this);
+            scene = new Scene(root);
+        } catch (Exception e) {
+            System.out.println("album oops");
+            e.printStackTrace();
+        }
         primaryStage = MainController.getStage();
-        ac = MainController.getAlbumController();
-        scene = MainController.getAlbumScene();
     }
 }
