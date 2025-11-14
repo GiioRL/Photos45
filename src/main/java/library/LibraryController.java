@@ -18,22 +18,31 @@ public class LibraryController {
     private HBox albumHBox;
 
     @FXML
-    private Button searchButon;
+    private Button createAlbumButon;
 
     @FXML
-    private Button createAlbumButon;
+    private Button deleteAlbumButon;
+
+    @FXML
+    private Button logoutButton;
+
+    @FXML
+    private Button openAlbumButon;
+
+    @FXML
+    private Button quitButton;
+
+    @FXML
+    private Button renameAlbumButon;
+
+    @FXML
+    private Button searchButon;
 
     @FXML
     private ComboBox<?> tagDropdown;
 
     @FXML
     private ComboBox<?> valueDropdown;
-
-    @FXML
-    private Button logoutButton;
-
-    @FXML
-    private Button quitButton;
 
     private MainController mc;
 
@@ -58,8 +67,8 @@ public class LibraryController {
     }
 
     @FXML
-    void createAlbum() {
-        libraryModel.createAlbum(user);
+    void createAlbum(ActionEvent event) {
+
     }
 
     void createAlbum(ArrayList<Photo> photos) {
@@ -67,13 +76,28 @@ public class LibraryController {
     }
 
     @FXML
-    void logout() {
-        Stage primaryStage = MainController.getStage();
-        primaryStage.setScene(MainController.getLoginScene());
+    void deleteAlbum(ActionEvent event) {
+
     }
 
     @FXML
-    void quit() {
-        System.exit(0);
+    void logout(ActionEvent event) {
+
     }
+
+    @FXML
+    void openAlbum(ActionEvent event) {
+
+    }
+
+    @FXML
+    void quit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void renameAlbum(ActionEvent event) {
+
+    }
+
 }

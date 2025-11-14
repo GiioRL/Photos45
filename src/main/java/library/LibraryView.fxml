@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -17,32 +18,38 @@
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="452.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="148.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="228.0" minHeight="10.0" prefHeight="228.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ScrollPane fitToHeight="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+            <ScrollPane fitToHeight="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="228.0" prefWidth="452.0" vbarPolicy="NEVER">
                <content>
-                  <HBox fx:id="albumHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="198.0" prefWidth="598.0" spacing="50.0">
+                  <HBox fx:id="albumHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="225.0" prefWidth="450.0" spacing="50.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
-                     <children>
-                        <Button fx:id="createAlbumButon" minWidth="-Infinity" mnemonicParsing="false" onAction="#createAlbum" text="Create Album">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin></Button>
-                     </children>
                      <padding>
                         <Insets left="25.0" right="25.0" />
                      </padding>
                   </HBox>
                </content>
             </ScrollPane>
-            <AnchorPane prefHeight="223.0" prefWidth="598.0" GridPane.rowIndex="1">
+            <VBox alignment="CENTER" prefHeight="228.0" prefWidth="123.0" spacing="15.0" GridPane.columnIndex="1">
+               <children>
+                  <Button fx:id="createAlbumButon" mnemonicParsing="false" onAction="#createAlbum" text="Create Album" />
+                  <Button fx:id="openAlbumButon" disable="true" mnemonicParsing="false" onAction="#openAlbum" text="Open Album" />
+                  <Button fx:id="renameAlbumButon" disable="true" mnemonicParsing="false" onAction="#renameAlbum" text="Remove Photo" />
+                  <Button fx:id="deleteAlbumButon" disable="true" mnemonicParsing="false" onAction="#deleteAlbum" text="Caption Photo" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <AnchorPane prefHeight="223.0" prefWidth="598.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="104.0" layoutX="150.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
                   <Text layoutX="250.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Search">
