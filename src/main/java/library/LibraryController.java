@@ -62,13 +62,12 @@ public class LibraryController {
     public void start() {
         albumHBox.getChildren().clear(); // maybe do something else
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
-        albumHBox.getChildren().add(createAlbumButon);
         albumHBox.getChildren().addAll(thumbnails);
     }
 
     @FXML
-    void createAlbum(ActionEvent event) {
-
+    void createAlbum() {
+        libraryModel.createAlbum(user);
     }
 
     void createAlbum(ArrayList<Photo> photos) {
@@ -76,27 +75,28 @@ public class LibraryController {
     }
 
     @FXML
-    void deleteAlbum(ActionEvent event) {
+    void deleteAlbum() {
 
     }
 
     @FXML
-    void logout(ActionEvent event) {
+    void openAlbum() {
 
     }
 
     @FXML
-    void openAlbum(ActionEvent event) {
-
+    void logout() {
+        Stage primaryStage = MainController.getStage();
+        primaryStage.setScene(MainController.getLoginScene());
     }
 
     @FXML
-    void quit(ActionEvent event) {
-
+    void quit() {
+        System.exit(0);
     }
 
     @FXML
-    void renameAlbum(ActionEvent event) {
+    void renameAlbum() {
 
     }
 
