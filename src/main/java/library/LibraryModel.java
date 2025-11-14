@@ -26,7 +26,7 @@ public class LibraryModel {
     }
 
     public void createAlbum(User user) {
-        createAlbum(user, "default");
+        createAlbum(user, "Unnamed album");
     }
 
     public void createAlbum(User user, String name) {

@@ -31,7 +31,7 @@ public class MainController {
     // private static AlbumController albumController;
 
     public void start(Stage primaryStage) { //if you make more fxmlloaders you can have multiple instances of the same scene
-        this.primaryStage = primaryStage;
+        MainController.primaryStage = primaryStage;
         try {
             loginLoader = new FXMLLoader(getClass().getResource("login/LoginView.fxml"));
             loginRoot = loginLoader.load();

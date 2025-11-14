@@ -14,18 +14,20 @@ import main.java.MainController;
 
 public class Album {
 
+    private String name;
+    private User user;
     private ArrayList<Photo> photos;
+    private Node thumbnail;
+    private AlbumThumbnailController tc;
+
     private static AlbumController ac;
     private static Scene scene;
     private static Stage primaryStage;
-    private User user;
-    private Node thumbnail;
-    private AlbumThumbnailController tc;
-    private String name;
 
     public Album(User user, String name) {
         this.user = user;
         this.name = name;
+        photos = new ArrayList<Photo>();
     }
 
     public Album(ArrayList<Photo> photos, String name, User user) {

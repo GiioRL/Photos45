@@ -14,11 +14,11 @@ public class User { // this might become library model
     
     protected String username = "";
     protected String password = "";
-    protected static LibraryController lc; //maybe private
+    protected LibraryController lc;
     protected ArrayList<Photo> photos = new ArrayList<Photo>();
     protected ArrayList<Album> albums = new ArrayList<Album>();
-    private static Stage primaryStage;
-    private static Scene scene;
+    private Stage primaryStage;
+    private Scene scene;
     private static ArrayList<User> users = new ArrayList<User>();
 
     static {

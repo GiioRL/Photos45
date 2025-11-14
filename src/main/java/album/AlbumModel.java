@@ -44,15 +44,13 @@ public class AlbumModel {
                 Node thumbnail = photo.getThumbnail();
                 thumbnails.add(thumbnail);
             }
-            if (thumbnails.get(0) == null) {
-                System.out.println("oh this guy is null");
-            }
         }
         return thumbnails;
     }
 
     public void back(Album album) {
         if (album.getPhotos() == null) {
+            System.out.println("deleting album");
             album.delete();
         }
         album.back();
