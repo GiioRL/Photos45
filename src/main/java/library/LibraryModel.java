@@ -42,9 +42,6 @@ public class LibraryModel {
             
             thumbnails.add(thumbnail);
         }
-        // if (thumbnails.get(0) == null) {
-        //     System.out.println("oh this guy is null");
-        // }
         return thumbnails;
     }
 }

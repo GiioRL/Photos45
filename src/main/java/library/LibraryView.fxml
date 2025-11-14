@@ -20,8 +20,8 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="228.0" minHeight="10.0" prefHeight="228.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <ScrollPane fitToHeight="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
@@ -31,23 +31,29 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <Button fx:id="createAlbumButon" mnemonicParsing="false" onAction="#createAlbum" text="Create Album" />
+                        <Button fx:id="createAlbumButon" minWidth="-Infinity" mnemonicParsing="false" onAction="#createAlbum" text="Create Album">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></Button>
                      </children>
+                     <padding>
+                        <Insets left="25.0" right="25.0" />
+                     </padding>
                   </HBox>
                </content>
             </ScrollPane>
             <AnchorPane prefHeight="223.0" prefWidth="598.0" GridPane.rowIndex="1">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="104.0" layoutX="150.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
-                  <Text layoutX="250.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Search">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="104.0" layoutX="150.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="300.0" />
+                  <Text layoutX="250.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Search">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ComboBox fx:id="tagDropdown" layoutX="175.0" layoutY="71.0" prefWidth="150.0" promptText="Tag" />
-                  <ComboBox fx:id="valueDropdown" layoutX="175.0" layoutY="103.0" prefWidth="150.0" promptText="Value" />
-                  <Button fx:id="searchButon" layoutX="363.0" layoutY="91.0" mnemonicParsing="false" text="Search" />
-                  <HBox alignment="BOTTOM_LEFT" layoutX="2.0" layoutY="164.0" prefHeight="34.0" prefWidth="211.0" spacing="10.0">
+                  <ComboBox fx:id="tagDropdown" layoutX="175.0" layoutY="51.0" prefWidth="150.0" promptText="Tag" />
+                  <ComboBox fx:id="valueDropdown" layoutX="175.0" layoutY="83.0" prefWidth="150.0" promptText="Value" />
+                  <Button fx:id="searchButon" layoutX="363.0" layoutY="71.0" mnemonicParsing="false" text="Search" />
+                  <HBox alignment="BOTTOM_LEFT" layoutY="138.0" prefHeight="34.0" prefWidth="211.0" spacing="10.0">
                      <children>
                         <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" text="Quit Application" />
                         <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#logout" text="Logout" />

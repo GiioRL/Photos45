@@ -47,10 +47,10 @@ public class LibraryController {
 
     public void injectUser(User user) {
         this.user = user;
-        initScene();
+        start();
     }
 
-    private void initScene() {
+    public void start() {
         albumHBox.getChildren().clear(); // maybe do something else
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
         albumHBox.getChildren().add(createAlbumButon);

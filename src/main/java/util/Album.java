@@ -20,9 +20,9 @@ public class Album {
     private Node thumbnail;
     private AlbumThumbnailController tc;
 
-    private static AlbumController ac;
-    private static Scene scene;
-    private static Stage primaryStage;
+    private AlbumController ac;
+    private Scene scene;
+    private Stage primaryStage;
 
     public Album(User user, String name) {
         this.user = user;
@@ -77,6 +77,7 @@ public class Album {
     }
 
     public void back() {
+        createThumbnail(); //there may be better ways
         user.start();
     }
 

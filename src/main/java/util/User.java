@@ -102,7 +102,7 @@ public class User { // this might become library model
         if (scene == null) {
             initScene();
         }
-        // lc.injectUser(this);
+        lc.start();
         primaryStage.setScene(scene);
     }
 
