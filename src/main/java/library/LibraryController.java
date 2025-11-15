@@ -50,6 +50,10 @@ public class LibraryController {
 
     private static LibraryModel libraryModel = LibraryModel.getInstance();
 
+    private static Album currentlySelected = null;
+
+    private boolean selection = false;
+
     public void injectMainController(MainController mc) {
         this.mc = mc;
     }
@@ -59,10 +63,37 @@ public class LibraryController {
         start();
     }
 
+    @FXML
+    void deselect() {
+        if (selection) {
+            selection = false;
+            return;
+        }
+        if (currentlySelected != null) {
+            currentlySelected.deselect();
+        }
+        openAlbumButon.setDisable(true);
+        renameAlbumButon.setDisable(true);
+        deleteAlbumButon.setDisable(true);
+    }
+
+    public void select(Album album) {
+        selection = true;
+        if (currentlySelected != null) {
+            currentlySelected.deselect();
+        }
+        currentlySelected = album;
+        currentlySelected.select();
+        openAlbumButon.setDisable(false);
+        renameAlbumButon.setDisable(false);
+        deleteAlbumButon.setDisable(false);
+    }
+
     public void start() {
         albumHBox.getChildren().clear(); // maybe do something else
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
         albumHBox.getChildren().addAll(thumbnails);
+        deselect();
     }
 
     @FXML
@@ -81,7 +112,7 @@ public class LibraryController {
 
     @FXML
     void openAlbum() {
-
+        currentlySelected.start();
     }
 
     @FXML

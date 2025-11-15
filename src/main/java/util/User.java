@@ -98,6 +98,10 @@ public class User { // this might become library model
         return albums;
     }
 
+    public LibraryController getLC() {
+        return lc;
+    }
+
     public void start() {
         if (scene == null) {
             initScene();

@@ -10,7 +10,7 @@ public class App extends Application {
         MainController mc = new MainController();
         mc.start(primaryStage);
     }
- 
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,5 +1,6 @@
 package main.java.album;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -29,13 +30,13 @@ public class AlbumModel {
     public Photo createPhoto(String location, long millis) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(millis);
+        calendar.set(Calendar.MILLISECOND, 0);
         return new Photo(calendar, null, location, "");
     }
 
     public Photo createPhoto(String location) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.MILLISECOND, 0);
-        return new Photo(calendar, null, location, "");
+        File file = new File(location);
+        return createPhoto(location, file.lastModified());
     }
 
     public String convertDatetoString(Calendar date) {

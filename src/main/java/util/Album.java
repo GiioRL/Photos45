@@ -34,7 +34,7 @@ public class Album {
         this.photos = photos;
         this.name = name;
         this.user = user;
-        createThumbnail();
+        // createThumbnail();
     }
 
     public void createThumbnail() {
@@ -61,11 +61,18 @@ public class Album {
     }
 
     public Node getThumbnail() {
+        if (thumbnail == null) {
+            createThumbnail();
+        }
         return thumbnail;
     }
 
     public String getName() {
         return name;
+    }
+
+    public User getUser() {
+        return user;
     }
     
     public void start() {
@@ -74,6 +81,14 @@ public class Album {
         }
         // ac.injectAlbum(this);
         primaryStage.setScene(scene);
+    }
+
+    public void select() {
+        tc.select();
+    }
+
+    public void deselect() {
+        tc.deselect();
     }
 
     public void back() {

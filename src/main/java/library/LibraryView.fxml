@@ -26,7 +26,7 @@
           <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ScrollPane fitToHeight="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="228.0" prefWidth="452.0" vbarPolicy="NEVER">
+            <ScrollPane fitToHeight="true" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#deselect" prefHeight="228.0" prefWidth="452.0" vbarPolicy="NEVER">
                <content>
                   <HBox fx:id="albumHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="225.0" prefWidth="450.0" spacing="50.0">
                      <opaqueInsets>
@@ -42,8 +42,8 @@
                <children>
                   <Button fx:id="createAlbumButon" mnemonicParsing="false" onAction="#createAlbum" text="Create Album" />
                   <Button fx:id="openAlbumButon" disable="true" mnemonicParsing="false" onAction="#openAlbum" text="Open Album" />
-                  <Button fx:id="renameAlbumButon" disable="true" mnemonicParsing="false" onAction="#renameAlbum" text="Remove Photo" />
-                  <Button fx:id="deleteAlbumButon" disable="true" mnemonicParsing="false" onAction="#deleteAlbum" text="Caption Photo" />
+                  <Button fx:id="renameAlbumButon" disable="true" mnemonicParsing="false" onAction="#renameAlbum" text="Rename Album" />
+                  <Button fx:id="deleteAlbumButon" disable="true" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete Album" />
                </children>
                <opaqueInsets>
                   <Insets />
