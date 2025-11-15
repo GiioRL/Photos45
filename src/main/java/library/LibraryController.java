@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-import main.java.MainController;
+import main.java.App;
 import main.java.util.*;
 
 public class LibraryController {
@@ -44,8 +44,6 @@ public class LibraryController {
     @FXML
     private ComboBox<?> valueDropdown;
 
-    private MainController mc;
-
     private static User user;
 
     private static LibraryModel libraryModel = LibraryModel.getInstance();
@@ -53,10 +51,6 @@ public class LibraryController {
     private static Album currentlySelected = null;
 
     private boolean selection = false;
-
-    public void injectMainController(MainController mc) {
-        this.mc = mc;
-    }
 
     public void injectUser(User user) {
         this.user = user;
@@ -117,8 +111,8 @@ public class LibraryController {
 
     @FXML
     void logout() {
-        Stage primaryStage = MainController.getStage();
-        primaryStage.setScene(MainController.getLoginScene());
+        Stage primaryStage = App.getStage();
+        primaryStage.setScene(App.getLoginScene());
     }
 
     @FXML

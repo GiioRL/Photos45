@@ -1,13 +1,11 @@
 package main.java.admin;
 
-import java.util.ArrayList;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import main.java.MainController;
+import main.java.App;
 import main.java.util.User;
 
 public class AdminController {
@@ -78,8 +76,8 @@ public class AdminController {
 
     @FXML
     void logout() {
-        Stage primaryStage = MainController.getStage();
-        primaryStage.setScene(MainController.getLoginScene());
+        Stage primaryStage = App.getStage();
+        primaryStage.setScene(App.getLoginScene());
     }
 
     @FXML

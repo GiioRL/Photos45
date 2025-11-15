@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import main.java.MainController;
+import main.java.App;
 
 public class Admin extends User {
 
@@ -43,7 +43,7 @@ public class Admin extends User {
     }
 
     public void start() {
-        primaryStage = MainController.getStage();
+        primaryStage = App.getStage();
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/main/java/admin/AdminView.fxml"));

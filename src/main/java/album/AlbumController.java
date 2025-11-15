@@ -1,23 +1,18 @@
 package main.java.album;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import java.net.URI;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import main.java.MainController;
+import main.java.App;
 import main.java.album.photoBox.PhotoBoxController;
 import main.java.util.*;
 
@@ -95,7 +90,7 @@ public class AlbumController {
 
     @FXML
     void addPhoto(ActionEvent event) {
-        Stage primaryStage = MainController.getStage();
+        Stage primaryStage = App.getStage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Photo");
         fileChooser.getExtensionFilters().addAll(
@@ -120,22 +115,6 @@ public class AlbumController {
                 error.showAndWait();
             }
         }
-                
-        // TextInputDialog locationDialog = new TextInputDialog();
-        // locationDialog.setContentText("Enter photo location");
-        // locationDialog.setHeaderText("Add Photo");
-        // locationDialog.showAndWait().ifPresent(location -> {
-        //     Photo newPhoto = albumModel.createPhoto(location);
-        //     if (!album.getPhotos().contains(newPhoto)) {
-        //         album.getPhotos().add(newPhoto);
-        //         initScene();
-        //     }
-        //     else {
-        //         Alert error = new Alert(Alert.AlertType.ERROR, "Photo already exists in album.");
-        //         error.setHeaderText("Photo Already Exists");
-        //         error.showAndWait();
-        //     }
-        // });
     }
 
     @FXML

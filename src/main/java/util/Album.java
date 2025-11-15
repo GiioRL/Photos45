@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import main.java.album.AlbumController;
 import main.java.album.albumThumbnail.AlbumThumbnailController;
-import main.java.MainController;
+import main.java.App;
 
 public class Album {
 
@@ -34,7 +34,6 @@ public class Album {
         this.photos = photos;
         this.name = name;
         this.user = user;
-        // createThumbnail();
     }
 
     public void createThumbnail() {
@@ -79,7 +78,6 @@ public class Album {
         if (scene == null) {
             initScene();
         }
-        // ac.injectAlbum(this);
         primaryStage.setScene(scene);
     }
 
@@ -111,6 +109,6 @@ public class Album {
             System.out.println("album oops");
             e.printStackTrace();
         }
-        primaryStage = MainController.getStage();
+        primaryStage = App.getStage();
     }
 }

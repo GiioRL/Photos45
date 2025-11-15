@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import main.java.library.LibraryController;
-import main.java.MainController;
+import main.java.App;
 
 public class User { // this might become library model
     
@@ -121,6 +121,6 @@ public class User { // this might become library model
             System.out.println("user oops");
             e.printStackTrace();
         }
-        primaryStage = MainController.getStage();
+        primaryStage = App.getStage();
     }
 }

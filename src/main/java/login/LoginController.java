@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
-import main.java.MainController;
+import main.java.App;
 import main.java.util.User;
 
 public class LoginController {
@@ -27,7 +27,6 @@ public class LoginController {
     @FXML
     private Button quitButton;
 
-    private MainController mc;
     private Scene scene;
     private Stage stage;
 
@@ -49,10 +48,6 @@ public class LoginController {
         System.exit(0);
     }
 
-    public void injectMainController(MainController mc) { // we may not even need a main controller but we'll see
-        this.mc = mc;
-    }
-
     public void start() {
         if (scene == null) {
             initScene();
@@ -61,7 +56,7 @@ public class LoginController {
     }
 
     private void initScene() {
-        stage = MainController.getStage();
-        scene = MainController.getLoginScene();
+        stage = App.getStage();
+        scene = App.getLoginScene(); //replace this maybe
     }
 }
