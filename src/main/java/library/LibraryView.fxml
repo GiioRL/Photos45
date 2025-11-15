@@ -59,7 +59,7 @@
                   </Text>
                   <ComboBox fx:id="tagDropdown" layoutX="175.0" layoutY="51.0" prefWidth="150.0" promptText="Tag" />
                   <ComboBox fx:id="valueDropdown" layoutX="175.0" layoutY="83.0" prefWidth="150.0" promptText="Value" />
-                  <Button fx:id="searchButon" layoutX="363.0" layoutY="71.0" mnemonicParsing="false" text="Search" />
+                  <Button fx:id="searchButon" layoutX="363.0" layoutY="71.0" mnemonicParsing="false" onAction="#search" text="Search" />
                   <HBox alignment="BOTTOM_LEFT" layoutY="138.0" prefHeight="34.0" prefWidth="211.0" spacing="10.0">
                      <children>
                         <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" text="Quit Application" />

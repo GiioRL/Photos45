@@ -20,7 +20,7 @@ public class User { // this might become library model
     private Stage primaryStage;
     private Scene scene;
     private static ArrayList<User> users = new ArrayList<User>();
-    protected ArrayList<Tag> tags = new ArrayList<Tag>();
+    protected ArrayList<Tag> tags = new ArrayList<Tag>(); // tags should have a (Type, null) for every (Type, Value)
 
     static {
         users.add(new Admin());
@@ -40,8 +40,28 @@ public class User { // this might become library model
         tags.add(new Tag("person", null));
     }
 
-    public void checkTags(ArrayList<Tag> tags) {
-        // add tags when necessary
+    public void addTag(Tag newTag) { // only checks the tag type
+        if (tags.contains(newTag)) { // type exists in tags
+            boolean bool = false;
+            for (Tag tag: tags) {
+                bool |= tag.tagEquals(newTag);
+            }
+            if (bool) {
+                tags.add(newTag);
+            }
+        }
+        tags.add(new Tag(newTag.getType(), null));
+        if (newTag.getValue() != null) {
+            tags.add(newTag);
+        }        
+    }
+
+    public ArrayList<Tag> getTags() {
+        return tags;
+    }
+
+    public ArrayList<Photo> getPhotos() {
+        return photos;
     }
 
     public String getUsername() {

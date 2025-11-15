@@ -44,4 +44,28 @@ public class LibraryModel {
         }
         return thumbnails;
     }
+
+    public ArrayList<String> getTypes(User user) {
+        ArrayList<String> types = new ArrayList<String>();
+        ArrayList<Tag> tags = user.getTags();
+        for (Tag tag: tags) {
+            if (tag.getValue() == null) {
+                types.add(tag.getType());
+            }
+        }
+        return types;
+    }
+
+    public ArrayList<String> getValues(User user, String type) {
+        ArrayList<String> values = new ArrayList<String>();
+        ArrayList<Tag> tags = user.getTags();
+        for (Tag tag: tags) {
+            if (tag.equals(new Tag(type, null))) {
+                if (tag.getValue() != null) {
+                    values.add(tag.getValue());
+                }
+            }
+        }
+        return values;
+    }
 }

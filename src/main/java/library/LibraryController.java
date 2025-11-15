@@ -2,6 +2,7 @@ package main.java.library;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -39,10 +40,10 @@ public class LibraryController {
     private Button searchButon;
 
     @FXML
-    private ComboBox<?> tagDropdown;
+    private ComboBox<String> tagDropdown;
 
     @FXML
-    private ComboBox<?> valueDropdown;
+    private ComboBox<String> valueDropdown;
 
     private static User user;
 
@@ -87,6 +88,12 @@ public class LibraryController {
         albumHBox.getChildren().clear(); // maybe do something else
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
         albumHBox.getChildren().addAll(thumbnails);
+        tagDropdown.setItems(FXCollections.observableArrayList(libraryModel.getTypes(user)));
+        tagDropdown.getSelectionModel().clearSelection();
+        tagDropdown.valueProperty().addListener((obs, oldType, newType) -> {
+            valueDropdown.setItems(FXCollections.observableArrayList(libraryModel.getValues(user, newType)));
+            valueDropdown.getSelectionModel().clearSelection();
+        });
         deselect();
     }
 
@@ -107,6 +114,31 @@ public class LibraryController {
     @FXML
     void openAlbum() {
         currentlySelected.start();
+    }
+
+    @FXML
+    void search() {
+        ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
+        Tag tag = new Tag(tagDropdown.valueProperty().getValue(), valueDropdown.valueProperty().getValue());
+        ArrayList<Photo> photos = user.getPhotos();
+        for (Photo photo: photos) {
+            ArrayList<Tag> photoTags = photo.getTags();
+            if (photoTags != null) {
+                if (photoTags.contains(tag)) {
+                    for (Tag photoTag: photoTags) {
+                        if (photoTag.tagEquals(tag)) {
+                            System.out.println(photoTag);
+                            System.out.println(tag);
+                            System.out.println("adding photo");
+                            albumPhotos.add(photo);
+                        }
+                    }
+                }
+            }
+        }
+        Album album = new Album(albumPhotos, "Unnamed album", user);
+        user.addAlbum(album);
+        album.start();
     }
 
     @FXML

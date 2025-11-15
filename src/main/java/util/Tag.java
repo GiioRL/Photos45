@@ -17,4 +17,21 @@ public class Tag {
     public String getValue() {
         return value;
     }
+
+    public boolean equals(Object o) { // only checks tag types
+        if (o == null || !(o instanceof Tag)) {
+            return false;
+        } else {
+            Tag other = (Tag)o;
+            return type.equals(other.getType());
+        }
+    }
+
+    public boolean tagEquals(Tag other) {
+        return value.equals(other.getValue());
+    }
+
+    public String toString() {
+        return type + ": " + value;
+    }
 }
