@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import main.java.album.photoThumbnail.PhotoThumbnailController;
 
@@ -31,11 +30,6 @@ public class Photo {
         this.tags = tags;
         this.location = location;
         this.caption = caption;
-        // try {
-        //     image = createImage();
-        // } catch (IOException e) {
-        //     System.out.println("oops hehe");
-        // }
         image = createImage();
         createThumbnail();
     }

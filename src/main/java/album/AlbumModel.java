@@ -26,6 +26,12 @@ public class AlbumModel {
         return new Photo(calendar, tags, location, caption);
     }
 
+    public Photo createPhoto(String location, long millis) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(millis);
+        return new Photo(calendar, null, location, "");
+    }
+
     public Photo createPhoto(String location) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.MILLISECOND, 0);
@@ -33,7 +39,7 @@ public class AlbumModel {
     }
 
     public String convertDatetoString(Calendar date) {
-        return ("" + date.MONTH + "/" + date.DAY_OF_MONTH + "/" + date.YEAR);
+        return ("" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.YEAR));
     }
 
     public ArrayList<Node> getThumbnails(Album album) {

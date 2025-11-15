@@ -101,7 +101,6 @@ public class User { // this might become library model
     public void start() {
         if (scene == null) {
             initScene();
-            System.out.println("scene is null - first time user is starting");
         }
         lc.start();
         primaryStage.setScene(scene);
