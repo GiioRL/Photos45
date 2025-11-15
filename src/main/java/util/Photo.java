@@ -17,19 +17,23 @@ import main.java.album.photoThumbnail.PhotoThumbnailController;
 
 public class Photo {
 
-    private Calendar date;
-    private ArrayList<Tag> tags;
     private String location;
     private String caption;
+    private ArrayList<Tag> tags;
+    private Calendar date;
+    
     private Image image;
     private Node thumbnail;
     private PhotoThumbnailController tc;
     
-    public Photo(Calendar date, ArrayList<Tag> tags, String location, String caption) {
-        this.date = date;
-        this.tags = tags;
+    public Photo(String location, String caption, ArrayList<Tag> tags, long millis) {
         this.location = location;
         this.caption = caption;
+        this.tags = tags;
+        date = Calendar.getInstance();
+        date.setTimeInMillis(millis);
+        date.set(Calendar.MILLISECOND, 0);
+
         image = createImage();
         createThumbnail();
     }

@@ -102,9 +102,8 @@ public class AlbumController {
             return;
         
         for (File photoFile: photoFiles) {
-            long millis = photoFile.lastModified();
             String location = photoFile.getAbsolutePath();
-            Photo newPhoto = albumModel.createPhoto(location, millis);
+            Photo newPhoto = albumModel.createPhoto(location);
             if (!album.getPhotos().contains(newPhoto)) {
                 album.getPhotos().add(newPhoto);
                 initScene();

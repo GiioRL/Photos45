@@ -20,6 +20,7 @@ public class User { // this might become library model
     private Stage primaryStage;
     private Scene scene;
     private static ArrayList<User> users = new ArrayList<User>();
+    protected ArrayList<Tag> tags = new ArrayList<Tag>();
 
     static {
         users.add(new Admin());
@@ -35,6 +36,12 @@ public class User { // this might become library model
         this.username = username;
         this.password = password;
         users.add(this);
+        tags.add(new Tag("location", null));
+        tags.add(new Tag("person", null));
+    }
+
+    public void checkTags(ArrayList<Tag> tags) {
+        // add tags when necessary
     }
 
     public String getUsername() {

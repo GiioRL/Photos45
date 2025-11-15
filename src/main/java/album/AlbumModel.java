@@ -23,20 +23,21 @@ public class AlbumModel {
         return instance;
     }
 
-    public Photo createPhoto(Calendar calendar, ArrayList<Tag> tags, String location, String caption) {
-        return new Photo(calendar, tags, location, caption);
+    public Photo createPhoto(String location, String caption, ArrayList<Tag> tags, long millis) {
+        return new Photo(location, caption, tags, millis);
     }
 
-    public Photo createPhoto(String location, long millis) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(millis);
-        calendar.set(Calendar.MILLISECOND, 0);
-        return new Photo(calendar, null, location, "");
+    public Photo createPhoto(String location, String caption, ArrayList<Tag> tags) {
+        File file = new File(location);
+        return createPhoto(location, caption, tags, file.lastModified());
+    }
+
+    public Photo createPhoto(String location, String caption) {
+        return createPhoto(location, caption, null);
     }
 
     public Photo createPhoto(String location) {
-        File file = new File(location);
-        return createPhoto(location, file.lastModified());
+        return createPhoto(location, "");
     }
 
     public String convertDatetoString(Calendar date) {
