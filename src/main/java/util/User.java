@@ -36,8 +36,8 @@ public class User { // this might become library model
         this.username = username;
         this.password = password;
         users.add(this);
-        tags.add(new Tag("location", null));
-        tags.add(new Tag("person", null));
+        tags.add(new Tag("Location", null));
+        tags.add(new Tag("Person", null));
     }
 
     public void addTag(Tag newTag) { // only checks the tag type
