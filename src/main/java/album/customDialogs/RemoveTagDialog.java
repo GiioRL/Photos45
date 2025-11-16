@@ -28,7 +28,8 @@ public class RemoveTagDialog extends Dialog<RemoveTagDialog.TagData> {
         this.typeBox.setMinWidth(150.0);
         if (pane != null) {
             for (Tag t: tags)
-            this.typeBox.getItems().add(t.getType());
+                if (!this.typeBox.getItems().contains(t.getType()))
+                    this.typeBox.getItems().add(t.getType());
         }
         this.typeBox.setMaxWidth(Double.MAX_VALUE);
         GridPane.setHgrow(this.typeBox, Priority.ALWAYS);

@@ -199,8 +199,12 @@ public class AlbumController {
     void addTag(ActionEvent event) {
         AddTagDialog locationDialog = new AddTagDialog(album.getUser().getTags());
         locationDialog.showAndWait().ifPresent(tagData -> {
-            if (tagData.getType() == null || tagData.getValue().length() == 0)
+            if (tagData.getType() == null || tagData.getValue().length() == 0) {
+                Alert warning = new Alert(Alert.AlertType.WARNING, "Enter a tag-value combination.");
+                warning.setHeaderText("Invalid Tag Selection");
+                warning.showAndWait();
                 return;
+            }
             Tag newTag = new Tag(tagData.getType(), tagData.getValue());
             ArrayList<Tag> curTags = curSelected.getTags();
             if (curTags == null)
@@ -215,6 +219,9 @@ public class AlbumController {
             }
             curTags.add(newTag);
             curSelected.setTags(curTags);
+            Alert info = new Alert(Alert.AlertType.WARNING, "Tag added successfully!");
+            info.setHeaderText("Tag Added");
+            info.showAndWait();
         });
     }
 
@@ -288,6 +295,7 @@ public class AlbumController {
                         userAlbum.getPhotos().add(curSelected);
                         album.getPhotos().remove(curSelected);
                         deselect();
+                        initScene();
                         Alert info = new Alert(Alert.AlertType.INFORMATION, "Photo moved to " + destAlbum + " successfully!");
                         info.setHeaderText("Moved Successfully");
                         info.showAndWait();
@@ -322,11 +330,18 @@ public class AlbumController {
         }
         RemoveTagDialog locationDialog = new RemoveTagDialog(curTags);
         locationDialog.showAndWait().ifPresent(tagData -> {
-            if (tagData.getType() == null || tagData.getValue() == null)
+            if (tagData.getType() == null || tagData.getValue() == null) {
+                Alert warning = new Alert(Alert.AlertType.WARNING, "Select a tag-value combination.");
+                warning.setHeaderText("Invalid Selection");
+                warning.showAndWait();
                 return;
+            }
             Tag oldTag = new Tag(tagData.getType(), tagData.getValue());
             curTags.remove(oldTag);
             curSelected.setTags(curTags);
+            Alert info = new Alert(Alert.AlertType.INFORMATION, "Tag removed successfully!");
+            info.setHeaderText("Tag Removed");
+            info.showAndWait();
         });
     }
 
