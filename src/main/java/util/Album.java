@@ -64,6 +64,10 @@ public class Album {
     public String getName() {
         return name;
     }
+
+    public User getUser() {
+        return user;
+    }
     
     public void start() {
         if (scene == null) {

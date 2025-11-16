@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.java.MainController;
+import main.java.album.customDialogs.*;
 import main.java.album.photoBox.PhotoBoxController;
 import main.java.util.*;
 
@@ -131,7 +132,7 @@ public class AlbumController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Photo");
         fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Image Files (*.png, *.jpg, *.jpeg, *.gif, *.webp, *.bmp, *.heic, *.svg, *.avif)", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.bmp", "*.heic", "*.svg", "*.avif"),
+            new FileChooser.ExtensionFilter("Image Files (*.png, *.jpg, *.jpeg, *.gif, *.bmp)", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"),
             new FileChooser.ExtensionFilter("All Files", "*.*")
         );
         List<File> photoFiles = fileChooser.showOpenMultipleDialog(primaryStage);
@@ -147,27 +148,28 @@ public class AlbumController {
                 initScene();
             }
             else {
-                Alert error = new Alert(Alert.AlertType.ERROR, "Photo already exists in album.");
-                error.setHeaderText("Photo Already Exists");
-                error.showAndWait();
+                Alert warning = new Alert(Alert.AlertType.WARNING, "Photo already exists in album.");
+                warning.setHeaderText("Photo Already Exists");
+                warning.showAndWait();
             }
         }
     }
 
     @FXML
     void addTag(ActionEvent event) {
-        TagInputDialog locationDialog = new TagInputDialog();
-        locationDialog.setHeaderText("Add Tag");
+        AddTagDialog locationDialog = new AddTagDialog(album.getUser().getTags());
         locationDialog.showAndWait().ifPresent(tagData -> {
+            if (tagData.getType() == null || tagData.getValue().length() == 0)
+                return;
             Tag newTag = new Tag(tagData.getType(), tagData.getValue());
             ArrayList<Tag> curTags = curSelected.getTags();
             if (curTags == null)
                 curTags = new ArrayList<Tag>();
             for (Tag tag: curTags) {
                 if (tag.equals(newTag) && tag.tagEquals(newTag)) {
-                    Alert error = new Alert(Alert.AlertType.ERROR, "Photo already contains tag.");
-                    error.setHeaderText("Tag Already Exists");
-                    error.showAndWait();
+                    Alert warning = new Alert(Alert.AlertType.WARNING, "Photo already contains tag.");
+                    warning.setHeaderText("Tag Already Exists");
+                    warning.showAndWait();
                     return;
                 }
             }
@@ -217,7 +219,22 @@ public class AlbumController {
 
     @FXML
     void removeTag(ActionEvent event) {
-        
+        ArrayList<Tag> curTags = curSelected.getTags();
+        if (curTags == null || curTags.size() == 0)
+        {
+            Alert warning = new Alert(Alert.AlertType.WARNING, "Photo does not have any tags.");
+            warning.setHeaderText("No Tags");
+            warning.showAndWait();
+            return;
+        }
+        RemoveTagDialog locationDialog = new RemoveTagDialog(curTags);
+        locationDialog.showAndWait().ifPresent(tagData -> {
+            if (tagData.getType() == null || tagData.getValue() == null)
+                return;
+            Tag oldTag = new Tag(tagData.getType(), tagData.getValue());
+            curTags.remove(oldTag);
+            curSelected.setTags(curTags);
+        });
     }
 
     @FXML
