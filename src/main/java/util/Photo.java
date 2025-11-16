@@ -75,6 +75,10 @@ public class Photo {
         return tags;
     }
 
+    public void setTags(ArrayList<Tag> newTags) {
+        tags = newTags;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -83,12 +87,28 @@ public class Photo {
         return caption;
     }
 
+    public void setCaption(String newCaption) {
+        caption = newCaption;
+    }
+
     public Image getImage() {
         return image;
     }
 
     public Node getThumbnail() {
         return thumbnail;
+    }
+
+    public PhotoThumbnailController getPhotoThumbnailController() {
+        return tc;
+    }
+
+    public void select() {
+        tc.select();
+    }
+    
+    public void deselect() {
+        tc.deselect();
     }
 
     // Returns true if photos have same location - perhaps change in future, but this way is useful for preventing duplicate photo insert into album

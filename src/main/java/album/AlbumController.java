@@ -60,6 +60,7 @@ public class AlbumController {
     private static AlbumModel albumModel = AlbumModel.getInstance();
     private ArrayList<Node> photoBoxes = new ArrayList<Node>();
     private ArrayList<PhotoBoxController> pbControllers = new ArrayList<PhotoBoxController>();
+    private Photo curSelected = null;
 
     public void injectAlbum(Album album) {
         this.album = album;
@@ -93,6 +94,37 @@ public class AlbumController {
         pbControllers.add(pb);
     }
 
+    public void select(Photo photo) {
+        if (curSelected == null || !curSelected.equals(photo)) {
+            deselect();
+            curSelected = photo;
+            curSelected.select();
+            removePhotoButon.setDisable(false);
+            captionPhotoButon.setDisable(false);
+            displayPhotoButon.setDisable(false);
+            addTagButon.setDisable(false);
+            removeTagButon.setDisable(false);
+            copyButon.setDisable(false);
+            moveButon.setDisable(false);
+        }
+        else
+            deselect();
+    }
+
+    private void deselect() {
+        if (curSelected != null) {
+            curSelected.deselect();
+            removePhotoButon.setDisable(true);
+            captionPhotoButon.setDisable(true);
+            displayPhotoButon.setDisable(true);
+            addTagButon.setDisable(true);
+            removeTagButon.setDisable(true);
+            copyButon.setDisable(true);
+            moveButon.setDisable(true);
+        }
+        curSelected = null;
+    }
+
     @FXML
     void addPhoto(ActionEvent event) {
         Stage primaryStage = MainController.getStage();
@@ -110,6 +142,7 @@ public class AlbumController {
             String location = photoFile.getAbsolutePath();
             Photo newPhoto = albumModel.createPhoto(location);
             if (!album.getPhotos().contains(newPhoto)) {
+                newPhoto.getPhotoThumbnailController().injectAlbumController(this);
                 album.getPhotos().add(newPhoto);
                 initScene();
             }
@@ -119,37 +152,45 @@ public class AlbumController {
                 error.showAndWait();
             }
         }
-                
-        // TextInputDialog locationDialog = new TextInputDialog();
-        // locationDialog.setContentText("Enter photo location");
-        // locationDialog.setHeaderText("Add Photo");
-        // locationDialog.showAndWait().ifPresent(location -> {
-        //     Photo newPhoto = albumModel.createPhoto(location);
-        //     if (!album.getPhotos().contains(newPhoto)) {
-        //         album.getPhotos().add(newPhoto);
-        //         initScene();
-        //     }
-        //     else {
-        //         Alert error = new Alert(Alert.AlertType.ERROR, "Photo already exists in album.");
-        //         error.setHeaderText("Photo Already Exists");
-        //         error.showAndWait();
-        //     }
-        // });
     }
 
     @FXML
     void addTag(ActionEvent event) {
-
+        TagInputDialog locationDialog = new TagInputDialog();
+        locationDialog.setHeaderText("Add Tag");
+        locationDialog.showAndWait().ifPresent(tagData -> {
+            Tag newTag = new Tag(tagData.getType(), tagData.getValue());
+            ArrayList<Tag> curTags = curSelected.getTags();
+            if (curTags == null)
+                curTags = new ArrayList<Tag>();
+            for (Tag tag: curTags) {
+                if (tag.equals(newTag) && tag.tagEquals(newTag)) {
+                    Alert error = new Alert(Alert.AlertType.ERROR, "Photo already contains tag.");
+                    error.setHeaderText("Tag Already Exists");
+                    error.showAndWait();
+                    return;
+                }
+            }
+            curTags.add(newTag);
+            curSelected.setTags(curTags);
+        });
     }
 
     @FXML
     void back(ActionEvent event) {
+        deselect();
         albumModel.back(album);
     }
 
     @FXML
     void captionPhoto(ActionEvent event) {
-
+        TextInputDialog locationDialog = new TextInputDialog();
+        locationDialog.setContentText("Photo caption:");
+        locationDialog.setHeaderText("Caption Photo");
+        locationDialog.showAndWait().ifPresent(caption -> {
+            curSelected.setCaption(caption);
+            initScene();
+        });
     }
 
     @FXML
@@ -169,12 +210,14 @@ public class AlbumController {
 
     @FXML
     void removePhoto(ActionEvent event) {
-
+        album.getPhotos().remove(curSelected);
+        deselect();
+        initScene();
     }
 
     @FXML
     void removeTag(ActionEvent event) {
-
+        
     }
 
     @FXML
