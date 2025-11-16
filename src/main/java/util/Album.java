@@ -38,8 +38,8 @@ public class Album {
 
     public void createThumbnail() {
         if (photos.size() == 0) {
-            System.out.println("ALBUM HAS NO PHTOOS");
-            return; // dont let this happen, delete album or something
+            delete();
+            return;
         }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/albumThumbnail/albumThumbnailView.fxml"));
