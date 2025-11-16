@@ -81,6 +81,13 @@ public class Album {
         primaryStage.setScene(scene);
     }
 
+    public void start(boolean bool) {
+        if (scene == null) {
+            initScene(bool);
+        }
+        primaryStage.setScene(scene);
+    }
+
     public void select() {
         tc.select();
     }
@@ -110,5 +117,23 @@ public class Album {
             e.printStackTrace();
         }
         primaryStage = App.getStage();
+    }
+
+    private void initScene(boolean bool) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/java/album/AlbumView.fxml"));
+            Parent root = loader.load();
+            ac = loader.getController();
+            ac.injectAlbum(this, bool);
+            scene = new Scene(root);
+        } catch (Exception e) {
+            System.out.println("album oops");
+            e.printStackTrace();
+        }
+        primaryStage = App.getStage();
+    }
+
+    public Album clone() {
+        return new Album(photos, name, user);
     }
 }

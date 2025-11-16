@@ -129,8 +129,7 @@ public class LibraryController {
             //error message, "select value and tag"
             return;
         }
-        user.addAlbum(album);
-        album.start();
+        album.start(true);
     }
 
     @FXML
@@ -148,8 +147,8 @@ public class LibraryController {
             toLocalDate = temp;
         }
         Album album = libraryModel.dateSearch(fromLocalDate, toLocalDate, user);
-        user.addAlbum(album); // instead add a button in the albumview to add to library
-        album.start();
+        // user.addAlbum(album); // instead add a button in the albumview to add to library
+        album.start(true);
     }
 
     @FXML
