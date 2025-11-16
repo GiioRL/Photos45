@@ -12,7 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-
+import main.java.album.AlbumController;
 import main.java.album.photoThumbnail.PhotoThumbnailController;
 
 public class Photo {
@@ -87,6 +87,9 @@ public class Photo {
 
     public void setCaption(String newCaption) {
         caption = newCaption;
+        AlbumController temp = tc.getAC();
+        createThumbnail();
+        tc.injectAlbumController(temp);
     }
 
     public Image getImage() {

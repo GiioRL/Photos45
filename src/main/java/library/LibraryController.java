@@ -147,7 +147,6 @@ public class LibraryController {
             toLocalDate = temp;
         }
         Album album = libraryModel.dateSearch(fromLocalDate, toLocalDate, user);
-        // user.addAlbum(album); // instead add a button in the albumview to add to library
         album.start(true);
     }
 

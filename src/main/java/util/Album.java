@@ -89,6 +89,10 @@ public class Album {
         if (scene == null) {
             initScene(bool);
         }
+        ac.injectAlbum(this);
+        if (photos != null)
+            for (Photo photo: photos)
+                photo.getPhotoThumbnailController().injectAlbumController(ac);
         primaryStage.setScene(scene);
     }
 

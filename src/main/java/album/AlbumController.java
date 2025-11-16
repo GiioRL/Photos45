@@ -232,6 +232,7 @@ public class AlbumController {
         captionDialog.showAndWait().ifPresent(caption -> {
             curSelected.setCaption(caption);
             initScene();
+            curSelected.select();
         });
     }
 

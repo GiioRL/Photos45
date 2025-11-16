@@ -48,4 +48,8 @@ public class PhotoThumbnailController {
     public void deselect() {
         container.setStyle("-fx-border-color: TRANSPARENT");
     }
+
+    public AlbumController getAC() {
+        return ac;
+    }
 }

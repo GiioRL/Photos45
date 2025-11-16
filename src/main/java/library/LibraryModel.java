@@ -112,8 +112,6 @@ public class LibraryModel {
         photoCopy.add(fromDummy);
         photoCopy.add(toDummy);
         photoCopy.sort(Comparator.comparing(Photo::getDate));
-        // int start = photoCopy.indexOf(fromDummy);
-        // int end = photoCopy.indexOf(toDummy);
         for (int i = photoCopy.indexOf(fromDummy)+1; i < photoCopy.indexOf(toDummy); i++) {
             albumPhotos.add(photoCopy.get(i));
         }
