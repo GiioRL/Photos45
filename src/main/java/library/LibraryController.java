@@ -1,11 +1,14 @@
 package main.java.library;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -37,13 +40,19 @@ public class LibraryController {
     private Button renameAlbumButon;
 
     @FXML
-    private Button searchButon;
+    private Button tagSearchButon;
 
     @FXML
     private ComboBox<String> tagDropdown;
 
     @FXML
     private ComboBox<String> valueDropdown;
+
+    @FXML
+    private DatePicker fromDate;
+
+    @FXML
+    private DatePicker toDate;
 
     private static User user;
 
@@ -102,10 +111,6 @@ public class LibraryController {
         libraryModel.createAlbum(user);
     }
 
-    void createAlbum(ArrayList<Photo> photos) {
-        libraryModel.createAlbum(photos);
-    }
-
     @FXML
     void deleteAlbum() {
 
@@ -117,27 +122,33 @@ public class LibraryController {
     }
 
     @FXML
-    void search() {
-        ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
-        Tag tag = new Tag(tagDropdown.valueProperty().getValue(), valueDropdown.valueProperty().getValue());
-        ArrayList<Photo> photos = user.getPhotos();
-        for (Photo photo: photos) {
-            ArrayList<Tag> photoTags = photo.getTags();
-            if (photoTags != null) {
-                if (photoTags.contains(tag)) {
-                    for (Tag photoTag: photoTags) {
-                        if (photoTag.tagEquals(tag)) {
-                            System.out.println(photoTag);
-                            System.out.println(tag);
-                            System.out.println("adding photo");
-                            albumPhotos.add(photo);
-                        }
-                    }
-                }
-            }
+    void tagSearch() {
+        Album album = libraryModel.tagSearch(tagDropdown.valueProperty().getValue(), valueDropdown.valueProperty().getValue(), user);
+        if (album == null) {
+            System.out.println("select value and tag!!");
+            //error message, "select value and tag"
+            return;
         }
-        Album album = new Album(albumPhotos, "Unnamed album", user);
         user.addAlbum(album);
+        album.start();
+    }
+
+    @FXML
+    void dateSearch() {
+        LocalDate fromLocalDate = fromDate.valueProperty().getValue();
+        LocalDate toLocalDate = toDate.valueProperty().getValue();
+        if (fromLocalDate == null || toLocalDate == null) {
+            System.out.println("select dates!!");
+            //error message, "select dates"
+            return;
+        }
+        if (fromLocalDate.compareTo(toLocalDate) > 0) {
+            LocalDate temp = fromLocalDate;
+            fromLocalDate = toLocalDate;
+            toLocalDate = temp;
+        }
+        Album album = libraryModel.dateSearch(fromLocalDate, toLocalDate, user);
+        user.addAlbum(album); // instead add a button in the albumview to add to library
         album.start();
     }
 

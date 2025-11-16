@@ -1,6 +1,10 @@
 package main.java.library;
 
+import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
 
 import javafx.scene.Node;
 
@@ -11,6 +15,7 @@ public class LibraryModel {
 
     private ArrayList<Tag> tags;
     private static LibraryModel instance;
+    private static AlbumModel albumModel = AlbumModel.getInstance();
 
     private LibraryModel() {}
 
@@ -19,10 +24,6 @@ public class LibraryModel {
             instance = new LibraryModel();
         }
         return instance;
-    }
-    
-    public AlbumModel createAlbum(ArrayList<Photo> photos) {
-        return null;
     }
 
     public void createAlbum(User user) {
@@ -67,5 +68,54 @@ public class LibraryModel {
             }
         }
         return values;
+    }
+
+    public Album tagSearch(String type, String value, User user) {
+        if (type == null || value == null) {
+            return null;
+        }
+        ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
+        Tag tag = new Tag(type, value);
+        ArrayList<Photo> photos = user.getPhotos();
+        for (Photo photo: photos) {
+            ArrayList<Tag> photoTags = photo.getTags();
+            if (photoTags != null) {
+                if (photoTags.contains(tag)) {
+                    for (Tag photoTag: photoTags) {
+                        if (photoTag.tagEquals(tag)) {
+                            System.out.println(photoTag);
+                            System.out.println(tag);
+                            System.out.println("adding photo");
+                            albumPhotos.add(photo);
+                        }
+                    }
+                }
+            }
+        }
+        return new Album(albumPhotos, "Unnamed album", user);
+    }
+
+    public Album dateSearch(LocalDate from, LocalDate to, User user) {
+        if (from == null || to == null) {
+            return null;
+        }
+        ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
+        Calendar fromCalendar = Calendar.getInstance();
+        fromCalendar.set(from.getYear(), from.getMonthValue()-1, from.getDayOfMonth()); // set to beginning of day
+        Calendar toCalendar = Calendar.getInstance();
+        toCalendar.set(to.getYear(), to.getMonthValue()-1, to.getDayOfMonth()); // set to end of day
+        ArrayList<Photo> photos = user.getPhotos();
+        String resFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+        Photo fromDummy = albumModel.createPhoto(resFolder + "dummyPhoto1.jpg", "fromDummy", null, fromCalendar.getTimeInMillis());
+        Photo toDummy = albumModel.createPhoto(resFolder + "dummyPhoto2.jpg", "toDummy", null, toCalendar.getTimeInMillis());
+        photos.add(fromDummy);
+        photos.add(toDummy);
+        photos.sort(Comparator.comparing(Photo::getDate));
+        int start = photos.indexOf(fromDummy);
+        int end = photos.indexOf(toDummy);
+        for (int i = start+1; i < end; i++) {
+            albumPhotos.add(photos.get(i));
+        }
+        return new Album(albumPhotos, "Unnamed Album", user);
     }
 }

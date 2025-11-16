@@ -50,7 +50,7 @@ public class Stock extends User {
         photos.add(albumModel.createPhoto(resFolder + "Ocean_Background.jpg", "Ocean", new ArrayList<Tag>() {{
             add(new Tag("Location", "Background"));
         }}));
-        albums.add(new Album(photos, "stock", this));
+        albums.add(new Album(photos, "Stock", this));
     }
     
 }
