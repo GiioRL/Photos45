@@ -112,10 +112,9 @@ public class LibraryModel {
         photoCopy.add(fromDummy);
         photoCopy.add(toDummy);
         photoCopy.sort(Comparator.comparing(Photo::getDate));
-        int start = photoCopy.indexOf(fromDummy);
-        int end = photoCopy.indexOf(toDummy);
-        System.out.println("start: " + start + "\nend: " + end);
-        for (int i = start+1; i < end; i++) {
+        // int start = photoCopy.indexOf(fromDummy);
+        // int end = photoCopy.indexOf(toDummy);
+        for (int i = photoCopy.indexOf(fromDummy)+1; i < photoCopy.indexOf(toDummy); i++) {
             albumPhotos.add(photoCopy.get(i));
         }
         return new Album(albumPhotos, "Unnamed Album", user);

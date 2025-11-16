@@ -52,6 +52,9 @@ public class AlbumController {
     private Button slideshowButon;
 
     @FXML
+    private VBox butonBox;
+
+    @FXML
     private VBox photoVBox;
     
     private static Album album;
@@ -62,7 +65,12 @@ public class AlbumController {
 
     public void injectAlbum(Album album) {
         this.album = album;
-        initScene();
+        initScene(false);
+    }
+
+    public void injectAlbum(Album album, boolean bool) {
+        this.album = album;
+        initScene(bool);
     }
 
     private void initScene() {
@@ -86,6 +94,35 @@ public class AlbumController {
             pbControllers.get(i).init(photos);
         }
         photoVBox.getChildren().addAll(photoBoxes);
+    }
+
+    private void initScene(boolean bool) {
+        ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
+        int num = thumbnails.size();
+        albumModel.injectAlbumController(this);
+        photoVBox.getChildren().clear(); // there could be better ways..
+        photoBoxes.clear();
+        pbControllers.clear();
+
+        for (int i = 0; i < (num+2)/3; i++) {
+            photoBoxes.add(albumModel.getPhotoBox());
+            Node[] photos = new Node[3];
+            for (int j = 0; j < 3; j++) {
+                if (3*i+j >= num) {
+                    photos[j] = null;
+                } else {
+                    photos[j] = thumbnails.get(3*i + j);
+                }
+            }
+            pbControllers.get(i).init(photos);
+        }
+        photoVBox.getChildren().addAll(photoBoxes);
+        if (bool) {
+            Button buton = new Button("Add to Library");
+            buton.setOnAction(e -> addToLibrary());
+            butonBox.getChildren().addFirst(buton);
+            butonBox.setSpacing(10);
+        }
     }
 
     public void injectPB(PhotoBoxController pb) {
@@ -124,6 +161,12 @@ public class AlbumController {
     }
 
     @FXML
+    void addToLibrary() {
+        album.getUser().getAlbums().add(album.clone());
+        album.getUser().start();
+    }
+
+    @FXML
     void addPhoto(ActionEvent event) {
         Stage primaryStage = App.getStage();
         FileChooser fileChooser = new FileChooser();
@@ -142,7 +185,7 @@ public class AlbumController {
             if (!album.getPhotos().contains(newPhoto)) {
                 newPhoto.getPhotoThumbnailController().injectAlbumController(this);
                 album.getPhotos().add(newPhoto);
-                initScene();
+                initScene(false);
             }
             else {
                 Alert warning = new Alert(Alert.AlertType.WARNING, "Photo already exists in album.");
@@ -290,5 +333,4 @@ public class AlbumController {
     void slideshow(ActionEvent event) {
 
     }
-    
 }
