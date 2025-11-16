@@ -21,7 +21,6 @@ public class Stock extends User {
         photos.add(albumModel.createPhoto(resFolder + "Forest_Background.jpg"));
         photos.add(albumModel.createPhoto(resFolder + "Mountain_Background.jpg"));
         photos.add(albumModel.createPhoto(resFolder + "Ocean_Background.jpg"));
-        tags.add(new Tag("Test", "Value"));
 
         // photos.add(albumModel.createPhoto("/main/resources/StockPhotos/Monk_with_Munk.jpg"));
         // photos.add(albumModel.createPhoto("/main/resources/StockPhotos/Monkey_Fall.jpg"));
