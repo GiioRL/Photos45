@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -182,10 +183,10 @@ public class AlbumController {
 
     @FXML
     void captionPhoto(ActionEvent event) {
-        TextInputDialog locationDialog = new TextInputDialog();
-        locationDialog.setContentText("Photo caption:");
-        locationDialog.setHeaderText("Caption Photo");
-        locationDialog.showAndWait().ifPresent(caption -> {
+        TextInputDialog captionDialog = new TextInputDialog();
+        captionDialog.setContentText("Photo caption:");
+        captionDialog.setHeaderText("Caption Photo");
+        captionDialog.showAndWait().ifPresent(caption -> {
             curSelected.setCaption(caption);
             initScene();
         });
@@ -193,7 +194,32 @@ public class AlbumController {
 
     @FXML
     void copy(ActionEvent event) {
-
+        ChoiceDialog<String> albumDialog = new ChoiceDialog<String>();
+        for (Album userAlbum: album.getUser().getAlbums())
+            if (!userAlbum.getName().equals(album.getName()))
+                albumDialog.getItems().add(userAlbum.getName());
+        albumDialog.setContentText("Album to copy to:");
+        albumDialog.setHeaderText("Choose Album");
+        albumDialog.showAndWait().ifPresent(destAlbum -> {
+            if (destAlbum == null)
+                return;
+            for (Album userAlbum: album.getUser().getAlbums()) {
+                if (userAlbum.getName().equals(destAlbum)) {
+                    if (!userAlbum.getPhotos().contains(curSelected)) {
+                        userAlbum.getPhotos().add(curSelected);
+                        Alert info = new Alert(Alert.AlertType.INFORMATION, "Photo copied to " + destAlbum + " successfully!");
+                        info.setHeaderText("Copied Successfully");
+                        info.showAndWait();
+                    }
+                    else {
+                        Alert warning = new Alert(Alert.AlertType.WARNING, "Photo already exists in " + destAlbum + ".");
+                        warning.setHeaderText("Photo Already Exists");
+                        warning.showAndWait();
+                    }
+                    return;
+                }
+            }
+        });
     }
 
     @FXML
@@ -203,7 +229,34 @@ public class AlbumController {
 
     @FXML
     void move(ActionEvent event) {
-
+        ChoiceDialog<String> albumDialog = new ChoiceDialog<String>();
+        for (Album userAlbum: album.getUser().getAlbums())
+            if (!userAlbum.getName().equals(album.getName()))
+                albumDialog.getItems().add(userAlbum.getName());
+        albumDialog.setContentText("Album to move to:");
+        albumDialog.setHeaderText("Choose Album");
+        albumDialog.showAndWait().ifPresent(destAlbum -> {
+            if (destAlbum == null)
+                return;
+            for (Album userAlbum: album.getUser().getAlbums()) {
+                if (userAlbum.getName().equals(destAlbum)) {
+                    if (!userAlbum.getPhotos().contains(curSelected)) {
+                        userAlbum.getPhotos().add(curSelected);
+                        album.getPhotos().remove(curSelected);
+                        deselect();
+                        Alert info = new Alert(Alert.AlertType.INFORMATION, "Photo moved to " + destAlbum + " successfully!");
+                        info.setHeaderText("Moved Successfully");
+                        info.showAndWait();
+                    }
+                    else {
+                        Alert warning = new Alert(Alert.AlertType.WARNING, "Photo already exists in " + destAlbum + ".");
+                        warning.setHeaderText("Photo Already Exists");
+                        warning.showAndWait();
+                    }
+                    return;
+                }
+            }
+        });
     }
 
     @FXML
