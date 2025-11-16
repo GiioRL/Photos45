@@ -108,13 +108,15 @@ public class LibraryModel {
         String resFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         Photo fromDummy = albumModel.createPhoto(resFolder + "dummyPhoto1.jpg", "fromDummy", null, fromCalendar.getTimeInMillis());
         Photo toDummy = albumModel.createPhoto(resFolder + "dummyPhoto2.jpg", "toDummy", null, toCalendar.getTimeInMillis());
-        photos.add(fromDummy);
-        photos.add(toDummy);
-        photos.sort(Comparator.comparing(Photo::getDate));
-        int start = photos.indexOf(fromDummy);
-        int end = photos.indexOf(toDummy);
+        ArrayList<Photo> photoCopy = (ArrayList<Photo>)photos.clone();
+        photoCopy.add(fromDummy);
+        photoCopy.add(toDummy);
+        photoCopy.sort(Comparator.comparing(Photo::getDate));
+        int start = photoCopy.indexOf(fromDummy);
+        int end = photoCopy.indexOf(toDummy);
+        System.out.println("start: " + start + "\nend: " + end);
         for (int i = start+1; i < end; i++) {
-            albumPhotos.add(photos.get(i));
+            albumPhotos.add(photoCopy.get(i));
         }
         return new Album(albumPhotos, "Unnamed Album", user);
     }
