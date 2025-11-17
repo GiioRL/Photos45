@@ -67,10 +67,10 @@ public class App extends Application {
 
     public static void saveData() {
         ArrayList<User> users = User.getUsers();
-        String saveFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator;
+        String dataFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator;
         for (User user: users) {
             try {
-                user.save(saveFolder);
+                user.save(dataFolder);
             } catch (Exception e) {
                 System.out.println("saving error :/");
                 e.printStackTrace();
@@ -79,8 +79,8 @@ public class App extends Application {
     }
 
     public static void loadData() {
-        File saveFolder = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator);
-        File[] files = saveFolder.listFiles();
+        File dataFolder = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator);
+        File[] files = dataFolder.listFiles();
         if (files != null) {
             if (files.length == 0) {
                 initApp();
@@ -94,6 +94,9 @@ public class App extends Application {
                     }
                 }
             }
+        } else {
+            dataFolder.mkdir();
+            initApp();
         }
     }
 }
