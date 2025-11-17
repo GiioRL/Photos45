@@ -219,6 +219,12 @@ public class AlbumController {
             }
             curTags.add(newTag);
             curSelected.setTags(curTags);
+            boolean userHasTag = false;
+            for (Tag t: album.getUser().getTags())
+                if (t.equals(newTag) && t.tagEquals(newTag))
+                    userHasTag = true;
+            if (!userHasTag)
+                album.getUser().getTags().add(newTag);
             Alert info = new Alert(Alert.AlertType.WARNING, "Tag added successfully!");
             info.setHeaderText("Tag Added");
             info.showAndWait();
@@ -337,8 +343,30 @@ public class AlbumController {
                 return;
             }
             Tag oldTag = new Tag(tagData.getType(), tagData.getValue());
-            curTags.remove(oldTag);
+            for (int i = 0; i < curTags.size(); i++) {
+                Tag t = curTags.get(i);
+                if (t.equals(oldTag) && t.tagEquals(oldTag)) {
+                    curTags.remove(i);
+                    break;
+                }
+            }
             curSelected.setTags(curTags);
+            boolean somePhotoHasTag = false;
+            for (Album a: album.getUser().getAlbums())
+                for (Photo p: a.getPhotos())
+                    for (Tag t: p.getTags())
+                        if (t.equals(oldTag) && t.tagEquals(oldTag))
+                            somePhotoHasTag = true;
+            if (!somePhotoHasTag) {
+                ArrayList<Tag> userTags = album.getUser().getTags();
+                for (int i = 0; i < userTags.size(); i++) {
+                    Tag t = userTags.get(i);
+                    if (t.equals(oldTag) && t.tagEquals(oldTag)) {
+                        userTags.remove(i);
+                        break;
+                    }
+                }
+            }
             Alert info = new Alert(Alert.AlertType.INFORMATION, "Tag removed successfully!");
             info.setHeaderText("Tag Removed");
             info.showAndWait();
@@ -347,6 +375,6 @@ public class AlbumController {
 
     @FXML
     void slideshow(ActionEvent event) {
-
+        new SlidesDialog(album, curSelected).showAndWait();
     }
 }

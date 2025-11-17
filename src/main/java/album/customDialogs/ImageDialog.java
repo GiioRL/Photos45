@@ -43,7 +43,6 @@ public class ImageDialog extends Dialog<Object> {
             DialogPane pane = loader.load();
 
             this.imageView.setImage(photo.getImage());
-            pane.getButtonTypes().add(ButtonType.OK);
 
             String text = "Tags:\n";
             if (photo.getTags() != null) {
@@ -58,17 +57,13 @@ public class ImageDialog extends Dialog<Object> {
                     text += line.getKey() + ": " + line.getValue() + "\n";
             }
             this.tagText.setText(text);
+
+            pane.getButtonTypes().add(ButtonType.OK);
             this.setDialogPane(pane);
-            
-            // pane.contentTextProperty().addListener((var1x) -> {
-            //     this.updateGrid();
-            // });
 
             String header = photo.getCaption().length() > 0 ? photo.getCaption() : "(Uncaptioned)";
             header += " - " + photo.getDateString();
             this.setHeaderText(header);
-            // pane.getStyleClass().add("text-input-dialog");
-            // pane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
 
             this.setResultConverter((buttonType) -> {
                 return null;
