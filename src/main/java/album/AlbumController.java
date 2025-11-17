@@ -382,6 +382,12 @@ public class AlbumController {
     }
 
     @FXML
+    void logout() {
+        Stage primaryStage = App.getStage();
+        primaryStage.setScene(App.getLoginScene());
+    }
+
+    @FXML
     void quit(ActionEvent event) {
         System.exit(0);
     }
