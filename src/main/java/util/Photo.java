@@ -3,6 +3,8 @@ package main.java.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -15,16 +17,16 @@ import javafx.scene.image.Image;
 import main.java.album.AlbumController;
 import main.java.album.photoThumbnail.PhotoThumbnailController;
 
-public class Photo {
+public class Photo implements Serializable {
 
     private String location;
     private String caption;
     private ArrayList<Tag> tags;
     private Calendar date;
     
-    private Image image;
-    private Node thumbnail;
-    private PhotoThumbnailController tc;
+    private transient Image image;
+    private transient Node thumbnail;
+    private transient PhotoThumbnailController tc;
     
     public Photo(String location, String caption, ArrayList<Tag> tags, long millis) {
         this.location = location;
@@ -33,7 +35,6 @@ public class Photo {
         date = Calendar.getInstance();
         date.setTimeInMillis(millis);
         date.set(Calendar.MILLISECOND, 0);
-
         image = createImage();
         createThumbnail();
     }
@@ -117,5 +118,12 @@ public class Photo {
         if (o == null || !(o instanceof Photo))
             return false;
         return location.equals(((Photo) o).location);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        image = createImage();
+        createThumbnail();
     }
 }

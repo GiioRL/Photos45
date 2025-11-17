@@ -1,5 +1,6 @@
 package main.java.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
@@ -12,17 +13,17 @@ import main.java.album.AlbumController;
 import main.java.album.albumThumbnail.AlbumThumbnailController;
 import main.java.App;
 
-public class Album {
+public class Album implements Serializable {
 
     private String name;
     private User user;
     private ArrayList<Photo> photos;
-    private Node thumbnail;
-    private AlbumThumbnailController tc;
 
-    private AlbumController ac;
-    private Scene scene;
-    private Stage primaryStage;
+    private transient Node thumbnail;
+    private transient AlbumThumbnailController tc;
+    private transient AlbumController ac;
+    private transient Scene scene;
+    private transient Stage primaryStage;
 
     public Album(User user, String name) {
         this.user = user;

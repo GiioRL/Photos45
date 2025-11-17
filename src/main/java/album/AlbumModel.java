@@ -1,6 +1,7 @@
 package main.java.album;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -9,10 +10,10 @@ import javafx.scene.Node;
 
 import main.java.util.*;
 
-public class AlbumModel {
+public class AlbumModel implements Serializable{
 
     static AlbumModel instance;
-    private AlbumController ac;
+    private transient AlbumController ac;
 
     private AlbumModel() {}
 

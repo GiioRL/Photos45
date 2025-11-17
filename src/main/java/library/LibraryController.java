@@ -158,7 +158,7 @@ public class LibraryController {
 
     @FXML
     void quit() {
-        System.exit(0);
+        App.quit();
     }
 
     @FXML

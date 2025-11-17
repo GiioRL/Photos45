@@ -1,5 +1,12 @@
 package main.java.util;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
@@ -10,22 +17,23 @@ import javafx.stage.Stage;
 import main.java.library.LibraryController;
 import main.java.App;
 
-public class User { // this might become library model
+public class User implements Serializable { // this might become library model
     
     protected String username = "";
     protected String password = "";
-    protected LibraryController lc;
     protected ArrayList<Photo> photos = new ArrayList<Photo>();
     protected ArrayList<Album> albums = new ArrayList<Album>();
-    private Stage primaryStage;
-    private Scene scene;
     private static ArrayList<User> users = new ArrayList<User>();
     protected ArrayList<Tag> tags = new ArrayList<Tag>(); // tags should have a (Type, null) for every (Type, Value)
 
-    static {
-        users.add(new Admin());
-        users.add(new Stock());
-    }
+    protected transient LibraryController lc;
+    private transient Stage primaryStage;
+    private transient Scene scene;
+
+    // static {
+    //     users.add(new Admin());
+    //     users.add(new Stock());
+    // }
 
     public User() {}
 
@@ -149,5 +157,60 @@ public class User { // this might become library model
             e.printStackTrace();
         }
         primaryStage = App.getStage();
+    }
+
+    public static void initClass() {
+        users.add(new Admin());
+        users.add(new Stock());
+    }
+
+    public static void resetClass() {
+        users.clear();
+        File saveFolder = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator);
+        File[] files = saveFolder.listFiles();
+        for (File file: files) {
+            if (!file.delete()) {
+                System.out.println("Failed to delete file: " + file.getAbsolutePath());
+            }
+        }
+        initClass();
+    }
+
+    public static void restoreClass() {
+        File saveFolder = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator);
+        File adminFile = new File(saveFolder + File.separator + "admin.txt");
+        File stockFile = new File(saveFolder + File.separator + "stock.txt");
+        if (adminFile.delete()) {
+            users.remove(new Admin());   
+        } else {
+            System.out.println("Failed to delete admin file");
+        }
+        if (stockFile.delete()) {
+            users.remove(new Stock());
+        } else {
+            System.out.println("Failed to delete stock file");
+        }
+        initClass();
+    }
+
+    public void save(String folder) throws Exception {
+        File file = new File(folder + File.separator + username + ".txt");
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(this);
+        oos.close();
+    }
+
+    public static void load(File file) throws Exception {
+        // File file = new File(username + ".txt");
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        User user = (User)(ois.readObject());
+        users.add(user);
+        ois.close();
+    }
+
+    public String toString() {
+        return "User " + username;
     }
 }
