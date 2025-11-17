@@ -29,11 +29,7 @@
             <Insets bottom="5.0" left="5.0" />
          </padding>
       </HBox>
-<<<<<<< HEAD
       <Button layoutX="477.0" layoutY="367.0" mnemonicParsing="false" onAction="#reset" text="Reset Application" />
       <Button layoutX="338.0" layoutY="367.0" mnemonicParsing="false" onAction="#restore" text="Reset Admin &amp; Stock" />
-=======
-      <!-- <PasswordField layoutX="42.0" layoutY="162.0" promptText="Test" /> -->
->>>>>>> photoButtons
    </children>
 </AnchorPane>

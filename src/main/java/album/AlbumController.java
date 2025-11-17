@@ -379,7 +379,7 @@ public class AlbumController {
 
     @FXML
     void quit(ActionEvent event) {
-        System.exit(0);
+        App.quit();
     }
 
     private boolean searchTagInAlbums(Tag searchTag) {
