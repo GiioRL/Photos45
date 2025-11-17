@@ -178,8 +178,8 @@ public class User implements Serializable { // this might become library model
 
     public static void restoreClass() {
         File saveFolder = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "data" + File.separator);
-        File adminFile = new File(saveFolder + File.separator + "admin.txt");
-        File stockFile = new File(saveFolder + File.separator + "stock.txt");
+        File adminFile = new File(saveFolder + File.separator + "admin.dat");
+        File stockFile = new File(saveFolder + File.separator + "stock.dat");
         if (adminFile.delete()) {
             users.remove(new Admin());   
         } else {
@@ -194,7 +194,7 @@ public class User implements Serializable { // this might become library model
     }
 
     public void save(String folder) throws Exception {
-        File file = new File(folder + File.separator + username + ".txt");
+        File file = new File(folder + File.separator + username + ".dat");
         FileOutputStream fos = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(this);
@@ -202,7 +202,6 @@ public class User implements Serializable { // this might become library model
     }
 
     public static void load(File file) throws Exception {
-        // File file = new File(username + ".txt");
         FileInputStream fis = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream(fis);
         User user = (User)(ois.readObject());
