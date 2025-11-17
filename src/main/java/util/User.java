@@ -21,7 +21,7 @@ public class User implements Serializable { // this might become library model
     
     protected String username = "";
     protected String password = "";
-    protected ArrayList<Photo> photos = new ArrayList<Photo>();
+    // protected ArrayList<Photo> photos = new ArrayList<Photo>();
     protected ArrayList<Album> albums = new ArrayList<Album>();
     private static ArrayList<User> users = new ArrayList<User>();
     protected ArrayList<Tag> tags = new ArrayList<Tag>(); // tags should have a (Type, null) for every (Type, Value)
@@ -68,9 +68,9 @@ public class User implements Serializable { // this might become library model
         return tags;
     }
 
-    public ArrayList<Photo> getPhotos() {
-        return photos;
-    }
+    // public ArrayList<Photo> getPhotos() {
+    //     return photos;
+    // }
 
     public String getUsername() {
         return username;

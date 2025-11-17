@@ -76,7 +76,10 @@ public class LibraryModel {
         }
         ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
         Tag tag = new Tag(type, value);
-        ArrayList<Photo> photos = user.getPhotos();
+        // ArrayList<Photo> photos = user.getPhotos();
+        ArrayList<Photo> photos = new ArrayList<>();
+        for (Album album: user.getAlbums())
+            photos.addAll(album.getPhotos());
         for (Photo photo: photos) {
             ArrayList<Tag> photoTags = photo.getTags();
             if (photoTags != null) {
@@ -104,7 +107,10 @@ public class LibraryModel {
         fromCalendar.set(from.getYear(), from.getMonthValue()-1, from.getDayOfMonth()); // set to beginning of day
         Calendar toCalendar = Calendar.getInstance();
         toCalendar.set(to.getYear(), to.getMonthValue()-1, to.getDayOfMonth()); // set to end of day
-        ArrayList<Photo> photos = user.getPhotos();
+        // ArrayList<Photo> photos = user.getPhotos();
+        ArrayList<Photo> photos = new ArrayList<>();
+        for (Album album: user.getAlbums())
+            photos.addAll(album.getPhotos());
         String resFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
         Photo fromDummy = albumModel.createPhoto(resFolder + "dummyPhoto1.jpg", "fromDummy", null, fromCalendar.getTimeInMillis());
         Photo toDummy = albumModel.createPhoto(resFolder + "dummyPhoto2.jpg", "toDummy", null, toCalendar.getTimeInMillis());

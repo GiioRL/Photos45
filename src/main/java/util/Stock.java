@@ -22,6 +22,7 @@ public class Stock extends User {
         tags.add(new Tag("Pet", "Monkey"));
         tags.add(new Tag("Pet", "Pumpkin"));
         String resFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "StockPhotos" + File.separator;
+        ArrayList<Photo> photos = new ArrayList<>();
         photos.add(albumModel.createPhoto(resFolder + "Monk_with_Munk.jpg", "Monk with Munk", new ArrayList<Tag>() {{
             add(new Tag("Location", "Home"));
             add(new Tag("Pet", "Monkey"));
