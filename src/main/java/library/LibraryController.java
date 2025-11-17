@@ -25,6 +25,9 @@ public class LibraryController {
     private HBox albumHBox;
 
     @FXML
+    private Button createTagButton;
+
+    @FXML
     private Button createAlbumButon;
 
     @FXML
@@ -197,4 +200,27 @@ public class LibraryController {
         });
     }
 
+    @FXML
+    void createTag() {
+        TextInputDialog tagDialog = new TextInputDialog();
+        tagDialog.setContentText("Tag name:");
+        tagDialog.showAndWait().ifPresent(newTagType -> {
+            if (newTagType.length() == 0) {
+                Alert warning = new Alert(AlertType.WARNING, "Enter a non-empty name.");
+                warning.setHeaderText("Invalid Name");
+                warning.showAndWait();
+                return;
+            }
+            for (Tag t: user.getTags()) {
+                if (t.getType().equals(newTagType)) {
+                    Alert warning = new Alert(AlertType.WARNING, "Tag already exists.");
+                    warning.setHeaderText("Tag Already Exists");
+                    warning.showAndWait();
+                    return;
+                }
+            }
+            user.getTags().add(new Tag(newTagType, null));
+            start();
+        });
+    }
 }
