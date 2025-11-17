@@ -52,6 +52,9 @@ public class AlbumController {
     private Button slideshowButon;
 
     @FXML
+    private Button quitButton;
+
+    @FXML
     private VBox butonBox;
 
     @FXML
@@ -199,8 +202,12 @@ public class AlbumController {
     void addTag(ActionEvent event) {
         AddTagDialog locationDialog = new AddTagDialog(album.getUser().getTags());
         locationDialog.showAndWait().ifPresent(tagData -> {
-            if (tagData.getType() == null || tagData.getValue().length() == 0)
+            if (tagData.getType() == null || tagData.getValue().length() == 0) {
+                Alert warning = new Alert(Alert.AlertType.WARNING, "Enter a tag-value combination.");
+                warning.setHeaderText("Invalid Tag Selection");
+                warning.showAndWait();
                 return;
+            }
             Tag newTag = new Tag(tagData.getType(), tagData.getValue());
             ArrayList<Tag> curTags = curSelected.getTags();
             if (curTags == null)
@@ -215,6 +222,15 @@ public class AlbumController {
             }
             curTags.add(newTag);
             curSelected.setTags(curTags);
+            boolean userHasTag = false;
+            for (Tag t: album.getUser().getTags())
+                if (t.equals(newTag) && t.tagEquals(newTag))
+                    userHasTag = true;
+            if (!userHasTag)
+                album.getUser().getTags().add(newTag);
+            Alert info = new Alert(Alert.AlertType.WARNING, "Tag added successfully!");
+            info.setHeaderText("Tag Added");
+            info.showAndWait();
         });
     }
 
@@ -268,7 +284,7 @@ public class AlbumController {
 
     @FXML
     void displayPhoto(ActionEvent event) {
-
+        new ImageDialog(curSelected).showAndWait();
     }
 
     @FXML
@@ -288,6 +304,7 @@ public class AlbumController {
                         userAlbum.getPhotos().add(curSelected);
                         album.getPhotos().remove(curSelected);
                         deselect();
+                        initScene();
                         Alert info = new Alert(Alert.AlertType.INFORMATION, "Photo moved to " + destAlbum + " successfully!");
                         info.setHeaderText("Moved Successfully");
                         info.showAndWait();
@@ -306,6 +323,9 @@ public class AlbumController {
     @FXML
     void removePhoto(ActionEvent event) {
         album.getPhotos().remove(curSelected);
+        for (Tag t: curSelected.getTags())
+            if (!searchTagInAlbums(t))
+                removeUserTag(t);
         deselect();
         initScene();
     }
@@ -322,16 +342,64 @@ public class AlbumController {
         }
         RemoveTagDialog locationDialog = new RemoveTagDialog(curTags);
         locationDialog.showAndWait().ifPresent(tagData -> {
-            if (tagData.getType() == null || tagData.getValue() == null)
+            if (tagData.getType() == null || tagData.getValue() == null) {
+                Alert warning = new Alert(Alert.AlertType.WARNING, "Select a tag-value combination.");
+                warning.setHeaderText("Invalid Selection");
+                warning.showAndWait();
                 return;
+            }
             Tag oldTag = new Tag(tagData.getType(), tagData.getValue());
-            curTags.remove(oldTag);
+            for (int i = 0; i < curTags.size(); i++) {
+                Tag t = curTags.get(i);
+                if (t.equals(oldTag) && t.tagEquals(oldTag)) {
+                    curTags.remove(i);
+                    break;
+                }
+            }
             curSelected.setTags(curTags);
+            if (!searchTagInAlbums(oldTag)) {
+                removeUserTag(oldTag);
+            }
+            Alert info = new Alert(Alert.AlertType.INFORMATION, "Tag removed successfully!");
+            info.setHeaderText("Tag Removed");
+            info.showAndWait();
         });
     }
 
     @FXML
     void slideshow(ActionEvent event) {
+        new SlidesDialog(album, curSelected).showAndWait();
+    }
 
+    @FXML
+    void logout() {
+        Stage primaryStage = App.getStage();
+        primaryStage.setScene(App.getLoginScene());
+    }
+
+    @FXML
+    void quit(ActionEvent event) {
+        System.exit(0);
+    }
+
+    private boolean searchTagInAlbums(Tag searchTag) {
+        boolean somePhotoHasTag = false;
+        for (Album a: album.getUser().getAlbums())
+            for (Photo p: a.getPhotos())
+                for (Tag t: p.getTags())
+                    if (t.equals(searchTag) && t.tagEquals(searchTag))
+                        somePhotoHasTag = true;
+        return somePhotoHasTag;
+    }
+
+    private void removeUserTag(Tag oldTag) {
+        ArrayList<Tag> userTags = album.getUser().getTags();
+        for (int i = 0; i < userTags.size(); i++) {
+            Tag t = userTags.get(i);
+            if (t.equals(oldTag) && t.tagEquals(oldTag)) {
+                userTags.remove(i);
+                break;
+            }
+        }
     }
 }

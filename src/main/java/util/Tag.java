@@ -30,6 +30,8 @@ public class Tag implements Serializable{
     }
 
     public boolean tagEquals(Tag other) {
+        if (value == null || other == null)
+            return false;
         return value.equals(other.getValue());
     }
 

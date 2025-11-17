@@ -70,6 +70,10 @@ public class Photo implements Serializable {
         return date;
     }
 
+    public String getDateString() {
+        return ("" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.DAY_OF_MONTH) + "/" + date.get(Calendar.YEAR));
+    }
+
     public ArrayList<Tag> getTags() {
         return tags;
     }

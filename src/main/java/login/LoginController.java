@@ -39,6 +39,8 @@ public class LoginController {
             textInvalid.setVisible(true);
         } else {
             textInvalid.setVisible(false);
+            tfUsername.setText("");
+            tfPassword.setText("");
             user.start();
         }
     }

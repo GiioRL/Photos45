@@ -6,9 +6,12 @@ import java.util.Calendar;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -20,6 +23,9 @@ public class LibraryController {
 
     @FXML
     private HBox albumHBox;
+
+    @FXML
+    private Button createTagButton;
 
     @FXML
     private Button createAlbumButon;
@@ -95,6 +101,8 @@ public class LibraryController {
 
     public void start() {
         albumHBox.getChildren().clear(); // maybe do something else
+        for (Album album: user.getAlbums())
+            album.createThumbnail();
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
         albumHBox.getChildren().addAll(thumbnails);
         tagDropdown.setItems(FXCollections.observableArrayList(libraryModel.getTypes(user)));
@@ -113,7 +121,9 @@ public class LibraryController {
 
     @FXML
     void deleteAlbum() {
-
+        user.getAlbums().remove(currentlySelected);
+        deselect();
+        start();
     }
 
     @FXML
@@ -126,7 +136,9 @@ public class LibraryController {
         Album album = libraryModel.tagSearch(tagDropdown.valueProperty().getValue(), valueDropdown.valueProperty().getValue(), user);
         if (album == null) {
             System.out.println("select value and tag!!");
-            //error message, "select value and tag"
+            Alert warning = new Alert(Alert.AlertType.WARNING, "Select a tag-value combination.");
+            warning.setHeaderText("Invalid Selection");
+            warning.showAndWait();
             return;
         }
         album.start(true);
@@ -138,7 +150,9 @@ public class LibraryController {
         LocalDate toLocalDate = toDate.valueProperty().getValue();
         if (fromLocalDate == null || toLocalDate == null) {
             System.out.println("select dates!!");
-            //error message, "select dates"
+            Alert warning = new Alert(Alert.AlertType.WARNING, "Choose a proper date range.");
+            warning.setHeaderText("Invalid Date Range");
+            warning.showAndWait();
             return;
         }
         if (fromLocalDate.compareTo(toLocalDate) > 0) {
@@ -163,7 +177,50 @@ public class LibraryController {
 
     @FXML
     void renameAlbum() {
-
+        TextInputDialog nameDialog = new TextInputDialog();
+        nameDialog.setContentText("Album name:");
+        nameDialog.showAndWait().ifPresent(newName -> {
+            if (newName.length() == 0) {
+                Alert warning = new Alert(AlertType.WARNING, "Enter a non-empty name.");
+                warning.setHeaderText("Invalid Name");
+                warning.showAndWait();
+                return;
+            }
+            for (Album album: user.getAlbums()) {
+                if (album.getName().equals(newName)) {
+                    Alert warning = new Alert(AlertType.WARNING, "Album with that name already exists.");
+                    warning.setHeaderText("Album Already Exists");
+                    warning.showAndWait();
+                    return;
+                }
+            }
+            currentlySelected.setName(newName);
+            currentlySelected.createThumbnail();
+            start();
+        });
     }
 
+    @FXML
+    void createTag() {
+        TextInputDialog tagDialog = new TextInputDialog();
+        tagDialog.setContentText("Tag name:");
+        tagDialog.showAndWait().ifPresent(newTagType -> {
+            if (newTagType.length() == 0) {
+                Alert warning = new Alert(AlertType.WARNING, "Enter a non-empty name.");
+                warning.setHeaderText("Invalid Name");
+                warning.showAndWait();
+                return;
+            }
+            for (Tag t: user.getTags()) {
+                if (t.getType().equals(newTagType)) {
+                    Alert warning = new Alert(AlertType.WARNING, "Tag already exists.");
+                    warning.setHeaderText("Tag Already Exists");
+                    warning.showAndWait();
+                    return;
+                }
+            }
+            user.getTags().add(new Tag(newTagType, null));
+            start();
+        });
+    }
 }
