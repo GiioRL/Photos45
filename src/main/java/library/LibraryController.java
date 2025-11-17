@@ -133,7 +133,9 @@ public class LibraryController {
         Album album = libraryModel.tagSearch(tagDropdown.valueProperty().getValue(), valueDropdown.valueProperty().getValue(), user);
         if (album == null) {
             System.out.println("select value and tag!!");
-            //error message, "select value and tag"
+            Alert warning = new Alert(Alert.AlertType.WARNING, "Select a tag-value combination.");
+            warning.setHeaderText("Invalid Selection");
+            warning.showAndWait();
             return;
         }
         album.start(true);
@@ -145,7 +147,9 @@ public class LibraryController {
         LocalDate toLocalDate = toDate.valueProperty().getValue();
         if (fromLocalDate == null || toLocalDate == null) {
             System.out.println("select dates!!");
-            //error message, "select dates"
+            Alert warning = new Alert(Alert.AlertType.WARNING, "Choose a proper date range.");
+            warning.setHeaderText("Invalid Date Range");
+            warning.showAndWait();
             return;
         }
         if (fromLocalDate.compareTo(toLocalDate) > 0) {
@@ -174,7 +178,7 @@ public class LibraryController {
         nameDialog.setContentText("Album name:");
         nameDialog.showAndWait().ifPresent(newName -> {
             if (newName.length() == 0) {
-                Alert warning = new Alert(AlertType.WARNING, "Please enter a non-empty name.");
+                Alert warning = new Alert(AlertType.WARNING, "Enter a non-empty name.");
                 warning.setHeaderText("Invalid Name");
                 warning.showAndWait();
                 return;
