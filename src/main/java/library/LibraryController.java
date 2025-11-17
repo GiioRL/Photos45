@@ -121,7 +121,7 @@ public class LibraryController {
 
     @FXML
     void deleteAlbum() {
-        user.getAlbums().remove(currentlySelected);
+        currentlySelected.delete();
         deselect();
         start();
     }

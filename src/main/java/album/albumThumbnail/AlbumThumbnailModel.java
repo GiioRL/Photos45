@@ -24,6 +24,9 @@ public class AlbumThumbnailModel {
     }
 
     public Image getImage(Album album) {
+        if (album.getPhotos().size() == 0) {
+            return new Image("/main/resources/imageNotFound.png");
+        }
         return album.getPhotos().get(0).getImage();
     }
 
@@ -32,6 +35,9 @@ public class AlbumThumbnailModel {
     }
 
     public String getDateRange(Album album) {
+        if (album.getPhotos().size() == 0) {
+            return "";
+        }
         ArrayList<Calendar> dates = new ArrayList<Calendar>();
         for (Photo photo: album.getPhotos()) {
             dates.add(photo.getDate());

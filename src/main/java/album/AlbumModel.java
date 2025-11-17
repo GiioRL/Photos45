@@ -58,9 +58,9 @@ public class AlbumModel implements Serializable{
     }
 
     public void back(Album album) {
-        if (album.getPhotos() == null) {
-            album.delete();
-        }
+        // if (album.getPhotos() == null) {
+        //     album.delete();
+        // }
         album.back();
     }
 
