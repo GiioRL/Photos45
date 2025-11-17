@@ -275,7 +275,7 @@ public class AlbumController {
 
     @FXML
     void displayPhoto(ActionEvent event) {
-
+        new ImageDialog(curSelected).showAndWait();
     }
 
     @FXML

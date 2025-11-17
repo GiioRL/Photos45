@@ -95,6 +95,8 @@ public class LibraryController {
 
     public void start() {
         albumHBox.getChildren().clear(); // maybe do something else
+        for (Album album: user.getAlbums())
+            album.createThumbnail();
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
         albumHBox.getChildren().addAll(thumbnails);
         tagDropdown.setItems(FXCollections.observableArrayList(libraryModel.getTypes(user)));
