@@ -52,6 +52,9 @@ public class AlbumController {
     private Button slideshowButon;
 
     @FXML
+    private Button quitButton;
+
+    @FXML
     private VBox butonBox;
 
     @FXML
@@ -376,5 +379,10 @@ public class AlbumController {
     @FXML
     void slideshow(ActionEvent event) {
         new SlidesDialog(album, curSelected).showAndWait();
+    }
+
+    @FXML
+    void quit(ActionEvent event) {
+        System.exit(0);
     }
 }

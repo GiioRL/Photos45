@@ -108,5 +108,8 @@ public class SlidesDialog extends Dialog<Object> {
         String header = curPhoto.getCaption().length() > 0 ? curPhoto.getCaption() : "(Uncaptioned)";
         header += " - " + curPhoto.getDateString();
         this.setHeaderText(header);
+
+        DialogPane pane = this.getDialogPane();
+        pane.getScene().getWindow().sizeToScene();
     }
 }
