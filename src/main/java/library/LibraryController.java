@@ -135,7 +135,6 @@ public class LibraryController {
     void tagSearch() {
         Album album = libraryModel.tagSearch(tagDropdown.valueProperty().getValue(), valueDropdown.valueProperty().getValue(), user);
         if (album == null) {
-            System.out.println("select value and tag!!");
             Alert warning = new Alert(Alert.AlertType.WARNING, "Select a tag-value combination.");
             warning.setHeaderText("Invalid Selection");
             warning.showAndWait();
@@ -149,7 +148,6 @@ public class LibraryController {
         LocalDate fromLocalDate = fromDate.valueProperty().getValue();
         LocalDate toLocalDate = toDate.valueProperty().getValue();
         if (fromLocalDate == null || toLocalDate == null) {
-            System.out.println("select dates!!");
             Alert warning = new Alert(Alert.AlertType.WARNING, "Choose a proper date range.");
             warning.setHeaderText("Invalid Date Range");
             warning.showAndWait();

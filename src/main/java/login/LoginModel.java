@@ -24,8 +24,6 @@ public class LoginModel {
 
     public User login(String username, String password) { //returns 1 if admin, 0 if other, -1 if unsuccessful
         User user = User.getUser(username, password);
-        if (user == null)
-            System.out.println("Login unsuccessful");
         return user;
     }
     

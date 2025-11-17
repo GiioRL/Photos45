@@ -83,9 +83,6 @@ public class LibraryModel {
                 if (photoTags.contains(tag)) {
                     for (Tag photoTag: photoTags) {
                         if (photoTag.tagEquals(tag)) {
-                            System.out.println(photoTag);
-                            System.out.println(tag);
-                            System.out.println("adding photo");
                             albumPhotos.add(photo);
                         }
                     }
