@@ -1,6 +1,8 @@
 package main.java.util;
 
-public class Tag {
+import java.io.Serializable;
+
+public class Tag implements Serializable{
 
     private String type;
     private String value;

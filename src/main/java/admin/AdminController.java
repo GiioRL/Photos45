@@ -82,6 +82,6 @@ public class AdminController {
 
     @FXML
     void quit() {
-        System.exit(0);
+        App.quit();
     }
 }

@@ -27,5 +27,7 @@
             <Insets bottom="5.0" left="5.0" />
          </padding>
       </HBox>
+      <Button layoutX="477.0" layoutY="367.0" mnemonicParsing="false" onAction="#reset" text="Reset Application" />
+      <Button layoutX="338.0" layoutY="367.0" mnemonicParsing="false" onAction="#restore" text="Reset Admin &amp; Stock" />
    </children>
 </AnchorPane>

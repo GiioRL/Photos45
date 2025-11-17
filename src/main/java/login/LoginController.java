@@ -45,7 +45,17 @@ public class LoginController {
 
     @FXML
     void quit() {
-        System.exit(0);
+        App.quit();
+    }
+
+    @FXML
+    void restore() {
+        User.restoreClass();
+    }
+
+    @FXML
+    void reset() {
+        User.resetClass();
     }
 
     public void start() {

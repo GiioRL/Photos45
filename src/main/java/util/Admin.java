@@ -11,7 +11,7 @@ import main.java.App;
 
 public class Admin extends User {
 
-    private Stage primaryStage;
+    private transient Stage primaryStage;
 
     public Admin() {
         username = "admin";
