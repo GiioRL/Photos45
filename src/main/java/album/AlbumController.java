@@ -323,9 +323,11 @@ public class AlbumController {
     @FXML
     void removePhoto(ActionEvent event) {
         album.getPhotos().remove(curSelected);
-        for (Tag t: curSelected.getTags())
-            if (!searchTagInAlbums(t))
-                removeUserTag(t);
+        if (curSelected.getTags() != null) {
+            for (Tag t: curSelected.getTags())
+                if (!searchTagInAlbums(t))
+                    removeUserTag(t);
+        }
         deselect();
         initScene();
     }
@@ -384,19 +386,26 @@ public class AlbumController {
 
     private boolean searchTagInAlbums(Tag searchTag) {
         boolean somePhotoHasTag = false;
-        for (Album a: album.getUser().getAlbums())
-            for (Photo p: a.getPhotos())
-                for (Tag t: p.getTags())
-                    if (t.equals(searchTag) && t.tagEquals(searchTag))
-                        somePhotoHasTag = true;
+        for (Album a: album.getUser().getAlbums()) {
+            for (Photo p: a.getPhotos()) {
+                if (p.getTags() != null) {
+                    for (Tag t: p.getTags()) {
+                        if (searchTag.equals(t) && searchTag.tagEquals(t))
+                            somePhotoHasTag = true;
+                    }
+                }
+            }
+        }
         return somePhotoHasTag;
     }
 
     private void removeUserTag(Tag oldTag) {
         ArrayList<Tag> userTags = album.getUser().getTags();
+        if (userTags == null)
+            return;
         for (int i = 0; i < userTags.size(); i++) {
             Tag t = userTags.get(i);
-            if (t.equals(oldTag) && t.tagEquals(oldTag)) {
+            if (oldTag.equals(t) && oldTag.tagEquals(t)) {
                 userTags.remove(i);
                 break;
             }
