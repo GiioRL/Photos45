@@ -6,9 +6,12 @@ import java.util.Calendar;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -115,7 +118,9 @@ public class LibraryController {
 
     @FXML
     void deleteAlbum() {
-
+        user.getAlbums().remove(currentlySelected);
+        deselect();
+        start();
     }
 
     @FXML
@@ -165,7 +170,27 @@ public class LibraryController {
 
     @FXML
     void renameAlbum() {
-
+        TextInputDialog nameDialog = new TextInputDialog();
+        nameDialog.setContentText("Album name:");
+        nameDialog.showAndWait().ifPresent(newName -> {
+            if (newName.length() == 0) {
+                Alert warning = new Alert(AlertType.WARNING, "Please enter a non-empty name.");
+                warning.setHeaderText("Invalid Name");
+                warning.showAndWait();
+                return;
+            }
+            for (Album album: user.getAlbums()) {
+                if (album.getName().equals(newName)) {
+                    Alert warning = new Alert(AlertType.WARNING, "Album with that name already exists.");
+                    warning.setHeaderText("Album Already Exists");
+                    warning.showAndWait();
+                    return;
+                }
+            }
+            currentlySelected.setName(newName);
+            currentlySelected.createThumbnail();
+            start();
+        });
     }
 
 }

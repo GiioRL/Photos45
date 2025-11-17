@@ -70,6 +70,10 @@ public class Album {
         return name;
     }
 
+    public void setName(String newName) {
+        name = newName;
+    }
+
     public User getUser() {
         return user;
     }
