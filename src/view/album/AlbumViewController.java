@@ -184,6 +184,7 @@ public class AlbumViewController {
     /**
      * Adds the current album to the user's library.
      */
+    
     @FXML
     void addToLibrary() {
         TextInputDialog nameDialog = new TextInputDialog();
@@ -256,16 +257,32 @@ public class AlbumViewController {
                 warning.showAndWait();
                 return;
             }
-            Tag newTag = new Tag(tagData.getType(), tagData.getValue());
+            boolean multiValue = true;
+            for (Tag t: album.getUser().getTags()) {
+                if (t.getType().equals(tagData.getType())) {
+                    multiValue = t.getMultiValue();
+                    break;
+                }
+            }
+            Tag newTag = new Tag(tagData.getType(), tagData.getValue(), multiValue);
             ArrayList<Tag> curTags = curSelected.getTags();
             if (curTags == null)
                 curTags = new ArrayList<Tag>();
             for (Tag tag: curTags) {
-                if (tag.equals(newTag) && tag.tagEquals(newTag)) {
-                    Alert warning = new Alert(Alert.AlertType.WARNING, "Photo already contains tag.");
-                    warning.setHeaderText("Tag Already Exists");
-                    warning.showAndWait();
-                    return;
+                if (tag.equals(newTag)) {
+                    // System.out.println(tag.getMultiValue());
+                    if (tag.tagEquals(newTag)) {
+                        Alert warning = new Alert(Alert.AlertType.WARNING, "Photo already contains tag.");
+                        warning.setHeaderText("Tag Already Exists");
+                        warning.showAndWait();
+                        return;
+                    }
+                    else if (!tag.getMultiValue()) {
+                        Alert warning = new Alert(Alert.AlertType.WARNING, "Photo cannot have more than one value for " + tag.getType() + " tag.");
+                        warning.setHeaderText("Cannot Have Multiple Tag Values");
+                        warning.showAndWait();
+                        return;
+                    }
                 }
             }
             curTags.add(newTag);

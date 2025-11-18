@@ -81,7 +81,7 @@ public class User implements Serializable {
         users.add(this);
 
         // Default tag categories for all users
-        tags.add(new Tag("Location", null));
+        tags.add(new Tag("Location", null, false));
         tags.add(new Tag("Person", null));
     }
 

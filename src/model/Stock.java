@@ -41,10 +41,10 @@ public class Stock extends User {
         password = "stock";
 
         // Predefined tags
-        tags.add(new Tag("Location", null)); 
-        tags.add(new Tag("Location", "Home"));
-        tags.add(new Tag("Location", "Rutgers University"));
-        tags.add(new Tag("Location", "Background"));
+        tags.add(new Tag("Location", null, false)); 
+        tags.add(new Tag("Location", "Home", false));
+        tags.add(new Tag("Location", "Rutgers University", false));
+        tags.add(new Tag("Location", "Background", false));
 
         tags.add(new Tag("Person", null));
         tags.add(new Tag("Person", "Rohit"));
@@ -64,39 +64,39 @@ public class Stock extends User {
 
         // Create sample photos with default tags
         photos.add(albumModel.createPhoto(resFolder + "Monk_with_Munk.jpg", "Monk with Munk", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Home"));
+            add(new Tag("Location", "Home", false));
             add(new Tag("Pet", "Monkey"));
         }}));
 
         photos.add(albumModel.createPhoto(resFolder + "Monkey_Fall.jpg", "Monkey Fall", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Home"));
+            add(new Tag("Location", "Home", false));
             add(new Tag("Pet", "Monkey"));
         }}));
 
         photos.add(albumModel.createPhoto(resFolder + "Pumpkin.jpg", "Pumpkin", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Home"));
+            add(new Tag("Location", "Home", false));
             add(new Tag("Pet", "Pumpkin"));
         }}));
 
         photos.add(albumModel.createPhoto(resFolder + "Skill_Issue.jpg", "Pool", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Rutgers University"));
+            add(new Tag("Location", "Rutgers University", false));
             add(new Tag("Person", "Rohit"));
         }}));
 
         photos.add(albumModel.createPhoto(resFolder + "Costa_Rica_Background.jpg", "Costa Rica", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Background"));
+            add(new Tag("Location", "Background", false));
         }}));
 
         photos.add(albumModel.createPhoto(resFolder + "Forest_Background.jpg", "Forest", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Background"));
+            add(new Tag("Location", "Background", false));
         }}));
 
         photos.add(albumModel.createPhoto(resFolder + "Mountain_Background.jpg", "Mountain", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Background"));
+            add(new Tag("Location", "Background", false));
         }}));
 
         photos.add(albumModel.createPhoto(resFolder + "Ocean_Background.jpg", "Ocean", new ArrayList<Tag>() {{
-            add(new Tag("Location", "Background"));
+            add(new Tag("Location", "Background", false));
         }}));
 
         // Add the stock album

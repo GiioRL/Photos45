@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import main.App;
 import controller.LibraryController;
 import model.*;
+import view.album.customDialogs.CreateTagDialog;
 
 /**
  * Controller class for the library view.
@@ -304,11 +305,12 @@ public class LibraryViewController {
     /**
      * Creates a new tag for the current user after validation.
      */
-    @FXML
+     @FXML
     void createTag() {
-        TextInputDialog tagDialog = new TextInputDialog();
-        tagDialog.setContentText("Tag name:");
-        tagDialog.showAndWait().ifPresent(newTagType -> {
+        CreateTagDialog tagDialog = new CreateTagDialog();
+        tagDialog.showAndWait().ifPresent(tagInfo -> {
+            String newTagType = tagInfo.getKey();
+            boolean multiValue = tagInfo.getValue();
             if (newTagType.length() == 0) {
                 Alert warning = new Alert(AlertType.WARNING, "Enter a non-empty name.");
                 warning.setHeaderText("Invalid Name");
@@ -323,7 +325,8 @@ public class LibraryViewController {
                     return;
                 }
             }
-            user.getTags().add(new Tag(newTagType, null));
+            Tag t = new Tag(newTagType, null, multiValue);
+            user.getTags().add(t);
             start();
         });
     }

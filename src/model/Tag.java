@@ -23,6 +23,9 @@ public class Tag implements Serializable {
     /** The specific tag value (may be null). */
     private String value;
 
+    /** Controls whether a tag can have multiple values or a single value */
+    private boolean multiValue;
+
     /**
      * Creates a new tag with the specified type and value.
      *
@@ -32,6 +35,19 @@ public class Tag implements Serializable {
     public Tag(String type, String value) {
         this.type = type;
         this.value = value;
+    }
+
+    /**
+     * Creates a new tag with the specified type and value.
+     *
+     * @param type  the tag category
+     * @param value the tag value (may be {@code null})
+     * @param multiValue the multivalue
+     */
+    public Tag(String type, String value, boolean multiValue) {
+        this.type = type;
+        this.value = value;
+        this.multiValue = multiValue;
     }
 
     /**
@@ -50,6 +66,16 @@ public class Tag implements Serializable {
      */
     public String getValue() {
         return value;
+    }
+
+
+    /**
+     * Returns the multivalue
+     * 
+     * @return the multivalue boolean
+     */
+    public boolean getMultiValue() {
+        return multiValue;
     }
 
     /**
