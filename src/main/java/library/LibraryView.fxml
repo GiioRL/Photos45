@@ -54,14 +54,14 @@
             <AnchorPane prefHeight="223.0" prefWidth="598.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="104.0" layoutX="10.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="285.0" />
-                  <Text layoutX="119.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tag Search">
+                  <Text layoutX="112.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tag Search">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <ComboBox fx:id="tagDropdown" layoutX="35.0" layoutY="51.0" prefWidth="150.0" promptText="Tag" />
-                  <ComboBox fx:id="valueDropdown" layoutX="35.0" layoutY="83.0" prefWidth="150.0" promptText="Value" />
-                  <Button fx:id="tagSearchButon" layoutX="216.0" layoutY="66.0" mnemonicParsing="false" onAction="#tagSearch" text="Search" />
+                  <ComboBox fx:id="tagDropdown1" layoutX="35.0" layoutY="51.0" prefHeight="25.0" prefWidth="74.0" promptText="Tag" />
+                  <ComboBox fx:id="valueDropdown1" layoutX="35.0" layoutY="83.0" prefHeight="25.0" prefWidth="74.0" promptText="Value" />
+                  <Button fx:id="tagSearchButon" layoutX="127.0" layoutY="83.0" mnemonicParsing="false" onAction="#tagSearch" text="Search" />
                   <HBox alignment="BOTTOM_LEFT" layoutY="138.0" prefHeight="34.0" prefWidth="211.0" spacing="10.0">
                      <children>
                         <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" text="Quit Application" />
@@ -80,6 +80,9 @@
                   <DatePicker fx:id="fromDate" layoutX="329.0" layoutY="51.0" />
                   <DatePicker fx:id="toDate" layoutX="329.0" layoutY="84.0" />
                   <Button fx:id="dateSearchButon" layoutX="520.0" layoutY="66.0" mnemonicParsing="false" onAction="#dateSearch" text="Search" />
+                  <ComboBox fx:id="conjunctionBox" layoutX="126.0" layoutY="51.0" prefHeight="25.0" prefWidth="54.0" promptText="Tag" />
+                  <ComboBox fx:id="tagDropdown2" layoutX="201.0" layoutY="51.0" prefHeight="25.0" prefWidth="74.0" promptText="Tag" />
+                  <ComboBox fx:id="valueDropdown2" layoutX="201.0" layoutY="83.0" prefHeight="25.0" prefWidth="74.0" promptText="Value" />
                </children>
             </AnchorPane>
          </children>

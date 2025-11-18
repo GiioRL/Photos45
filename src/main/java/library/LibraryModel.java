@@ -92,6 +92,50 @@ public class LibraryModel {
         return new Album(albumPhotos, "Unnamed album", user);
     }
 
+    public Album tagSearch(String type1, String value1, String conjunction, String type2, String value2, User user) {
+        Album album1 = tagSearch(type1, value1, user);
+        if (conjunction == null) {
+            return album1;
+        } else {
+            Album album2 = tagSearch(type2, value2, user);
+            ArrayList<Photo> album1Photos = album1.getPhotos();
+            ArrayList<Photo> album2Photos = album2.getPhotos();
+            ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
+            if (conjunction.equals("And")) {
+                for (Photo photo: album1Photos) {
+                    if (album2Photos.contains(photo)) {
+                        albumPhotos.add(photo);
+                    }
+                }
+                return trimDuplicates(new Album(albumPhotos, "Unnamed Album", user));
+            } else if (conjunction.equals("Or")) {
+                for (Photo photo: album2Photos) {
+                    album1Photos.add(photo);
+                }
+                return trimDuplicates(new Album(album1Photos, "Unnamed Album", user));
+            } else {
+                System.out.println("invalid conjunction");
+                return null;
+            }
+        }
+    }
+
+    private Album trimDuplicates(Album album) {
+        ArrayList<Photo> photos = album.getPhotos();
+        if (photos.size() <= 1) {
+            return album;
+        }
+        photos.sort(Comparator.comparing(Photo::getLocation));
+        ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
+        albumPhotos.add(photos.get(0));
+        for (int i = 1; i < photos.size(); i++) {
+            if (photos.get(i).getLocation().compareTo(photos.get(i-1).getLocation()) != 0) {
+                albumPhotos.add(photos.get(i));
+            }
+        }
+        return new Album(albumPhotos, album.getName(), album.getUser());
+    }
+
     public Album dateSearch(LocalDate from, LocalDate to, User user) {
         if (from == null || to == null) {
             return null;

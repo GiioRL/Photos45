@@ -49,10 +49,19 @@ public class LibraryController {
     private Button tagSearchButon;
 
     @FXML
-    private ComboBox<String> tagDropdown;
+    private ComboBox<String> tagDropdown1;
 
     @FXML
-    private ComboBox<String> valueDropdown;
+    private ComboBox<String> valueDropdown1;
+
+    @FXML
+    private ComboBox<String> conjunctionBox;
+
+    @FXML
+    private ComboBox<String> tagDropdown2;
+    
+    @FXML
+    private ComboBox<String> valueDropdown2;
 
     @FXML
     private DatePicker fromDate;
@@ -105,12 +114,23 @@ public class LibraryController {
             album.createThumbnail();
         ArrayList<Node> thumbnails = libraryModel.getThumbnails(user);
         albumHBox.getChildren().addAll(thumbnails);
-        tagDropdown.setItems(FXCollections.observableArrayList(libraryModel.getTypes(user)));
-        tagDropdown.getSelectionModel().clearSelection();
-        tagDropdown.valueProperty().addListener((obs, oldType, newType) -> {
-            valueDropdown.setItems(FXCollections.observableArrayList(libraryModel.getValues(user, newType)));
-            valueDropdown.getSelectionModel().clearSelection();
+        tagDropdown1.setItems(FXCollections.observableArrayList(libraryModel.getTypes(user)));
+        tagDropdown1.getSelectionModel().clearSelection();
+        tagDropdown1.valueProperty().addListener((obs, oldType, newType) -> {
+            valueDropdown1.setItems(FXCollections.observableArrayList(libraryModel.getValues(user, newType)));
+            valueDropdown1.getSelectionModel().clearSelection();
         });
+        tagDropdown2.setItems(FXCollections.observableArrayList(libraryModel.getTypes(user)));
+        tagDropdown2.getSelectionModel().clearSelection();
+        tagDropdown2.valueProperty().addListener((obs, oldType, newType) -> {
+            valueDropdown2.setItems(FXCollections.observableArrayList(libraryModel.getValues(user, newType)));
+            valueDropdown2.getSelectionModel().clearSelection();
+        });
+        ArrayList<String> conjunctions = new ArrayList<String>() {{
+            add("And");
+            add("Or");
+        }};
+        conjunctionBox.setItems(FXCollections.observableArrayList(conjunctions));
         deselect();
     }
 
@@ -133,9 +153,10 @@ public class LibraryController {
 
     @FXML
     void tagSearch() {
-        Album album = libraryModel.tagSearch(tagDropdown.valueProperty().getValue(), valueDropdown.valueProperty().getValue(), user);
+        Album album = libraryModel.tagSearch(tagDropdown1.valueProperty().getValue(), valueDropdown1.valueProperty().getValue(),
+        conjunctionBox.valueProperty().getValue(), tagDropdown2.valueProperty().getValue(), valueDropdown2.valueProperty().getValue(), user);
         if (album == null) {
-            Alert warning = new Alert(Alert.AlertType.WARNING, "Select a tag-value combination.");
+            Alert warning = new Alert(Alert.AlertType.WARNING, "Select a proper tag-value combination.");
             warning.setHeaderText("Invalid Selection");
             warning.showAndWait();
             return;

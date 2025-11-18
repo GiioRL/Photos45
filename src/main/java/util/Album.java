@@ -38,10 +38,6 @@ public class Album implements Serializable {
     }
 
     public void createThumbnail() {
-        // if (photos.size() == 0) {
-        //     delete();
-        //     return;
-        // }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../album/albumThumbnail/albumThumbnailView.fxml"));
             thumbnail = loader.load();
