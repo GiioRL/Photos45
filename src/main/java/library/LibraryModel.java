@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.HashSet;
 
 import javafx.scene.Node;
 
@@ -74,7 +75,7 @@ public class LibraryModel {
         if (type == null || value == null) {
             return null;
         }
-        ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
+        HashSet<Photo> albumPhotos = new HashSet<Photo>();
         Tag tag = new Tag(type, value);
         // ArrayList<Photo> photos = user.getPhotos();
         ArrayList<Photo> photos = new ArrayList<>();
@@ -95,14 +96,14 @@ public class LibraryModel {
                 }
             }
         }
-        return new Album(albumPhotos, "Unnamed album", user);
+        return new Album(new ArrayList<Photo>(albumPhotos), "Unnamed album", user);
     }
 
     public Album dateSearch(LocalDate from, LocalDate to, User user) {
         if (from == null || to == null) {
             return null;
         }
-        ArrayList<Photo> albumPhotos = new ArrayList<Photo>();
+        HashSet<Photo> albumPhotos = new HashSet<Photo>();
         Calendar fromCalendar = Calendar.getInstance();
         fromCalendar.set(from.getYear(), from.getMonthValue()-1, from.getDayOfMonth()); // set to beginning of day
         Calendar toCalendar = Calendar.getInstance();
@@ -121,6 +122,6 @@ public class LibraryModel {
         for (int i = photoCopy.indexOf(fromDummy)+1; i < photoCopy.indexOf(toDummy); i++) {
             albumPhotos.add(photoCopy.get(i));
         }
-        return new Album(albumPhotos, "Unnamed Album", user);
+        return new Album(new ArrayList<Photo>(albumPhotos), "Unnamed Album", user);
     }
 }
