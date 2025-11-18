@@ -28,15 +28,13 @@ public class Stock extends User {
 
     /**
      * Constructs the stock user, initializing its tags and preloaded photos.
-     * <p>
      * The constructor:
      * <ul>
-     *   <li>Sets username & password to {@code "stock"}.</li>
+     *   <li>Sets username and password to {@code "stock"}.</li>
      *   <li>Initializes a preset list of commonly used tags.</li>
      *   <li>Loads several sample photos from the resources folder.</li>
      *   <li>Puts them into a single "Stock" album.</li>
      * </ul>
-     * </p>
      */
     public Stock() {
         username = "stock";

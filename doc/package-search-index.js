@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"controller"},{"l":"controller.album"},{"l":"main"},{"l":"model"},{"l":"view.admin"},{"l":"view.album"},{"l":"view.album.albumThumbnail"},{"l":"view.album.customDialogs"},{"l":"view.album.photoBox"},{"l":"view.album.photoThumbnail"},{"l":"view.library"},{"l":"view.login"}];updateSearchResults();

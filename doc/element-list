@@ -1,0 +1,12 @@
+controller
+controller.album
+main
+model
+view.admin
+view.album
+view.album.albumThumbnail
+view.album.customDialogs
+view.album.photoBox
+view.album.photoThumbnail
+view.library
+view.login
