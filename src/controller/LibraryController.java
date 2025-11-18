@@ -147,14 +147,14 @@ public class LibraryController {
         }
         HashSet<Photo> albumPhotos = new HashSet<Photo>();
         Calendar fromCalendar = Calendar.getInstance();
-        fromCalendar.set(from.getYear(), from.getMonthValue()-1, from.getDayOfMonth()); // set to beginning of day
+        fromCalendar.set(from.getYear(), from.getMonthValue()-1, from.getDayOfMonth(), fromCalendar.getMinimum(Calendar.HOUR_OF_DAY), fromCalendar.getMinimum(Calendar.MINUTE), fromCalendar.getMinimum(Calendar.SECOND)); // set to beginning of day
         Calendar toCalendar = Calendar.getInstance();
-        toCalendar.set(to.getYear(), to.getMonthValue()-1, to.getDayOfMonth()); // set to end of day
+        toCalendar.set(to.getYear(), to.getMonthValue()-1, to.getDayOfMonth(), fromCalendar.getMaximum(Calendar.HOUR_OF_DAY), fromCalendar.getMaximum(Calendar.MINUTE), fromCalendar.getMaximum(Calendar.SECOND)); // set to end of day
         // ArrayList<Photo> photos = user.getPhotos();
         ArrayList<Photo> photos = new ArrayList<>();
         for (Album album: user.getAlbums())
             photos.addAll(album.getPhotos());
-        String resFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+        String resFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "resources" + File.separator;
         Photo fromDummy = albumModel.createPhoto(resFolder + "dummyPhoto1.jpg", "fromDummy", null, fromCalendar.getTimeInMillis());
         Photo toDummy = albumModel.createPhoto(resFolder + "dummyPhoto2.jpg", "toDummy", null, toCalendar.getTimeInMillis());
         ArrayList<Photo> photoCopy = (ArrayList<Photo>)photos.clone();
