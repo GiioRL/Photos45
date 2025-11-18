@@ -8,16 +8,13 @@ import java.util.Calendar;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
-// import main.java.util.*;
-import model.Album;
-import model.Photo;
-import model.Tag;
+import model.*;
 import view.album.AlbumViewController;
 
 public class AlbumController implements Serializable{
 
     static AlbumController instance;
-    private transient AlbumViewController ac;
+    private transient AlbumViewController avc;
 
     private AlbumController() {}
 
@@ -68,8 +65,8 @@ public class AlbumController implements Serializable{
         album.back();
     }
 
-    public void injectAlbumController(AlbumViewController ac) {
-        this.ac = ac;
+    public void injectAlbumController(AlbumViewController avc) {
+        this.avc = avc;
     }
 
     public Node getPhotoBox() {
@@ -80,7 +77,7 @@ public class AlbumController implements Serializable{
             if (photoBox == null) {
                 System.out.println("why null???");
             }
-            ac.injectPB(loader.getController());
+            avc.injectPB(loader.getController());
         } catch (Exception e) {
             System.out.println("o no bad thumbnail in AM");
             e.printStackTrace();

@@ -10,7 +10,7 @@ import model.Photo;
 public class AlbumThumbnailController {
 
     private static AlbumThumbnailController instance;
-    private static AlbumController albumModel = AlbumController.getInstance();
+    private static AlbumController ac = AlbumController.getInstance();
     
     private AlbumThumbnailController() {}
 
@@ -42,7 +42,7 @@ public class AlbumThumbnailController {
         }
         dates.sort(null);
         
-        return albumModel.convertDatetoString(dates.get(0)) + " - " + albumModel.convertDatetoString(dates.get(dates.size()-1));
+        return ac.convertDatetoString(dates.get(0)) + " - " + ac.convertDatetoString(dates.get(dates.size()-1));
     }
 
     public String getNumPhotos(Album album) {

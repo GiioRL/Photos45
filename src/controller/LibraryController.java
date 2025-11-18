@@ -9,14 +9,13 @@ import java.util.HashSet;
 
 import controller.album.AlbumController;
 import javafx.scene.Node;
-// import main.java.util.*;
 import model.*;
 
 public class LibraryController {
 
     private ArrayList<Tag> tags;
     private static LibraryController instance;
-    private static AlbumController albumModel = AlbumController.getInstance();
+    private static AlbumController ac = AlbumController.getInstance();
 
     private LibraryController() {}
 
@@ -155,8 +154,8 @@ public class LibraryController {
         for (Album album: user.getAlbums())
             photos.addAll(album.getPhotos());
         String resFolder = System.getProperty("user.dir") + File.separator + "src" + File.separator + "resources" + File.separator;
-        Photo fromDummy = albumModel.createPhoto(resFolder + "dummyPhoto1.jpg", "fromDummy", null, fromCalendar.getTimeInMillis());
-        Photo toDummy = albumModel.createPhoto(resFolder + "dummyPhoto2.jpg", "toDummy", null, toCalendar.getTimeInMillis());
+        Photo fromDummy = ac.createPhoto(resFolder + "dummyPhoto1.jpg", "fromDummy", null, fromCalendar.getTimeInMillis());
+        Photo toDummy = ac.createPhoto(resFolder + "dummyPhoto2.jpg", "toDummy", null, toCalendar.getTimeInMillis());
         ArrayList<Photo> photoCopy = (ArrayList<Photo>)photos.clone();
         photoCopy.add(fromDummy);
         photoCopy.add(toDummy);
