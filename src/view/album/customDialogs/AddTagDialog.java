@@ -1,36 +1,48 @@
 package view.album.customDialogs;
 
 import java.util.Collection;
-
 import javafx.geometry.Pos;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import model.Tag;
 
+/**
+ * Custom dialog for adding a tag to a photo or album.
+ * <p>
+ * Displays a ComboBox for selecting the tag type (pre-populated from existing tags)
+ * and a TextField for entering the tag value. Returns a {@link TagData} object
+ * containing the user's input when OK is pressed.
+ */
 public class AddTagDialog extends Dialog<AddTagDialog.TagData> {
     
+    /** GridPane layout for arranging labels and input controls. */
     private final GridPane grid;
-    private final Label typeLabel, valueLabel;
+
+    /** Label for the tag type field. */
+    private final Label typeLabel;
+
+    /** Label for the tag value field. */
+    private final Label valueLabel;
+
+    /** ComboBox to select the tag type. */
     private final ComboBox<String> typeBox;
+
+    /** TextField to enter the tag value. */
     private final TextField valueField;
 
+    /**
+     * Constructs a new AddTagDialog.
+     *
+     * @param tags A collection of existing {@link Tag} objects. Their types are
+     *             added to the ComboBox to allow selection.
+     */
     public AddTagDialog(Collection<Tag> tags) {
         super();
         DialogPane pane = this.getDialogPane();
 
-        // this.textField1 = new TextField("");
-        // this.textField1.setMaxWidth(Double.MAX_VALUE);
-        // GridPane.setHgrow(this.textField1, Priority.ALWAYS);
-        // GridPane.setFillWidth(this.textField1, true);
-        this.typeBox = new ComboBox<String>();
+        // Initialize ComboBox for tag types
+        this.typeBox = new ComboBox<>();
         this.typeBox.setMinWidth(150.0);
         if (pane != null) {
             for (Tag t: tags)
@@ -41,19 +53,20 @@ public class AddTagDialog extends Dialog<AddTagDialog.TagData> {
         GridPane.setHgrow(this.typeBox, Priority.ALWAYS);
         GridPane.setFillWidth(this.typeBox, true);
 
+        // Initialize TextField for tag value
         this.valueField = new TextField("");
         this.valueField.setMaxWidth(Double.MAX_VALUE);
         GridPane.setHgrow(this.valueField, Priority.ALWAYS);
         GridPane.setFillWidth(this.valueField, true);
 
+        // Initialize labels
         this.typeLabel = createContentLabel("Tag type:");
         this.typeLabel.setPrefWidth(-1.0);
-        // this.label1.textProperty().bind(var2.contentTextProperty());
 
         this.valueLabel = createContentLabel("Tag value:");
         this.valueLabel.setPrefWidth(-1.0);
-        // this.label2.textProperty().bind(var2.contentTextProperty());
 
+        // Initialize grid layout
         this.grid = new GridPane();
         this.grid.setHgap(10.0);
         this.grid.setMaxWidth(Double.MAX_VALUE);
@@ -62,19 +75,23 @@ public class AddTagDialog extends Dialog<AddTagDialog.TagData> {
             this.updateGrid();
         });
 
-        // this.setTitle(ControlResources.getString("Dialog.confirm.title"));
-        // var2.setHeaderText(ControlResources.getString("Dialog.confirm.header"));
         this.setHeaderText("Add Tag");
         pane.getStyleClass().add("text-input-dialog");
-        pane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
+        pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         this.updateGrid();
 
+        // Convert dialog result to TagData
         this.setResultConverter((buttonType) -> {
             ButtonBar.ButtonData buttonData = buttonType == null ? null : buttonType.getButtonData();
-            return buttonData == ButtonData.OK_DONE ? new TagData(typeBox.getSelectionModel().getSelectedItem(), valueField.getText()) : null;
+            return buttonData == ButtonBar.ButtonData.OK_DONE 
+                    ? new TagData(typeBox.getSelectionModel().getSelectedItem(), valueField.getText()) 
+                    : null;
         });
     }
 
+    /**
+     * Updates the grid layout with the labels and input fields.
+     */
     private void updateGrid() {
         this.grid.getChildren().clear();
         this.grid.add(this.typeLabel, 0, 0);
@@ -84,26 +101,51 @@ public class AddTagDialog extends Dialog<AddTagDialog.TagData> {
         this.getDialogPane().setContent(this.grid);
     }
 
+    /**
+     * Creates a label for use in the dialog content.
+     *
+     * @param label The text of the label.
+     * @return A new {@link Label} instance.
+     */
     private Label createContentLabel(String label) {
-        // Label var1 = new Label(var0);
-        // var1.setMaxWidth(Double.MAX_VALUE);
-        // var1.setMaxHeight(Double.MAX_VALUE);
-        // var1.getStyleClass().add("content");
-        // var1.setWrapText(true);
-        // var1.setPrefWidth(360.0);
-        // return var1;
         return new Label(label);
     }
 
+    /**
+     * Simple data holder for a tag type and value.
+     * Returned by the dialog when the user confirms input.
+     */
     public class TagData {
-        private String type, value;
 
+        /** The type of the tag. */
+        private String type;
+
+        /** The value of the tag. */
+        private String value;
+
+        /**
+         * Constructs a new TagData object.
+         *
+         * @param type  The tag type.
+         * @param value The tag value.
+         */
         public TagData(String type, String value) {
             this.type = type;
             this.value = value;
         }
 
+        /**
+         * Returns the tag type.
+         *
+         * @return the tag type.
+         */
         public String getType() { return type; }
+
+        /**
+         * Returns the tag value.
+         *
+         * @return the tag value.
+         */
         public String getValue() { return value; }
     }
 }

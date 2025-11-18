@@ -1,48 +1,53 @@
 package view.album.customDialogs;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.text.Text;
-import javafx.stage.Window;
+import javafx.scene.image.ImageView;
 import model.Album;
 import model.Photo;
-import model.Tag;
 
+/**
+ * A dialog that displays photos in an {@link Album} as a slideshow.
+ * <p>
+ * Users can navigate between photos using the left and right buttons.
+ * The dialog header shows the photo's caption (or "(Uncaptioned)") and its date.
+ * </p>
+ */
 public class SlidesDialog extends Dialog<Object> {
-    
+
+    /** ImageView displaying the current photo. */
     @FXML
     private ImageView imageView;
 
+    /** Button to navigate to the previous photo. */
     @FXML
     private Button leftButton;
 
+    /** Button to navigate to the next photo. */
     @FXML
     private Button rightButton;
 
+    /** The album containing the photos. */
     private Album album;
+
+    /** The currently displayed photo. */
     private Photo curPhoto;
+
+    /** Index of the currently displayed photo in the album. */
     private int curIndex;
 
+    /**
+     * Creates a SlidesDialog for an album.
+     *
+     * @param album The album containing photos to display.
+     * @param curSelected The photo to display first. If null, the first photo in the album is used.
+     */
     public SlidesDialog(Album album, Photo curSelected) {
         super();
         try {
@@ -52,15 +57,14 @@ public class SlidesDialog extends Dialog<Object> {
             DialogPane pane = loader.load();
 
             this.album = album;
+
             if (curSelected != null) {
                 this.curPhoto = curSelected;
                 this.curIndex = album.getPhotos().indexOf(curPhoto);
-            }
-            else if (album.getPhotos().size() > 0) {
+            } else if (!album.getPhotos().isEmpty()) {
                 this.curPhoto = album.getPhotos().get(0);
                 this.curIndex = 0;
-            }
-            else {
+            } else {
                 curSelected = null;
                 this.curIndex = -1;
             }
@@ -93,17 +97,20 @@ public class SlidesDialog extends Dialog<Object> {
                 setupImage();
             });
 
-            this.setResultConverter((buttonType) -> {
-                return null;
-            });
+            this.setResultConverter((buttonType) -> null);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Updates the image view and header to reflect the currently selected photo.
+     */
     private void setupImage() {
         if (curPhoto == null)
             return;
+
         this.imageView.setImage(curPhoto.getImage());
         String header = curPhoto.getCaption().length() > 0 ? curPhoto.getCaption() : "(Uncaptioned)";
         header += " - " + curPhoto.getDateString();

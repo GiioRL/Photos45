@@ -21,15 +21,15 @@ public class PhotoThumbnailViewController {
 
     private static PhotoThumbnailController thumbnailModel = PhotoThumbnailController.getInstance();
     private Photo photo;
-    private AlbumViewController ac;
+    private AlbumViewController avc;
 
     public void injectPhoto(Photo photo) {
         this.photo = photo;
         initScene();
     }
 
-    public void injectAlbumController(AlbumViewController ac) {
-        this.ac = ac;
+    public void injectAlbumController(AlbumViewController avc) {
+        this.avc = avc;
     }
 
     private void initScene() {
@@ -39,7 +39,7 @@ public class PhotoThumbnailViewController {
 
     @FXML
     void onClick() {
-        ac.select(photo);        
+        avc.select(photo);        
     }
 
     public void select() {
@@ -51,6 +51,6 @@ public class PhotoThumbnailViewController {
     }
 
     public AlbumViewController getAC() {
-        return ac;
+        return avc;
     }
 }

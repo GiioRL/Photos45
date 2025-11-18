@@ -1,12 +1,9 @@
 package view.album.customDialogs;
 
-import java.util.Collection;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
@@ -14,15 +11,38 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import model.Tag;
 
+/**
+ * A dialog for entering user credentials (username and password).
+ * <p>
+ * Provides two fields for the user to input a username and a password.
+ * Returns a {@link CredData} object when OK is pressed, or null if cancelled.
+ * </p>
+ */
 public class UserCredentialsDialog extends Dialog<UserCredentialsDialog.CredData> {
-    
+
+    /** Grid layout holding the labels and input fields. */
     private final GridPane grid;
-    private final Label usernameLabel, passwordLabel;
+
+    /** Label for the username field. */
+    private final Label usernameLabel;
+
+    /** Label for the password field. */
+    private final Label passwordLabel;
+
+    /** Text field for entering the username. */
     private final TextField usernameField;
+
+    /** Password field for entering the password. */
     private final PasswordField passwordField;
 
+    /**
+     * Creates a new dialog for entering user credentials.
+     * <p>
+     * The dialog contains a username text field and a password field,
+     * with OK and Cancel buttons.
+     * </p>
+     */
     public UserCredentialsDialog() {
         super();
         DialogPane pane = this.getDialogPane();
@@ -62,6 +82,9 @@ public class UserCredentialsDialog extends Dialog<UserCredentialsDialog.CredData
         });
     }
 
+    /**
+     * Updates the dialog grid layout with the current labels and fields.
+     */
     private void updateGrid() {
         this.grid.getChildren().clear();
         this.grid.add(this.usernameLabel, 0, 0);
@@ -71,19 +94,45 @@ public class UserCredentialsDialog extends Dialog<UserCredentialsDialog.CredData
         this.getDialogPane().setContent(this.grid);
     }
 
+    /**
+     * Creates a label for use in the dialog.
+     *
+     * @param label The text for the label.
+     * @return A new Label with the specified text.
+     */
     private Label createContentLabel(String label) {
         return new Label(label);
     }
 
+    /**
+     * Data class representing user credentials entered in the dialog.
+     */
     public class CredData {
         private String username, password;
 
+        /**
+         * Constructs a new credentials object.
+         *
+         * @param username The entered username.
+         * @param password The entered password.
+         */
         public CredData(String username, String password) {
             this.username = username;
             this.password = password;
         }
 
+        /**
+         * Returns the entered username.
+         *
+         * @return Username as a string.
+         */
         public String getUsername() { return username; }
+
+        /**
+         * Returns the entered password.
+         *
+         * @return Password as a string.
+         */
         public String getPassword() { return password; }
     }
 }

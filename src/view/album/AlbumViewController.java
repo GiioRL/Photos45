@@ -20,12 +20,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.App;
 import model.*;
-// import model.Album;
-// import model.Photo;
-// import model.Tag;
 import view.album.customDialogs.*;
 import view.album.photoBox.PhotoBoxController;
 
+/**
+ * Controller class for the Album view in the application.
+ * Handles the user interface and interactions within an Album,
+ * including adding/removing photos, editing captions, managing tags,
+ * copying/moving photos between albums, and displaying slideshows.
+ */
 public class AlbumViewController {
 
     @FXML
@@ -68,54 +71,51 @@ public class AlbumViewController {
     private VBox photoVBox;
     
     private static Album album;
-    private static AlbumController albumModel = AlbumController.getInstance();
+    private static AlbumController ac = AlbumController.getInstance();
     private ArrayList<Node> photoBoxes = new ArrayList<Node>();
     private ArrayList<PhotoBoxController> pbControllers = new ArrayList<PhotoBoxController>();
     private Photo curSelected = null;
 
+    /**
+     * Injects an Album into this controller and initializes the scene.
+     * @param album The album to display
+     */
     public void injectAlbum(Album album) {
         this.album = album;
         initScene(false);
     }
 
+    /**
+     * Injects an Album and optionally adds a library button.
+     * @param album The album to display
+     * @param bool Whether to show the "Add to Library" button
+     */
     public void injectAlbum(Album album, boolean bool) {
         this.album = album;
         initScene(bool);
     }
 
+     /**
+     * Initializes the album scene with photo thumbnails.
+     */
     private void initScene() {
-        ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
-        int num = thumbnails.size();
-        albumModel.injectAlbumController(this);
-        photoVBox.getChildren().clear(); // there could be better ways..
-        photoBoxes.clear();
-        pbControllers.clear();
-
-        for (int i = 0; i < (num+2)/3; i++) {
-            photoBoxes.add(albumModel.getPhotoBox());
-            Node[] photos = new Node[3];
-            for (int j = 0; j < 3; j++) {
-                if (3*i+j >= num) {
-                    photos[j] = null;
-                } else {
-                    photos[j] = thumbnails.get(3*i + j);
-                }
-            }
-            pbControllers.get(i).init(photos);
-        }
-        photoVBox.getChildren().addAll(photoBoxes);
+        initScene(false);
     }
 
+    /**
+     * Initializes the album scene with photo thumbnails.
+     * @param addLibraryButton Whether to display "Add to Library" button
+     */
     private void initScene(boolean bool) {
-        ArrayList<Node> thumbnails = albumModel.getThumbnails(album);
+        ArrayList<Node> thumbnails = ac.getThumbnails(album);
         int num = thumbnails.size();
-        albumModel.injectAlbumController(this);
+        ac.injectAlbumController(this);
         photoVBox.getChildren().clear(); // there could be better ways..
         photoBoxes.clear();
         pbControllers.clear();
 
         for (int i = 0; i < (num+2)/3; i++) {
-            photoBoxes.add(albumModel.getPhotoBox());
+            photoBoxes.add(ac.getPhotoBox());
             Node[] photos = new Node[3];
             for (int j = 0; j < 3; j++) {
                 if (3*i+j >= num) {
@@ -135,10 +135,18 @@ public class AlbumViewController {
         }
     }
 
+    /**
+     * Registers a PhotoBoxController with this controller.
+     * @param pb The PhotoBoxController to register
+     */
     public void injectPB(PhotoBoxController pb) {
         pbControllers.add(pb);
     }
 
+    /**
+     * Selects a photo, highlighting it and enabling relevant buttons.
+     * @param photo The photo to select
+     */
     public void select(Photo photo) {
         if (curSelected == null || !curSelected.equals(photo)) {
             deselect();
@@ -156,6 +164,9 @@ public class AlbumViewController {
             deselect();
     }
 
+     /**
+     * Deselects the current photo, disabling action buttons.
+     */
     private void deselect() {
         if (curSelected != null) {
             curSelected.deselect();
@@ -170,6 +181,9 @@ public class AlbumViewController {
         curSelected = null;
     }
 
+    /**
+     * Adds the current album to the user's library.
+     */
     @FXML
     void addToLibrary() {
         TextInputDialog nameDialog = new TextInputDialog();
@@ -195,6 +209,10 @@ public class AlbumViewController {
         });
     }
 
+    /**
+     * Opens a file chooser to add one or more photos to the album.
+     * @param event The action event
+     */
     @FXML
     void addPhoto(ActionEvent event) {
         Stage primaryStage = App.getStage();
@@ -210,7 +228,7 @@ public class AlbumViewController {
         
         for (File photoFile: photoFiles) {
             String location = photoFile.getAbsolutePath();
-            Photo newPhoto = albumModel.createPhoto(location);
+            Photo newPhoto = ac.createPhoto(location);
             if (!album.getPhotos().contains(newPhoto)) {
                 newPhoto.getPhotoThumbnailController().injectAlbumController(this);
                 album.getPhotos().add(newPhoto);
@@ -224,6 +242,10 @@ public class AlbumViewController {
         }
     }
 
+     /**
+     * Adds a tag to the currently selected photo.
+     * @param event The action event
+     */
     @FXML
     void addTag(ActionEvent event) {
         AddTagDialog locationDialog = new AddTagDialog(album.getUser().getTags());
@@ -260,12 +282,24 @@ public class AlbumViewController {
         });
     }
 
+    /**
+ * Returns to the previous view in the album navigation.
+ * Deselects the currently selected photo before navigating back.
+ *
+ * @param event The action event triggered by the back button.
+ */
     @FXML
     void back(ActionEvent event) {
         deselect();
-        albumModel.back(album);
+        ac.back(album);
     }
 
+    /**
+ * Prompts the user to enter a caption for the currently selected photo.
+ * Updates the photo's caption and refreshes the view.
+ *
+ * @param event The action event triggered by the caption photo button.
+ */
     @FXML
     void captionPhoto(ActionEvent event) {
         TextInputDialog captionDialog = new TextInputDialog();
@@ -278,6 +312,12 @@ public class AlbumViewController {
         });
     }
 
+    /**
+ * Copies the currently selected photo to another album chosen by the user.
+ * Displays an information or warning alert based on whether the copy succeeds.
+ *
+ * @param event The action event triggered by the copy button.
+ */
     @FXML
     void copy(ActionEvent event) {
         ChoiceDialog<String> albumDialog = new ChoiceDialog<String>();
@@ -308,11 +348,22 @@ public class AlbumViewController {
         });
     }
 
+    /**
+ * Displays the currently selected photo in a dialog window.
+ *
+ * @param event The action event triggered by the display photo button.
+ */
     @FXML
     void displayPhoto(ActionEvent event) {
         new ImageDialog(curSelected).showAndWait();
     }
 
+    /**
+ * Moves the currently selected photo to another album chosen by the user.
+ * Updates both the source and destination albums and provides appropriate alerts.
+ *
+ * @param event The action event triggered by the move button.
+ */
     @FXML
     void move(ActionEvent event) {
         ChoiceDialog<String> albumDialog = new ChoiceDialog<String>();
@@ -346,6 +397,12 @@ public class AlbumViewController {
         });
     }
 
+    /**
+ * Removes the currently selected photo from the album.
+ * Also removes any tags from the user’s global tag list that no longer exist in any photo.
+ *
+ * @param event The action event triggered by the remove photo button.
+ */
     @FXML
     void removePhoto(ActionEvent event) {
         album.getPhotos().remove(curSelected);
@@ -358,6 +415,12 @@ public class AlbumViewController {
         initScene();
     }
 
+    /**
+ * Removes a tag from the currently selected photo.
+ * Prompts the user to select a tag to remove and updates the user's global tag list if necessary.
+ *
+ * @param event The action event triggered by the remove tag button.
+ */
     @FXML
     void removeTag(ActionEvent event) {
         ArrayList<Tag> curTags = curSelected.getTags();
@@ -394,17 +457,30 @@ public class AlbumViewController {
         });
     }
 
+    /**
+ * Starts a slideshow of the photos in the current album, beginning with the currently selected photo.
+ *
+ * @param event The action event triggered by the slideshow button.
+ */
     @FXML
     void slideshow(ActionEvent event) {
         new SlidesDialog(album, curSelected).showAndWait();
     }
 
+    /**
+ * Logs out the current user and returns to the login scene.
+ */
     @FXML
     void logout() {
         Stage primaryStage = App.getStage();
         primaryStage.setScene(App.getLoginScene());
     }
 
+    /**
+ * Exits the application.
+ *
+ * @param event The action event triggered by the quit button.
+ */
     @FXML
     void quit(ActionEvent event) {
         App.quit();

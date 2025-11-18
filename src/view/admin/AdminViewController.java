@@ -1,7 +1,6 @@
 package view.admin;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.text.Text;
@@ -12,6 +11,11 @@ import view.album.customDialogs.UserCredentialsDialog;
 
 import controller.AdminController;
 
+/**
+ * Controller class for the Admin view in the application.
+ * Handles UI actions related to adding, deleting, and listing users,
+ * as well as logging out or quitting the application.
+ */
 public class AdminViewController {
 
     @FXML
@@ -28,12 +32,9 @@ public class AdminViewController {
 
     private static AdminController ac = AdminController.getInstance();
 
-    // @FXML
-    // private TextField tfPassword;
-
-    // @FXML
-    // private TextField tfUsername;
-
+    /**
+     * Displays a list of all registered users in the admin display text area.
+     */
     @FXML
     void listUsers() {
         String list = "Users:\n";
@@ -42,92 +43,46 @@ public class AdminViewController {
         display.setText(list);
     }
 
+    /**
+     * Opens a dialog to add a new user. 
+     * If valid credentials are provided, the user is added via AdminController.
+     */
     @FXML
     void addUser() {
         display.setText("");
         new UserCredentialsDialog().showAndWait().ifPresent(credData -> {
             String username = credData.getUsername(), password = credData.getPassword();
             ac.addUser(username, password);
-            // if (username.length() == 0) {
-            //     // display.setText("Enter a username to proceed.");
-            //     Alert warning = new Alert(Alert.AlertType.WARNING, "Enter a username to proceed.");
-            //     warning.setHeaderText("Invalid Username");
-            //     warning.showAndWait();
-            //     return;
-            // }
-            // else if (password.length() == 0) {
-            //     // display.setText("Enter a password to proceed.");
-            //     Alert warning = new Alert(Alert.AlertType.WARNING, "Enter a password to proceed.");
-            //     warning.setHeaderText("Invalid Password");
-            //     warning.showAndWait();
-            //     return;
-            // }
-            // else {
-            //     try {
-            //         new User(username, password);
-            //         // display.setText("User added successsfully!");
-            //         Alert info = new Alert(Alert.AlertType.INFORMATION, "User added successfully!");
-            //         info.setHeaderText("User Added");
-            //         info.showAndWait();
-            //     }
-            //     catch (Exception e) {
-            //         Alert warning = new Alert(Alert.AlertType.WARNING, e.getMessage());
-            //         warning.setHeaderText("Unable To Create User");
-            //         warning.showAndWait();
-            //         return;
-            //     }
-            // }
         });
     }
 
+    /**
+     * Opens a dialog to input a username to delete. 
+     * If the username is valid, the user is deleted via AdminController.
+     */
     @FXML
     void deleteUser() {
-        // String username = tfUsername.getText();
         display.setText("");
         TextInputDialog usernameDialog = new TextInputDialog();
         usernameDialog.setContentText("Username:");
         usernameDialog.setHeaderText("Delete User");
         usernameDialog.showAndWait().ifPresent(username -> {
             ac.deleteUser(username);
-            // if (username.length() == 0) {
-            //     // display.setText("Enter a username to proceed.");
-            //     Alert warning = new Alert(Alert.AlertType.WARNING, "Enter a username to proceed.");
-            //     warning.setHeaderText("Invalid Username");
-            //     warning.showAndWait();
-            //     return;
-            // }
-            // else if (username.equals("admin") || username.equals("stock")) {
-            //     Alert warning = new Alert(Alert.AlertType.WARNING, "Cannot remove " + username + " user.");
-            //     warning.setHeaderText("Cannot Remove User");
-            //     warning.showAndWait();
-            //     return;
-            // }
-            // else {
-            //     User oldUser = User.getUser(username);
-            //     if (oldUser == null) {
-            //         // display.setText("User with that username does not exist.");
-            //         Alert warning = new Alert(Alert.AlertType.WARNING, "User with that username does not exist.");
-            //         warning.setHeaderText("User Does Not Exist");
-            //         warning.showAndWait();
-            //         return;
-            //     }
-            //     else {
-            //         User.getUsers().remove(oldUser);
-            //         // display.setText("User deleted successfully!");
-            //         Alert info = new Alert(Alert.AlertType.INFORMATION, "User deleted successfully!");
-            //         info.setHeaderText("User Deleted");
-            //         info.showAndWait();
-            //     }
-            // }
         });
     }
 
+    /**
+     * Logs out the current admin user by switching to the login scene.
+     */
     @FXML
     void logout() {
         Stage primaryStage = App.getStage();
         primaryStage.setScene(App.getLoginScene());
     }
 
+    /**
+     * Exits the application gracefully.
+     */
     @FXML
     void quit() {
         App.quit();

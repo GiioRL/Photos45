@@ -27,25 +27,25 @@ public class AlbumThumbnailViewController {
     private AnchorPane backgroundPane;
 
     private Album album;
-    private static AlbumThumbnailController thumbnailModel = AlbumThumbnailController.getInstance();
-    private LibraryViewController lc;
+    private static AlbumThumbnailController tc = AlbumThumbnailController.getInstance();
+    private LibraryViewController lvc;
 
     public void injectAlbum(Album album) {
         this.album = album;
-        lc = album.getUser().getLC();
+        lvc = album.getUser().getLC();
         initScene();
     }
 
     private void initScene() {
-        imageView.setImage(thumbnailModel.getImage(album));
-        titleText.setText(thumbnailModel.getName(album));
-        dateRangeText.setText(thumbnailModel.getDateRange(album));
-        photoNumText.setText(thumbnailModel.getNumPhotos(album));
+        imageView.setImage(tc.getImage(album));
+        titleText.setText(tc.getName(album));
+        dateRangeText.setText(tc.getDateRange(album));
+        photoNumText.setText(tc.getNumPhotos(album));
     }
 
     @FXML
     void onClick(MouseEvent e) { // maybe this should be on the whole anchorpane and not just the image
-        lc.select(album);
+        lvc.select(album);
     }
 
     public void select() {
