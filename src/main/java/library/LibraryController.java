@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 import main.java.App;
+import main.java.album.customDialogs.CreateTagDialog;
 import main.java.util.*;
 
 public class LibraryController {
@@ -239,9 +240,10 @@ public class LibraryController {
 
     @FXML
     void createTag() {
-        TextInputDialog tagDialog = new TextInputDialog();
-        tagDialog.setContentText("Tag name:");
-        tagDialog.showAndWait().ifPresent(newTagType -> {
+        CreateTagDialog tagDialog = new CreateTagDialog();
+        tagDialog.showAndWait().ifPresent(tagInfo -> {
+            String newTagType = tagInfo.getKey();
+            boolean multiValue = tagInfo.getValue();
             if (newTagType.length() == 0) {
                 Alert warning = new Alert(AlertType.WARNING, "Enter a non-empty name.");
                 warning.setHeaderText("Invalid Name");
@@ -256,7 +258,8 @@ public class LibraryController {
                     return;
                 }
             }
-            user.getTags().add(new Tag(newTagType, null));
+            Tag t = new Tag(newTagType, null, multiValue);
+            user.getTags().add(t);
             start();
         });
     }

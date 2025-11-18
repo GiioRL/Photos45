@@ -44,8 +44,8 @@ public class User implements Serializable { // this might become library model
         this.username = username;
         this.password = password;
         users.add(this);
-        tags.add(new Tag("Location", null));
-        tags.add(new Tag("Person", null));
+        tags.add(new Tag("Location", null, false));
+        tags.add(new Tag("Person", null, true));
     }
 
     public void addTag(Tag newTag) { // only checks the tag type

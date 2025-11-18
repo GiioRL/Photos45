@@ -6,10 +6,18 @@ public class Tag implements Serializable{
 
     private String type;
     private String value;
+    private boolean multiValue;
 
     public Tag(String type, String value) {
         this.type = type;
         this.value = value;
+        this.multiValue = true;
+    }
+
+    public Tag(String type, String value, boolean multiValue) {
+        this.type = type;
+        this.value = value;
+        this.multiValue = multiValue;
     }
 
     public String getType() {
@@ -18,6 +26,10 @@ public class Tag implements Serializable{
 
     public String getValue() {
         return value;
+    }
+
+    public boolean getMultiValue() {
+        return multiValue;
     }
 
     public boolean equals(Object o) { // only checks tag types
@@ -36,6 +48,6 @@ public class Tag implements Serializable{
     }
 
     public String toString() {
-        return type + ": " + value;
+        return type + ": " + value + ", multiValue = " + multiValue;
     }
 }
