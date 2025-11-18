@@ -96,6 +96,7 @@ public class LibraryModel {
                 }
             }
         }
+        
         return new Album(new ArrayList<Photo>(albumPhotos), "Unnamed album", user);
     }
 

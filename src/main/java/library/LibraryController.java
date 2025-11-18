@@ -116,7 +116,25 @@ public class LibraryController {
 
     @FXML
     void createAlbum() {
-        libraryModel.createAlbum(user);
+        TextInputDialog nameDialog = new TextInputDialog();
+        nameDialog.setContentText("Album name:");
+        nameDialog.showAndWait().ifPresent(albumName -> {
+            if (albumName.length() == 0) {
+                Alert warning = new Alert(AlertType.WARNING, "Enter a non-empty name.");
+                warning.setHeaderText("Invalid Name");
+                warning.showAndWait();
+                return;
+            }
+            for (Album album: user.getAlbums()) {
+                if (album.getName().equals(albumName)) {
+                    Alert warning = new Alert(AlertType.WARNING, "Album with that name already exists.");
+                    warning.setHeaderText("Album Already Exists");
+                    warning.showAndWait();
+                    return;
+                }
+            }
+            libraryModel.createAlbum(user, albumName);
+        });
     }
 
     @FXML
