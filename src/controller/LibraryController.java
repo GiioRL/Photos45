@@ -146,7 +146,7 @@ public class LibraryController {
             if (photoTags != null) {
                 if (photoTags.contains(tag)) {
                     for (Tag photoTag: photoTags) {
-                        if (photoTag.tagEquals(tag)) {
+                        if (photoTag.tagContains(tag)) {
                             albumPhotos.add(photo);
                         }
                     }

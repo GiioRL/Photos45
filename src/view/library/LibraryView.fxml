@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -60,7 +61,6 @@
                      </font>
                   </Text>
                   <ComboBox fx:id="tagDropdown1" layoutX="35.0" layoutY="51.0" prefHeight="25.0" prefWidth="74.0" promptText="Tag" />
-                  <ComboBox fx:id="valueDropdown1" layoutX="35.0" layoutY="83.0" prefHeight="25.0" prefWidth="74.0" promptText="Value" />
                   <Button fx:id="tagSearchButon" layoutX="127.0" layoutY="83.0" mnemonicParsing="false" onAction="#tagSearch" text="Search" />
                   <HBox alignment="BOTTOM_LEFT" layoutY="138.0" prefHeight="34.0" prefWidth="211.0" spacing="10.0">
                      <children>
@@ -80,9 +80,10 @@
                   <DatePicker fx:id="fromDate" layoutX="329.0" layoutY="51.0" />
                   <DatePicker fx:id="toDate" layoutX="329.0" layoutY="84.0" />
                   <Button fx:id="dateSearchButon" layoutX="520.0" layoutY="66.0" mnemonicParsing="false" onAction="#dateSearch" text="Search" />
-                  <ComboBox fx:id="conjunctionBox" layoutX="126.0" layoutY="51.0" prefHeight="25.0" prefWidth="54.0" promptText="Tag" />
+                  <ComboBox fx:id="conjunctionBox" layoutX="126.0" layoutY="51.0" prefHeight="25.0" prefWidth="54.0" />
                   <ComboBox fx:id="tagDropdown2" layoutX="201.0" layoutY="51.0" prefHeight="25.0" prefWidth="74.0" promptText="Tag" />
-                  <ComboBox fx:id="valueDropdown2" layoutX="201.0" layoutY="83.0" prefHeight="25.0" prefWidth="74.0" promptText="Value" />
+                  <TextField fx:id="valueField1" layoutX="35.0" layoutY="84.0" prefHeight="25.0" prefWidth="74.0" />
+                  <TextField fx:id="valueField2" layoutX="201.0" layoutY="83.0" prefHeight="25.0" prefWidth="74.0" />
                </children>
             </AnchorPane>
          </children>

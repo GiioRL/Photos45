@@ -61,9 +61,9 @@ public class LibraryViewController {
     @FXML
     private ComboBox<String> tagDropdown1;
 
-    /** ComboBox for selecting the first tag value for search. */
+    /** TextField for selecting the first tag value for search. */
     @FXML
-    private ComboBox<String> valueDropdown1;
+    private TextField valueField1;
 
     /** ComboBox for selecting the conjunction ("And"/"Or") for tag search. */
     @FXML
@@ -73,9 +73,9 @@ public class LibraryViewController {
     @FXML
     private ComboBox<String> tagDropdown2;
 
-    /** ComboBox for selecting the second tag value for search. */
+    /** TextField for selecting the second tag value for search. */
     @FXML
-    private ComboBox<String> valueDropdown2;
+    private TextField valueField2;
 
     /** DatePicker for selecting the start of a date range search. */
     @FXML
@@ -153,17 +153,19 @@ public class LibraryViewController {
 
         tagDropdown1.setItems(FXCollections.observableArrayList(lc.getTypes(user)));
         tagDropdown1.getSelectionModel().clearSelection();
-        tagDropdown1.valueProperty().addListener((obs, oldType, newType) -> {
-            valueDropdown1.setItems(FXCollections.observableArrayList(lc.getValues(user, newType)));
-            valueDropdown1.getSelectionModel().clearSelection();
-        });
+        valueField1.clear();
+        // tagDropdown1.valueProperty().addListener((obs, oldType, newType) -> {
+        //     valueDropdown1.setItems(FXCollections.observableArrayList(lc.getValues(user, newType)));
+        //     valueDropdown1.getSelectionModel().clearSelection();
+        // });
 
         tagDropdown2.setItems(FXCollections.observableArrayList(lc.getTypes(user)));
         tagDropdown2.getSelectionModel().clearSelection();
-        tagDropdown2.valueProperty().addListener((obs, oldType, newType) -> {
-            valueDropdown2.setItems(FXCollections.observableArrayList(lc.getValues(user, newType)));
-            valueDropdown2.getSelectionModel().clearSelection();
-        });
+        valueField2.clear();
+        // tagDropdown2.valueProperty().addListener((obs, oldType, newType) -> {
+        //     valueDropdown2.setItems(FXCollections.observableArrayList(lc.getValues(user, newType)));
+        //     valueDropdown2.getSelectionModel().clearSelection();
+        // });
 
         ArrayList<String> conjunctions = new ArrayList<>() {{
             add("And");
@@ -224,8 +226,8 @@ public class LibraryViewController {
      */
     @FXML
     void tagSearch() {
-        Album album = lc.tagSearch(tagDropdown1.valueProperty().getValue(), valueDropdown1.valueProperty().getValue(),
-                conjunctionBox.valueProperty().getValue(), tagDropdown2.valueProperty().getValue(), valueDropdown2.valueProperty().getValue(), user);
+        Album album = lc.tagSearch(tagDropdown1.valueProperty().getValue(), valueField1.getText(),
+                conjunctionBox.valueProperty().getValue(), tagDropdown2.valueProperty().getValue(), valueField2.getText(), user);
         if (album == null) {
             Alert warning = new Alert(Alert.AlertType.WARNING, "Select a proper tag-value combination.");
             warning.setHeaderText("Invalid Selection");
